@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require('express')
 const mongoose = require('mongoose')
 const app = express()
@@ -12,3 +13,5 @@ mongoose.connect(dbURI, { useNewUrlParser: true , useUnifiedTopology: true }, (e
 app.use(logger)
 
 app.listen(port, () => console.log(`Express is up and running on ${port}`))
+
+module.exports = app

@@ -88,6 +88,42 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           postcode: 'SW11 4NJ',
           description: 'If you are new to yoga and dont know where to start come to our beginners class where you can learn with like minded people and start your journey',
           requiredPeople: 15
+        }, {
+          name: 'Power walking',
+          category: 'Walking',
+          date: new Date('June 14, 2020'),
+          time: '1100PM',
+          location: 'Streatham Common',
+          postcode: 'SW16 3BX',
+          description: 'For people not comfotable with running and would like to still get some light cardio come and join us on our long walk within the park where we will mix uphill and down hill walking around the park',
+          requiredPeople: 10
+        }, {
+          name: 'Football Match',
+          category: 'Football',
+          date: new Date('July 1, 2020'),
+          time: '1100PM',
+          location: 'Dulwich Park',
+          postcode: 'SE21 7EB',
+          description: 'Dont have a team? no problem! Turn up, play and enjoy a game with us. We get a light warm up and stretch done then get into a match ',
+          requiredPeople: 22
+        }, {
+          name: 'Beginners Yoga',
+          category: 'Yoga',
+          date: new Date('June 15, 2020'),
+          time: '1200PM',
+          location: 'Wimbledon Park',
+          postcode: 'SW19 8AU ',
+          description: 'If you are new to yoga and dont know where to start come to our beginners class where you can learn with like minded people and start your journey'  ,
+          requiredPeople: 15
+        }, {
+          name: 'Advanced Yoga',
+          category: 'Yoga',
+          date: new Date('March 25, 2020'),
+          time: '0600PM',
+          location: 'Southwark Park',
+          postcode: 'SE16 2TX',
+          description: 'If you are new to yoga and dont know where to start come to our beginners class where you can learn with like minded people and start your journey'  ,
+          requiredPeople: 15
         }
       ])
     })
