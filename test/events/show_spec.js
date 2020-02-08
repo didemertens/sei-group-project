@@ -1,7 +1,10 @@
 /* global describe, beforeEach, afterEach, it, api, expect */
 const Event = require('../../models/event')
 
-describe('GET /events', () => {
+describe('GET /events/:id', () => {
+
+  let event = {}
+
   beforeEach(done => {
     Event.create([
       {
@@ -23,6 +26,7 @@ describe('GET /events', () => {
         description: 'We are going to play a game of field hockey. Bring your own equipment. We will meet at the entrance of Millfields Park, opposite the Millfields cafe.'
       }
     ])
+      .then((events) => event = events[0])
       .then(() => done())
   })
 
@@ -32,64 +36,60 @@ describe('GET /events', () => {
       .then(() => done())
   })
 
-  it('should return a 200 response', done => {
-    api.get('/api/events')
+  it('should return status 404 when using wrong id', done => {
+    api.get('/api/dinosaurs/1234')
+      .end((err, res) => {
+        expect(res.status).to.eq(404)
+        done()
+      })
+  })
+
+  it('should return status 200', done => {
+    api.get(`/api/dinosaurs/${event._id}`)
       .end((err, res) => {
         expect(res.status).to.eq(200)
         done()
       })
   })
 
-  it('should return an array', done => {
-    api.get('/api/events')
+  it('should return an object', done => {
+    api.get(`/api/dinosaurs/${event._id}`)
       .end((err, res) => {
-        expect(res.body).to.be.an('array')
+        expect(res.body).to.be.an('object')
         done()
       })
   })
 
-  it('should return an array of objects', done => {
-    api.get('/api/events')
+  it('should be an object with the correct keys', done => {
+    api.get(`/api/dinosaurs/${event._id}`)
       .end((err, res) => {
-        res.body.forEach(event => {
-          expect(event).to.be.an('object')
-        })
+        expect(res.body).to.contains.keys([
+          '_id',
+          'name',
+          'category',
+          'date',
+          'time',
+          'location',
+          'postcode',
+          'description'
+        ])
         done()
       })
   })
 
-  it('should return an array of objects with the correct fields', done => {
-    api.get('/api/events')
+  it('should be an object with the correct fields and values', done => {
+    api.get(`/api/dinosaurs/${event._id}`)
       .end((err, res) => {
-        res.body.forEach(event => {
-          expect(event).to.contains.keys([
-            '_id',
-            'name',
-            'category',
-            'date',
-            'time',
-            'location',
-            'postcode',
-            'description'
-          ])
-        })
+        const event = res.body
+        expect(event.name).to.be.a('string')
+        expect(event.category).to.be.a('string')
+        expect(event.date).to.be.an('string')
+        expect(event.time).to.be.a('string')
+        expect(event.location).to.be.a('string')
+        expect(event.postcode).to.be.a('string')
+        expect(event.description).to.be.a('string')
         done()
       })
   })
 
-  it('should return an array of objects with the correct fields and value types', done => {
-    api.get('/api/events')
-      .end((err, res) => {
-        res.body.forEach(event => {
-          expect(event.name).to.be.a('string')
-          expect(event.category).to.be.a('string')
-          expect(event.date).to.be.an('string')
-          expect(event.time).to.be.a('string')
-          expect(event.location).to.be.a('string')
-          expect(event.postcode).to.be.a('string')
-          expect(event.description).to.be.a('string')
-        })
-        done()
-      })
-  })
 })
