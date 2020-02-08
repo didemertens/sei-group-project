@@ -5334,6 +5334,11 @@ react-router@5.1.2:
     tiny-invariant "^1.0.2"
     tiny-warning "^1.0.0"
 
+react-skeleton-css@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/react-skeleton-css/-/react-skeleton-css-1.1.0.tgz#568f7db9174694185fbf3829493b2848ed338976"
+  integrity sha512-/9/Aj4fAQFKLozZMB/AUp1jrmiYbpP9Ekons41ab5YfwKLqfaaTp1SvJEYYJpG6MxwMSMf3Oi4j/Ql09DAUYCw==
+
 react@^16.12.0:
   version "16.12.0"
   resolved "https://registry.yarnpkg.com/react/-/react-16.12.0.tgz#0c0a9c6a142429e3614834d5a778e18aa78a0b83"
