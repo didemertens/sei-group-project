@@ -20,8 +20,7 @@ describe('GET /events', () => {
         time: '0300PM',
         location: 'Millfields Park',
         postcode: 'E5 0AR',
-        description: 'We are going to play a game of field hockey. Bring your own equipment. We will meet at the entrance of Millfields Park, opposite the Millfields cafe.',
-        requiredPeople: 10
+        description: 'We are going to play a game of field hockey. Bring your own equipment. We will meet at the entrance of Millfields Park, opposite the Millfields cafe.'
       }
     ])
       .then(() => done())
@@ -71,8 +70,7 @@ describe('GET /events', () => {
             'time',
             'location',
             'postcode',
-            'description',
-            'requiredPeople'
+            'description'
           ])
         })
         done()
@@ -85,12 +83,11 @@ describe('GET /events', () => {
         res.body.forEach(event => {
           expect(event.name).to.be.a('string')
           expect(event.category).to.be.a('string')
-          expect(event.date).to.be.an('object')
+          expect(event.date).to.be.an('string')
           expect(event.time).to.be.a('string')
           expect(event.location).to.be.a('string')
           expect(event.postcode).to.be.a('string')
           expect(event.description).to.be.a('string')
-          expect(event.requiredPeople).to.be.a('number')
         })
         done()
       })
