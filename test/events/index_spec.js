@@ -2,7 +2,6 @@
 const Event = require('../../models/event')
 
 describe('GET /events', () => {
-
   beforeEach(done => {
     Event.create([
       {
@@ -27,7 +26,7 @@ describe('GET /events', () => {
     ])
       .then(() => done())
   })
-  
+
   afterEach(done => {
     Event.deleteMany()
       .then(() => Event.deleteMany())
@@ -41,11 +40,58 @@ describe('GET /events', () => {
         done()
       })
   })
-  
+
   it('should return an array', done => {
     api.get('/api/events')
       .end((err, res) => {
         expect(res.body).to.be.an('array')
+        done()
+      })
+  })
+
+  it('should return an array of objects', done => {
+    api.get('/api/events')
+      .end((err, res) => {
+        res.body.forEach(event => {
+          expect(event).to.be.an('object')
+        })
+        done()
+      })
+  })
+
+  it('should return an array of objects with the correct fields', done => {
+    api.get('/api/events')
+      .end((err, res) => {
+        res.body.forEach(event => {
+          expect(event).to.contains.keys([
+            '_id',
+            'name',
+            'category',
+            'date',
+            'time',
+            'location',
+            'postcode',
+            'description',
+            'requiredPeople'
+          ])
+        })
+        done()
+      })
+  })
+
+  it('should return an array of objects with the correct fields and value types', done => {
+    api.get('/api/events')
+      .end((err, res) => {
+        res.body.forEach(event => {
+          expect(event.name).to.be.a('string')
+          expect(event.category).to.be.a('string')
+          expect(event.date).to.be.an('object')
+          expect(event.time).to.be.a('string')
+          expect(event.location).to.be.a('string')
+          expect(event.postcode).to.be.a('string')
+          expect(event.description).to.be.a('string')
+          expect(event.requiredPeople).to.be.a('number')
+        })
         done()
       })
   })
