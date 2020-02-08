@@ -18,14 +18,14 @@ describe('POST /events', () => {
     category: 'Football'
   }
 
-  it('should return a 422 response when body is empty/wrong', done => {
-    api.post('/api/events')
-      .send(wrongTestEvent)
-      .end((err, res) => {
-        expect(res.status).to.eq(422)
-        done()
-      })
-  })
+  // it('should return a 422 response when body is empty/wrong', done => {
+  //   api.post('/api/events')
+  //     .send(wrongTestEvent)
+  //     .end((err, res) => {
+  //       expect(res.status).to.eq(422)
+  //       done()
+  //     })
+  // })
 
   it('should return a 201 response when body is correct', done => {
     api.post('/api/events')
