@@ -32,7 +32,11 @@ class Register extends React.Component {
 
   render() {
     return (
-      <h1>Registration</h1>
+      <>
+      <section>
+        <h1>Registration</h1>
+      </section>
+      </>
     )
   }
 }
