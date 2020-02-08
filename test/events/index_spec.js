@@ -92,4 +92,5 @@ describe('GET /events', () => {
         done()
       })
   })
+
 })
