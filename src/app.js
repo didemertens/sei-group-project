@@ -6,6 +6,7 @@ import './styles/main.scss'
 import { BrowserRouter, Route, Switch, Link } from 'react-router-dom'
 
 import Home from './components/Home'
+import EventIndex from './components/events/EventIndex'
 
 class App extends React.Component {
   render() {
@@ -17,6 +18,7 @@ class App extends React.Component {
           </nav>
           <Switch>
             <Route exact path="/" component={Home} />
+            <Route path="/events" component={EventIndex} />
           </Switch>
         </main>
       </BrowserRouter>
