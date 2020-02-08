@@ -36,7 +36,7 @@ describe('GET /events/:id', () => {
   })
 
   it('should return status 404 when using wrong id', done => {
-    api.get('/api/events/1234')
+    api.get('/api/events/123456789123456789123456')
       .end((err, res) => {
         expect(res.status).to.eq(404)
         done()
