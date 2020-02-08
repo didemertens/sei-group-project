@@ -6,6 +6,10 @@ const users = require('../controllers/auth')
 
 router.route('/events')
   .get(events.index)
+  .post(events.create)
+
+router.route('/events/:id')
+  .get(events.show)
 
 // USER ROUTES
 
