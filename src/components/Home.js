@@ -4,16 +4,20 @@ class Home extends React.Component {
 
   render() {
     return (
-      <div className="container">
-        <div className="row">
-          <div className="one column">
-            <p>Home</p>
+      <section className="hero">
+        <div className="container">
+          <div className="row">
+            <div className="offset-by-four eight columns">
+              <h2>Out and About</h2>
+            </div>
           </div>
-          <div className="eleven columns">
-            <p>hello</p>
+          <div className="row">
+            <div className="offset-by-four eight columns">
+              <button className="button-primary">Button element</button>
+            </div>
           </div>
         </div>
-      </div>
+      </section>
     )
   }
 }
