@@ -1,6 +1,7 @@
 require('dotenv').config()
 const express = require('express')
 const mongoose = require('mongoose')
+const bodyParser = require('body-parser')
 const app = express()
 const { port, dbURI } = require('./config/environment')
 const logger = require('./lib/logger')
@@ -10,6 +11,8 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
   if (err) return console.log(err)
   console.log('Mongo is connected')
 })
+
+app.use(bodyParser.json())
 
 app.use(logger)
 
