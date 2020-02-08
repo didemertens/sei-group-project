@@ -10,6 +10,7 @@ router.route('/events')
 
 router.route('/events/:id')
   .get(events.show)
+  .put(events.update)
 
 // USER ROUTES
 
