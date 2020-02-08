@@ -12,4 +12,7 @@ router.route('/events')
 router.route('/register')
   .post(users.register)
 
+router.route('/login')
+  .post(users.login)
+
 module.exports = router
