@@ -8,7 +8,7 @@ class EventIndex extends React.Component {
   async componentDidMount() {
     try {
       const res = await axios.get('/api/events')
-      this.setState({ events: res.data.events })
+      this.setState({ events: res.data })
     } catch (err) {
       console.log(err)
       this.props.history.push('/error')
