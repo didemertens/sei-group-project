@@ -4,7 +4,9 @@ import axios from 'axios'
 class Register extends React.Component {
   state = {
     data: {
-      username: '',
+      handle: '',
+      firstName: '',
+      surname: '',
       email: '',
       password: '',
       passwordConfirmation: ''
@@ -28,10 +30,13 @@ class Register extends React.Component {
     }
   }
 
-
   render() {
     return (
-      <h1>Register</h1>
+      <>
+      <section>
+        <h1>Registration</h1>
+      </section>
+      </>
     )
   }
 }

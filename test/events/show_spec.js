@@ -2,7 +2,6 @@
 const Event = require('../../models/event')
 
 describe('GET /events/:id', () => {
-
   let event = {}
 
   beforeEach(done => {
@@ -37,7 +36,7 @@ describe('GET /events/:id', () => {
   })
 
   it('should return status 404 when using wrong id', done => {
-    api.get('/api/dinosaurs/1234')
+    api.get('/api/events/123456789123456789123456')
       .end((err, res) => {
         expect(res.status).to.eq(404)
         done()
@@ -45,7 +44,7 @@ describe('GET /events/:id', () => {
   })
 
   it('should return status 200', done => {
-    api.get(`/api/dinosaurs/${event._id}`)
+    api.get(`/api/events/${event._id}`)
       .end((err, res) => {
         expect(res.status).to.eq(200)
         done()
@@ -53,15 +52,15 @@ describe('GET /events/:id', () => {
   })
 
   it('should return an object', done => {
-    api.get(`/api/dinosaurs/${event._id}`)
+    api.get(`/api/events/${event._id}`)
       .end((err, res) => {
         expect(res.body).to.be.an('object')
         done()
       })
   })
 
-  it('should be an object with the correct keys', done => {
-    api.get(`/api/dinosaurs/${event._id}`)
+  it('should be an object with the correct fields', done => {
+    api.get(`/api/events/${event._id}`)
       .end((err, res) => {
         expect(res.body).to.contains.keys([
           '_id',
@@ -78,7 +77,7 @@ describe('GET /events/:id', () => {
   })
 
   it('should be an object with the correct fields and values', done => {
-    api.get(`/api/dinosaurs/${event._id}`)
+    api.get(`/api/events/${event._id}`)
       .end((err, res) => {
         const event = res.body
         expect(event.name).to.be.a('string')
