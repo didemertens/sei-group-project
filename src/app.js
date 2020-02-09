@@ -10,6 +10,7 @@ import EventIndex from './components/events/EventIndex'
 import EventShow from './components/events/EventShow'
 import Login from './components/Login'
 import Register from './components/Register'
+import ErrorPage from './components/Error'
 
 class App extends React.Component {
   render() {
@@ -27,6 +28,7 @@ class App extends React.Component {
             <Route path="/events" component={EventIndex} />
             <Route path="/register" component={Register} />
             <Route path="/login" component={Login} />
+            <Route path="/*" component={ErrorPage} />
           </Switch>
         </main>
       </BrowserRouter>
