@@ -5,30 +5,58 @@ import moment from 'moment'
 import 'react-datepicker/dist/react-datepicker.css'
 
 class Home extends React.Component {
-
-
   state = {
-    date: new Date,
-    time: ''
+    data: {
+      postcode: '',
+      category: '',
+      date: new Date,
+      time: new Date
+    }
   }
 
-  handleChangeDate = date => {
-    this.setState({ date })
+  activityCategories = ['Football', 'Field Hockey', 'Badminton', 'Walking', 'Bootcamp', 'Running', 'Yoga', 'Rugby']
+
+  componentDidMount() {
+    // to round the time up to the next 15 minutes of the hour (e.g. 10:15, 10:30)
+    const coeff = 1000 * 60 * 15
+    const roundedTime = new Date(Math.ceil(new Date() / coeff) * coeff)
+    const data = { ...this.state.data, time: roundedTime }
+    this.setState({ data })
   }
 
-  handleChangeTime = time => {
-    this.setState({ time })
+  handleChange = e => {
+    const data = { ...this.state.data, [e.target.name]: e.target.value }
+    this.setState({ data })
+  }
+
+  handleTime = (time) => {
+    const data = { ...this.state.data, time }
+    this.setState({ data })
+  }
+
+  handleDate = (date) => {
+    const data = { ...this.state.data, date }
+    this.setState({ data })
   }
 
   handleSubmit = (e) => {
     e.preventDefault()
-    console.log(this.state.date.toISOString()) // same as in DB as isostring
-    console.log(this.state.time.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true })) // same as in DB as string e.g. 10:27 AM
-    console.log(this.state.time.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true }) === '10:27 AM') // compare times
+    // make all data the same as in the DB
+    const searchData = {
+      ...this.state.data,
+      postcode: this.state.data.postcode.replace(' ', ''),
+      date: this.state.data.date.toISOString(),
+      time: this.state.data.time.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true })
+    }
+    console.log(searchData)
+    // send search to index page, filter on place, data and time
+
+    // console.log(moment(this.state.date).isSame('2020-02-09T23:00:00.000Z', 'day')) // will check year and month and day
+    // console.log(this.state.time.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true }) === '10:27 AM') // compare times
   }
 
   render() {
-    console.log(moment(this.state.date).isSame('2020-02-09T23:00:00.000Z', 'day')) // will check year and month and day
+    const { date, time } = this.state.data
     return (
       <>
         <section className="section hero">
@@ -43,24 +71,37 @@ class Home extends React.Component {
               <div className="one-half column">
                 <form onSubmit={this.handleSubmit} className="form">
                   <label>Postcode</label>
-                  <input type="text" className="input u-full-width" placeholder="Postcode" />
+                  <input
+                    type="text"
+                    className="input u-full-width"
+                    placeholder="Postcode"
+                    onChange={this.handleChange}
+                    name="postcode"
+                    required={true}
+                  />
                   <label>Activity</label>
-                  <select className="u-full-width">
-                    <option value="" defaultValue hidden>Choose activity</option>
-                    <option value="Football">Football</option>
-                    <option value="Field hockey">Field hockey</option>
-                    <option value="Yoga">Yoga</option>
+                  <select
+                    className="u-full-width"
+                    onChange={this.handleChange}
+                    name="category"
+                    required={true}
+                  >
+                    <option value="" defaultValue>Choose activity</option>
+                    {this.activityCategories.map(category => (
+                      <option key={category} value={category}>{category}</option>
+                    ))}
                   </select>
                   <label>Date and Time</label>
-                  <div>
+                  <div className="row">
                     <DatePicker
-                      selected={this.state.date}
-                      onChange={this.handleChangeDate}
+                      selected={date}
+                      onChange={this.handleDate}
                       dateFormat="d MMMM yyyy"
+                      name="date"
                     />
                     <DatePicker
-                      selected={this.state.time}
-                      onChange={this.handleChangeTime}
+                      selected={time}
+                      onChange={this.handleTime}
                       showTimeSelect
                       showTimeSelectOnly
                       timeIntervals={15}
@@ -68,7 +109,7 @@ class Home extends React.Component {
                       dateFormat="h:mm aa"
                     />
                   </div>
-                  <button className="button">Search</button>
+                  <button className="button u-full-width">Search</button>
                 </form>
               </div>
             </div>
