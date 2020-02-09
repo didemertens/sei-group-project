@@ -1,34 +1,73 @@
 /* global describe, beforeEach, afterEach, it, api, expect */
 const Event = require('../../models/event')
+const User = require('../../models/user')
+const jwt = require('jsonwebtoken')
+const { secret } = require('../../config/environment')
+
+const testEvent = {
+  name: 'Football on the Common',
+  category: 'Football',
+  date: new Date('June 18, 2020'),
+  time: '0600 PM',
+  location: 'Clapham Common',
+  postcode: 'SW47AJ',
+  description: 'Casual game of football on Clapham Common, next to the pond (but not too close...) Everybody and anybody is welcome!',
+  requiredPeople: 10
+}
+
+const wrongTestEvent = {
+  name: 'Football on the Common',
+  category: 'Football'
+}
+
+const testUser = {
+  handle: 'test',
+  firstName: 'test',
+  surname: 'test',
+  email: 'test@test.test',
+  password: 'test',
+  passwordConfirmation: 'test'
+}
 
 describe('POST /events', () => {
-  const testEvent = {
-    name: 'Football on the Common',
-    category: 'Football',
-    date: new Date('June 18, 2020'),
-    time: '0600PM',
-    location: 'Clapham Common',
-    postcode: 'SW4 7AJ',
-    description: 'Casual game of football on Clapham Common, next to the pond (but not too close...) Everybody and anybody is welcome!',
-    requiredPeople: 10
-  }
+  let token = null
 
-  const wrongTestEvent = {
-    name: 'Football on the Common',
-    category: 'Football'
-  }
+  beforeEach(done => {
+    User.create(testUser)
+      .then(user => {
+        token = jwt.sign({ sub: user._id }, secret, { expiresIn: '6h' })
+        done()
+      })
+  })
 
-  // it('should return a 422 response when body is empty/wrong', done => {
-  //   api.post('/api/events')
-  //     .send(wrongTestEvent)
-  //     .end((err, res) => {
-  //       expect(res.status).to.eq(422)
-  //       done()
-  //     })
-  // })
+  afterEach(done => {
+    User.deleteMany()
+      .then(() => Event.deleteMany())
+      .then(() => done())
+  })
 
-  it('should return a 201 response when body is correct', done => {
+  it('should return a 401 response without token', done => {
     api.post('/api/events')
+      .send(testEvent)
+      .end((err, res) => {
+        expect(res.status).to.eq(401)
+        done()
+      })
+  })
+
+  it('should return a 422 response when body is empty/wrong', done => {
+    api.post('/api/events')
+      .set('Authorization', `Bearer ${token}`)
+      .send(wrongTestEvent)
+      .end((err, res) => {
+        expect(res.status).to.eq(422)
+        done()
+      })
+  })
+
+  it('should return a 201 response with token', done => {
+    api.post('/api/events')
+      .set('Authorization', `Bearer ${token}`)
       .send(testEvent)
       .end((err, res) => {
         expect(res.status).to.eq(201)
