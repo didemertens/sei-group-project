@@ -25,6 +25,7 @@ class Register extends React.Component {
     
     try {
       await axios.post('/api/register', this.state.data)
+      this.props.history.push('/login')
     } catch (err) {
       this.setState({ errors: err.response.data.errors })
     }
@@ -32,11 +33,9 @@ class Register extends React.Component {
 
   render() {
     return (
-      <>
       <section>
-        <h1>Registration</h1>
+        <h1>Registration Page</h1>
       </section>
-      </>
     )
   }
 }
