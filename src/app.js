@@ -7,6 +7,7 @@ import { BrowserRouter, Route, Switch, Link } from 'react-router-dom'
 
 import Home from './components/Home'
 import EventIndex from './components/events/EventIndex'
+import EventShow from './components/events/EventShow'
 import Login from './components/Login'
 import Register from './components/Register'
 
@@ -22,6 +23,7 @@ class App extends React.Component {
           </nav>
           <Switch>
             <Route exact path="/" component={Home} />
+            <Route path="/events/:id" component={EventShow} />
             <Route path="/events" component={EventIndex} />
             <Route path="/register" component={Register} />
             <Route path="/login" component={Login} />
