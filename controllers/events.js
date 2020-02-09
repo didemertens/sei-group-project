@@ -12,7 +12,7 @@ function create(req, res) {
   Event
     .create(req.body)
     .then(createdEvent => res.status(201).json(createdEvent))
-    .catch(err => console.log(err))
+    .catch(err => res.status(422).json(err))
 
 }
 
