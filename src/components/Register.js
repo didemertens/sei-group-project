@@ -33,9 +33,90 @@ class Register extends React.Component {
 
   render() {
     return (
-      <section>
+        <>
         <h1>Registration Page</h1>
-      </section>
+
+        <form onSubmit={this.handleSubmit}>
+
+          <div className="row">
+            <div className="five columns">
+
+              <input type="text" 
+                name="handle" 
+                placeholder="Handle Name" 
+                className={`u-full-width input ${this.state.errors.username} ? : 'has-error' : '' `} 
+                onChange={this.handleChange}
+              />
+              {this.state.errors.handle && <small className="help has-error">{this.state.errors.handle.message}</small>}
+            </div>
+          </div>
+
+          <div className="row">
+            <div className="five columns">
+              <input type="text" 
+                name="firstName" 
+                placeholder="First Name" 
+                className="u-full-width" 
+                onChange={this.handleChange}
+              />
+            </div>
+          </div>
+
+          <div className="row">
+            <div className="five columns">
+              <input type="text"
+                name="surname" 
+                placeholder="Surname" 
+                className="u-full-width" 
+                onChange={this.handleChange}
+              />
+            </div>
+          </div>
+
+          <div className="row">
+            <div className="five columns">
+              <input type="text" 
+                name="email" 
+                placeholder="Email Address" 
+                className="u-full-width" 
+                onChange={this.handleChange}
+              />
+            </div>
+          </div>
+
+          <div className="row">
+            <div className="five columns">
+              <input type="text" 
+                name="password" 
+                placeholder="Password" 
+                className="u-full-width" 
+                onChange={this.handleChange}
+              />
+            </div>
+          </div>
+
+
+          <div className="row">
+            <div className="five columns">
+              <input type="text" 
+                name="passwordConfirmation" 
+                placeholder="Please confirm your password here" 
+                className="u-full-width" 
+                onChange={this.handleChange}
+              />
+            </div>
+          </div>
+
+          <div className="row">
+            <div className="five columns">
+              <input type="submit" 
+                className="button-primary u-fullwidth" 
+                value="Login"
+              />
+            </div>
+          </div>
+        </form>
+      </>
     )
   }
 }
