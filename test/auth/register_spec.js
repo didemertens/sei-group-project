@@ -3,38 +3,48 @@
 const User = require('../../models/user')
 
 const testDataIncorrect = {
-  username: 'test',
+  handle: 'test',
+  firstName: 'test',
+  surname: 'test',
   email: 'test@test.test',
   password: 'test',
   passwordConfirmation: 'code'
 }
 
-const testDataDuplicateUsername = {
-  username: 'test',
+const testDataDuplicateHandle = {
+  handle: 'test',
+  firstName: 'test',
+  surname: 'test',
   email: 'unique@test.test',
   password: 'test',
   passwordConfirmation: 'test'
 }
 
 const testDataDuplicateEmail = {
-  username: 'unique',
+  handle: 'unique',
+  firstName: 'test',
+  surname: 'test',
   email: 'test@test.test',
   password: 'test',
   passwordConfirmation: 'test'
 }
 
 const testDataCorrect = {
-  username: 'testCorrect',
-  email: 'testCorrect@test.test',
+  handle: 'test',
+  firstName: 'test',
+  surname: 'test',
+  email: 'test@test.test',
   password: 'test',
   passwordConfirmation: 'test'
 }
 
 describe('POST /register', () => {
 
-  beforeEach(done => {
+  beforeEach(done => { 
     User.create({
-      username: 'test',
+      handle: 'test',
+      firstName: 'test',
+      surname: 'test',
       email: 'test@test.test',
       password: 'test',
       passwordConfirmation: 'test'
@@ -55,9 +65,9 @@ describe('POST /register', () => {
       })
   })
 
-  it('should return a 422 response if username already exists', done => {
+  it('should return a 422 response if handle already exists', done => {
     api.post('/api/register')
-      .send(testDataDuplicateUsername)
+      .send(testDataDuplicateHandle)
       .end((err, res) => {
         expect(res.status).to.eq(422)
         done()
@@ -102,3 +112,4 @@ describe('POST /register', () => {
       })
   })
 })
+
