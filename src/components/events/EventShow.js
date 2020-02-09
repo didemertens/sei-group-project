@@ -1,5 +1,5 @@
 import React from 'react'
-// import axios from 'axios'
+import axios from 'axios'
 // import { Link } from 'react-router-dom'
 // import Auth from '../../lib/auth'
 
@@ -9,18 +9,18 @@ class EventShow extends React.Component {
   }
 
   componentDidMount() {
-    // const eventId = this.props.match.params.id
-    // this.getEvent(eventId)
+    const eventId = this.props.match.params.id
+    this.getEvent(eventId)
   }
 
-  // getEvent = async (id) => {
-  //   try {
-  //     const { data } = await axios.get(`/api/events/${id}`)
-  //     this.setState({ eventInfo: data })
-  //   } catch (err) {
-  //     this.props.history.push('/notfound')
-  //   }
-  // }
+  getEvent = async (id) => {
+    try {
+      const { data } = await axios.get(`/api/events/${id}`)
+      this.setState({ eventInfo: data })
+    } catch (err) {
+      this.props.history.push('/notfound')
+    }
+  }
 
   // handleDelete = async () => {
   //   const eventId = this.props.match.params.id
@@ -37,19 +37,24 @@ class EventShow extends React.Component {
   // isOwner = () => Auth.getPayload().sub === this.state.eventInfo.user._id
 
   render() {
-    // if (!this.state.cheese) return null
-    // const { cheese } = this.state
+    // if (!this.state.eventInfo) return null
+    // const { eventInfo } = this.state
     return (
       <div className="container">
         <div className="row">
           <div className="four columns">
-            <p className="Event Info"></p>
+            <p>Event Info</p>
+            <p>Name</p>
+            <p>Date</p>
+            <p>Time</p>
+            <p>Location</p>
+            <p>Description</p>
           </div>
           <div className="four columns">
-            <p className="Attendees Info"></p>
+            <p>Attendees Info</p>
           </div>
           <div className="four columns">
-            <p className="User Comments"></p>
+            <p>User Comments</p>
           </div>
         </div>
       </div>

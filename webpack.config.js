@@ -46,7 +46,7 @@ module.exports = {
       inject: 'body'
     }),
     new CopyWebpackPlugin([
-      { from: './src/assets', to: 'assets' }
+      { from: './src/styles', to: 'assets' }
     ])
   ]
 }
