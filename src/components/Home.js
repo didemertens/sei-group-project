@@ -1,6 +1,5 @@
 import React from 'react'
 import DatePicker from 'react-datepicker'
-import moment from 'moment'
 
 import 'react-datepicker/dist/react-datepicker.css'
 
@@ -29,6 +28,7 @@ class Home extends React.Component {
     this.setState({ data })
   }
 
+  // different functions for time and date, because they return the date not the event (e)
   handleTime = (time) => {
     const data = { ...this.state.data, time }
     this.setState({ data })
@@ -41,18 +41,19 @@ class Home extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-    // make all data the same as in the DB
+    // make all data the same as in the database
     const searchData = {
       ...this.state.data,
       postcode: this.state.data.postcode.replace(' ', ''),
       date: this.state.data.date.toISOString(),
-      time: this.state.data.time.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true })
+      time: this.state.data.time.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true }) // e.g. "10:00 AM"
     }
-    console.log(searchData)
-    // send search to index page, filter on place, data and time
-
-    // console.log(moment(this.state.date).isSame('2020-02-09T23:00:00.000Z', 'day')) // will check year and month and day
-    // console.log(this.state.time.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true }) === '10:27 AM') // compare times
+    // send above searchData to the index page, and send user there as well
+    this.props.history.push({
+      pathname: '/events',
+      search: '',
+      state: { searchData }
+    })
   }
 
   render() {
