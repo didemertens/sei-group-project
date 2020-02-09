@@ -1,16 +1,17 @@
 const router = require('express').Router()
 const events = require('../controllers/events')
 const users = require('../controllers/auth')
+const secureRoute = require('../lib/secureRoute')
 
 // EVENT ROUTES
 
 router.route('/events')
   .get(events.index)
-  .post(events.create)
+  .post(secureRoute, events.create)
 
 router.route('/events/:id')
   .get(events.show)
-  .put(events.update)
+  .put(secureRoute, events.update)
 
 // USER ROUTES
 
