@@ -14,73 +14,107 @@ class EventIndex extends React.Component {
     const searchData = this.props.history.location.state.searchData
     try {
       const res = await axios.get('/api/events')
-      this.filterEvents(res, searchData)
+      this.filterCategory(res, searchData)
     } catch (err) {
       console.log(err)
       this.props.history.push('/error')
     }
   }
 
-  // filter on: 1) category, 2) location, 3) date, 4) time
-  filterEvents = (res, searchData) => {
-    console.log(searchData)
-    let events = []
-    const date = moment(searchData.date).format('DD/MM/YYYY')
-
-    // checking category
-    const categories = res.data.filter(event => {
+  // CHECK CATEGORY
+  filterCategory = (res, searchData) => {
+    const eventsByCategory = res.data.filter(event => {
       return event.category === searchData.category
     })
 
-    if (categories.length === 0) {
+    // no events with that category, try search again
+    if (eventsByCategory.length === 0) {
       this.setState({
         otherSuggestion: `There are no ${searchData.category} events yet. Go back and try another search.`
       })
       return
     }
+    this.filterPostcode(searchData, eventsByCategory)
+  }
 
-    // checking postcode
-    const postcodes = res.data.filter(event => {
-      return event.postcode === searchData.postcode
+  // CHECK POSTCODE
+  filterPostcode = (searchData, eventsByCategory) => {
+    const eventsByPostcode = eventsByCategory.filter(event => {
+      return event.postcode.slice(0, 3) === searchData.postcode.slice(0, 3)
     })
 
-    if (postcodes.length === 0) {
+    // no events in searched area, show events of searched category sorted by date & time
+    if (eventsByPostcode.length === 0) {
       this.setState({
-        otherSuggestion: 'There are no events in your area yet. Go back and try another search.'
+        otherSuggestion: `There are no ${searchData.category} events in your area yet. Here are some other suggestions.`
       })
+      const sortedEvents = this.sortDateTime(eventsByCategory)
+      this.setState({ events: sortedEvents })
       return
     }
 
-    // checking date
-    const dates = categories.filter(event => {
+    this.filterDate(searchData, eventsByPostcode)
+  }
+
+  // CHECK FILTER
+  filterDate = (searchData, eventsByPostcode) => {
+    const eventsByDates = eventsByPostcode.filter(event => {
       return moment(event.date).isSame(searchData.date, 'day') // checks year, month and day
     })
 
-    if (dates.length === 0) {
+    // no events with searched date, show the events of that area based on postcode, sorted by date & time
+    if (eventsByDates.length === 0) {
+      const date = moment(searchData.date).format('DD/MM/YYYY')
+
       this.setState({
         otherSuggestion: `There are no events for ${date} yet. Here are some other suggestions.`
       })
-      events = [...postcodes]
-      this.setState({ events })
+
+      const sortedEvents = this.sortDateTime(eventsByPostcode)
+      this.setState({ events: sortedEvents })
       return
     }
 
-    // checking time
-    const times = dates.filter(event => {
+    this.filterTime(searchData, eventsByDates)
+  }
+
+  // CHECK TIME
+  filterTime = (searchData, eventsByDates) => {
+    const date = moment(searchData.date).format('DD/MM/YYYY')
+    let events = []
+
+    const eventsByTime = eventsByDates.filter(event => {
       return event.time === searchData.time
     })
 
-    if (times.length === 0) {
+    // no events with searched time, show the events of that area on searched date sorted by time
+    if (eventsByTime.length === 0) {
       this.setState({
         otherSuggestion: `There are no events at ${searchData.time} yet. Here are some other suggestions for ${date}.`
       })
-      events = [...dates]
+      const sortedEvents = this.sortDateTime(eventsByDates)
+      events = [...sortedEvents]
     } else {
-      events = [...times]
+      const sortedEventsTime = this.sortDateTime(eventsByTime)
+      events = [...sortedEventsTime]
     }
 
     this.setState({ events })
   }
+
+  sortDateTime = (array) => {
+    const sortedArray = [...array].sort((a, b) => {
+      if (a.date === b.date) {
+        const aTime = moment(a.time, ['h:mm A']).format('HH:mm').replace(':', '.')
+        const bTime = moment(b.time, ['h:mm A']).format('HH:mm').replace(':', '.')
+        return (aTime - bTime)
+      } else {
+        return new Date(a.date) - new Date(b.date)
+      }
+    })
+    return sortedArray
+  }
+
 
 
   // handleChange = e => {
@@ -94,7 +128,7 @@ class EventIndex extends React.Component {
   render() {
     const { events, otherSuggestion } = this.state
     return (
-      <section className="section">
+      <section className="section" >
         <div className="container">
           <h3>Events Page</h3>
           <div className="row">
@@ -119,7 +153,7 @@ class EventIndex extends React.Component {
             </div>
           </div>
         </div>
-      </section>
+      </section >
     )
   }
 }
