@@ -1,10 +1,31 @@
 const mongoose = require('mongoose')
 const { dbURI } = require('../config/environment')
 const Event = require('../models/event')
+const User = require('../models/user')
 
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (err, db) => {
   if (err) return console.log(err)
   db.dropDatabase()
+    .then(() => {
+      return User.create([
+        {
+          handle: 'ckapak',
+          firstName: 'christine',
+          surname: 'kapak',
+          email: 'ckapak@email',
+          password: 'pass',
+          passwordConfirmation: 'pass'
+        },
+        {
+          handle: 'testy',
+          firstName: 'test',
+          surname: 'mctesty',
+          email: 'test@email',
+          password: 'pass',
+          passwordConfirmation: 'pass'
+        }
+      ])
+    })
     .then(() => {
       return Event.create([
         {

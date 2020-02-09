@@ -1,5 +1,6 @@
 import React from 'react'
-// import axios from 'axios'
+import axios from 'axios'
+import Auth from '../../lib/auth'
 
 class Login extends React.Component {
   state = {
@@ -19,8 +20,9 @@ class Login extends React.Component {
     e.preventDefault()
 
     try {
-      // const res =  await axios.post('/api/login', this.state.data)
-      // Auth.setToken(res.data.token)
+      const res = await axios.post('/api/login', this.state.data)
+      Auth.setToken(res.data.token)
+      // this.props.history.push('/events')
     } catch (err) {
       this.setState({ error: 'Incorrect Credentials' })
     }
@@ -33,19 +35,19 @@ class Login extends React.Component {
       <form onSubmit={this.handleSubmit}>
         <div className="row">
           <div className="five columns">
-            <input type="text" placeholder="Email Address" className="u-full-width" onChange={this.handleChange}>
+            <input type="text" name="email" placeholder="Email Address" className="u-full-width" onChange={this.handleChange}>
             </input>
           </div>
         </div>
         <div className="row">
           <div className="five columns">
-            <input type="text" placeholder="Password" className="u-full-width" onChange={this.handleChange}>
+            <input type="text" name="password" placeholder="Password" className="u-full-width" onChange={this.handleChange}>
             </input>
           </div>
         </div>
         <div className="row">
           <div className="five columns">
-            <input type="submit" name className="button-primary u-fullwidth" value="Login">
+            <input type="submit" className="button-primary u-fullwidth" value="Login">
             </input>
           </div>
         </div>
