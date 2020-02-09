@@ -11,7 +11,29 @@ class Login extends React.Component {
 
   render() {
     return (
-      <h1>This is the Login page</h1>
+      <>
+      <h1>Login</h1>
+      <form>
+        <div className="row">
+          <div className="six">
+            <input type="text" placeholder="Email Address" className="u-full-width">
+            </input>
+          </div>
+        </div>
+        <div className="row">
+          <div className="six">
+            <input type="text" placeholder="Password" className="u-full-width">
+            </input>
+          </div>
+        </div>
+        <div className="row">
+          <div className="six">
+            <input type="submit" name className="button-primary u-fullwidth" value="Login">
+            </input>
+          </div>
+        </div>
+      </form>
+      </>
     )
   }
 }
