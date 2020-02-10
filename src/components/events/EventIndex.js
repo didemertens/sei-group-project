@@ -1,7 +1,10 @@
 import React from 'react'
 import axios from 'axios'
 import moment from 'moment'
+import MapGL from 'react-map-gl'
+import { Link } from 'react-router-dom'
 
+const mapboxToken = process.env.MAPBOX_ACCESS_TOKEN
 
 class EventIndex extends React.Component {
   state = {
@@ -136,19 +139,29 @@ class EventIndex extends React.Component {
               <div className="cards">
                 {noEventsMessage && <p>{noEventsMessage}</p>}
                 {events.map(event => (
-                  <div className="card" key={event._id}>
-                    <h5>{event.name}</h5>
-                    <p>{event.category}</p>
-                    <p>{event.location}</p>
-                    <p>{moment(event.date).format('DD/MM/YYYY')}</p>
-                    <p>{event.time}</p>
-                    <p>{event.description}</p>
-                  </div>
+                  <Link to={`/events/${event._id}`} key={event._id}>
+                    <div className="card">
+                      <h5>{event.name}</h5>
+                      <p>{event.category}</p>
+                      <p>{event.location}</p>
+                      <p>{moment(event.date).format('DD/MM/YYYY')}</p>
+                      <p>{event.time}</p>
+                      <p>{event.description}</p>
+                    </div>
+                  </Link>
                 ))}
               </div>
             </div>
             <div className="six columns">
-              <p>Map</p>
+              <MapGL
+                mapboxApiAccessToken={mapboxToken}
+                mapStyle="mapbox://styles/mapbox/streets-v9"
+                latitude={0}
+                longitude={0}
+                height={'70vh'}
+                width={'90vh'}
+              >
+              </MapGL>
             </div>
           </div>
         </div>
