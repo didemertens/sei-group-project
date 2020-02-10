@@ -14,6 +14,9 @@ router.route('/events/:id')
   .put(secureRoute, events.update)
   .delete(secureRoute, events.destroy)
 
+router.route('/events/:id/attend')
+  .get(secureRoute, events.attend)
+
 // USER ROUTES
 
 router.route('/register')

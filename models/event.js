@@ -7,6 +7,12 @@ const commentSchema = new mongoose.Schema({
   timestamps: true
 })
 
+const attendeeSchema = new mongoose.Schema({
+  user: { type: mongoose.Schema.ObjectId, ref: 'User', required: true }
+}, {
+  timestamps: true
+})
+
 const eventSchema = new mongoose.Schema({
   name: { type: String, required: true },
   category: { type: String, required: true },
@@ -16,8 +22,11 @@ const eventSchema = new mongoose.Schema({
   postcode: { type: String, required: true },
   description: { type: String, required: true, maxlength: 1000 },
   requiredPeople: { type: Number },
+  latitude: { type: String },
+  longitude: { type: String },
   comments: [ commentSchema ],
-  user: { type: mongoose.Schema.ObjectId, ref: 'User', required: true }
+  user: { type: mongoose.Schema.ObjectId, ref: 'User', required: true },
+  attendees: [ attendeeSchema ]
 }, {
   timestamps: true
 })

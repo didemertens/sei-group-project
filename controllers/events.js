@@ -78,4 +78,17 @@ function commentDelete(req, res) {
     .catch(err => res.json(err))
 }
 
-module.exports = { index, create, show, update, destroy, commentCreate, commentDelete }
+function attend(req, res) {
+  Event
+    .findById(req.params.id)
+    .then(event => {
+      if (!event) return res.status(404).json({ message: 'Not Found ' })
+      if (event.attendees.some(attendee => attendee.user.equals(req.currentUser._id))) return event
+      event.attendees.push(req.currentUser)
+      return event.save()
+    })
+    .then(event => res.status(202).json(event))
+    .catch(err => res.json(err))
+}
+
+module.exports = { index, create, show, update, destroy, commentCreate, commentDelete, attend }
