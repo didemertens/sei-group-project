@@ -59,64 +59,57 @@ class Home extends React.Component {
   render() {
     const { date, time } = this.state.data
     return (
-      <>
-        <section className="section hero">
-          <div className="container">
-            <h2 className="section-heading u-full-width">Out and About</h2>
-          </div>
-        </section>
-
-        <section className="section form">
-          <div className="container">
-            <div className="row">
-              <div className="one-half column">
-                <form onSubmit={this.handleSubmit} className="form">
-                  <label>Postcode</label>
-                  <input
-                    type="text"
-                    className="input u-full-width"
-                    placeholder="Postcode"
-                    onChange={this.handleChange}
-                    name="postcode"
-                    required={true}
+      <section className="section form">
+        <div className="container">
+          <div className="row row-form">
+            <h2 className="offset-by-four five columns section-heading">Out and About</h2>
+            <div className="offset-by-two eight columns red-back">
+              <form onSubmit={this.handleSubmit} className="form">
+                <label>Postcode</label>
+                <input
+                  type="text"
+                  className="input u-full-width"
+                  placeholder="Postcode"
+                  onChange={this.handleChange}
+                  name="postcode"
+                  required={true}
+                />
+                <label>Activity</label>
+                <select
+                  className="u-full-width"
+                  onChange={this.handleChange}
+                  name="category"
+                  required={true}
+                >
+                  <option value="" defaultValue>Choose activity</option>
+                  {this.activityCategories.map(category => (
+                    <option key={category} value={category}>{category}</option>
+                  ))}
+                </select>
+                <label>Date and Time</label>
+                <div className="row">
+                  <DatePicker
+                    selected={date}
+                    onChange={this.handleDate}
+                    dateFormat="d MMMM yyyy"
+                    name="date"
                   />
-                  <label>Activity</label>
-                  <select
-                    className="u-full-width"
-                    onChange={this.handleChange}
-                    name="category"
-                    required={true}
-                  >
-                    <option value="" defaultValue>Choose activity</option>
-                    {this.activityCategories.map(category => (
-                      <option key={category} value={category}>{category}</option>
-                    ))}
-                  </select>
-                  <label>Date and Time</label>
-                  <div className="row">
-                    <DatePicker
-                      selected={date}
-                      onChange={this.handleDate}
-                      dateFormat="d MMMM yyyy"
-                      name="date"
-                    />
-                    <DatePicker
-                      selected={time}
-                      onChange={this.handleTime}
-                      showTimeSelect
-                      showTimeSelectOnly
-                      timeIntervals={15}
-                      timeCaption="Time"
-                      dateFormat="h:mm aa"
-                    />
-                  </div>
-                  <button className="button u-full-width">Search</button>
-                </form>
-              </div>
+                  <DatePicker
+                    selected={time}
+                    onChange={this.handleTime}
+                    showTimeSelect
+                    showTimeSelectOnly
+                    timeIntervals={15}
+                    timeCaption="Time"
+                    dateFormat="h:mm aa"
+                  />
+                </div>
+                <button className="button offset-by-three six columns btn-home">Search</button>
+              </form>
             </div>
           </div>
-        </section>
-      </>
+        </div>
+      </section>
     )
   }
 }
