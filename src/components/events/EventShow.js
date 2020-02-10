@@ -15,8 +15,9 @@ class EventShow extends React.Component {
 
   getEvent = async (id) => {
     try {
-      const { data } = await axios.get(`/api/events/${id}`)
-      this.setState({ eventInfo: data })
+      const response = await axios.get(`/api/events/${id}`)
+      console.log(response)
+      this.setState({ eventInfo: response.data })
     } catch (err) {
       this.props.history.push('/notfound')
     }
@@ -37,21 +38,24 @@ class EventShow extends React.Component {
   // isOwner = () => Auth.getPayload().sub === this.state.eventInfo.user._id
 
   render() {
-    // if (!this.state.eventInfo) return null
+    if (!this.state.eventInfo) return null
     // const { eventInfo } = this.state
+    console.log(this.state.eventInfo.user)
     return (
       <div className="container">
         <div className="row">
           <div className="four columns">
             <p>Event Info</p>
-            <p>Name</p>
-            <p>Date</p>
-            <p>Time</p>
-            <p>Location</p>
-            <p>Description</p>
+            <p>Name</p><p>{this.state.eventInfo.name}</p>
+            <p>Date</p><p>{this.state.eventInfo.date}</p>
+            <p>Time</p><p>{this.state.eventInfo.time}</p>
+            <p>Location</p><p>{this.state.eventInfo.location}</p>
+            <p>Description</p><p>{this.state.eventInfo.description}</p>
           </div>
           <div className="four columns">
             <p>Attendees Info</p>
+            <p>{this.state.eventInfo.user.handle}</p>
+            <p>{this.state.eventInfo.user.firstName} {this.state.eventInfo.user.surname}</p>
           </div>
           <div className="four columns">
             <p>User Comments</p>
