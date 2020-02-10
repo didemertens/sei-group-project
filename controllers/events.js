@@ -39,9 +39,16 @@ function update(req, res) {
     .catch(err => console.log(err))
 }
 
+function destroy(req, res) {
+  Event
+    .findById(req.params.id)
+    .then(event => {
+      if (!event) return res.status(404).json({ message: 'No event Found' })
+      if (!event.user.equals(req.currentUser._id)) return res.status(401).json({ message: 'Unauthorised' })
+      return event.remove()
+    })
+    .then(() => res.sendStatus(204))
+    .catch(err => res.json(err))
+}
 
-
-
-
-
-module.exports = { index, create, show, update }
+module.exports = { index, create, show, update, destroy }
