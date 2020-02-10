@@ -1,0 +1,19 @@
+@import 'base/colours';
+
+.form {
+  width: 100%;
+}
+
+.row-form {
+  margin-top: 10rem;
+}
+
+.btn-home {
+  border: none;
+  background-color: $orange-colour;
+  color: white;
+  &:hover{
+    background-color: $yellow-colour;
+  color: white;
+  }
+}
