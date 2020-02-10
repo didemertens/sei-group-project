@@ -1,15 +1,21 @@
 import React from 'react'
 import axios from 'axios'
 import moment from 'moment'
-import MapGL from 'react-map-gl'
 import { Link } from 'react-router-dom'
+import MapGL, { Marker, Popup } from 'react-map-gl'
+import Geocoder from 'react-map-gl-geocoder'
 
 const mapboxToken = process.env.MAPBOX_ACCESS_TOKEN
 
 class EventIndex extends React.Component {
   state = {
     events: [],
-    noEventsMessage: ''
+    noEventsMessage: '',
+    viewport: {
+      latitude: 51.4558,
+      longitude: 0.0255,
+      zoom: 7
+    }
   }
 
   async componentDidMount() {
@@ -17,10 +23,50 @@ class EventIndex extends React.Component {
     const searchData = this.props.history.location.state.searchData
     try {
       const res = await axios.get('/api/events')
+      this.convertPostcode(searchData)
       this.filterCategory(res, searchData)
     } catch (err) {
       console.log(err)
-      this.props.history.push('/error')
+      // this.props.history.push('/error')
+    }
+  }
+
+  convertPostcode = async (data) => {
+    const resMap = await axios.get(
+      `https://api.mapbox.com/geocoding/v5/mapbox.places/${data.postcode}.json?access_token=${mapboxToken}`
+    )
+    this.setState({
+      ...this.state,
+      viewport: {
+        ...this.state.viewport,
+        latitude: resMap.data.features[0].center[1],
+        longitude: resMap.data.features[0].center[0],
+        zoom: 13
+      }
+    })
+  }
+
+  convertPostcodeEvent = async (event) => {
+    let latitude
+    let longitude
+    try {
+      const resMap = await axios.get(
+        `https://api.mapbox.com/geocoding/v5/mapbox.places/${event.postcode}.json?access_token=${mapboxToken}`
+      )
+      latitude = resMap.data.features[0].center[1]
+      longitude = resMap.data.features[0].center[0]
+
+      // console.log(this.state.events.indexOf(event))
+      const indexEvent = this.state.events.indexOf(event)
+      const updatedEvent = { ...this.state.events[indexEvent], latitude, longitude }
+      console.log(updatedEvent)
+      const events = [...this.state.events, updatedEvent]
+      console.log(events)
+      // this.setState({
+      //   ...this.state, events: [...this.state.events, updatedEvent]
+      // })
+    } catch (err) {
+      console.log(err)
     }
   }
 
@@ -53,7 +99,12 @@ class EventIndex extends React.Component {
         noEventsMessage: `There are no ${searchData.category} events in your area yet. Here are some other suggestions.`
       })
       const sortedEvents = this.sortDateTime(eventsByCategory)
-      this.setState({ events: sortedEvents })
+      this.setState({ events: sortedEvents }, () => {
+        this.state.events.forEach(event => {
+          console.log(this.state.events)
+          this.convertPostcodeEvent(event)
+        })
+      })
       return
     }
 
@@ -127,8 +178,34 @@ class EventIndex extends React.Component {
   //   this.setState({ filterEvents })
   // }
 
+
+  // MAP
+  mapRef = React.createRef()
+
+  handleViewportChange = (viewport) => {
+    this.setState({
+      viewport: { ...this.state.viewport, ...viewport }
+    })
+  }
+
+  // handleGeocoderViewportChange = (viewport) => {
+  //   console.log(viewport)
+  //   const geocoderDefaultOverrides = { transitionDuration: 3000 }
+  //   this.setState({ viewport: { latitude: viewport.latitude, longitude: viewport.longitude, zoom: viewport.zoom } })
+  //   console.log(this.state.viewport)
+  //   return this.handleViewportChange({
+  //     ...viewport,
+  //     ...geocoderDefaultOverrides
+  //   })
+  // }
+
+  onClickPin = x => {
+    this.setState({ crimeInfo: x })
+  }
+
   render() {
-    const { events, noEventsMessage } = this.state
+    console.log(this.state)
+    const { events, noEventsMessage, viewport } = this.state
     return (
       <section className="section" >
         <div className="container">
@@ -155,12 +232,45 @@ class EventIndex extends React.Component {
             <div className="six columns">
               <MapGL
                 mapboxApiAccessToken={mapboxToken}
-                mapStyle="mapbox://styles/mapbox/streets-v9"
-                latitude={0}
-                longitude={0}
+                ref={this.mapRef}
+                {...viewport}
                 height={'70vh'}
                 width={'90vh'}
-              >
+                mapStyle="mapbox://styles/mapbox/streets-v11"
+                onViewportChange={this.handleViewportChange}>
+                {/* <Geocoder
+                  mapRef={this.mapRef}
+                  onViewportChange={this.handleGeocoderViewportChange}
+                  mapboxApiAccessToken={mapboxToken}
+                /> */}
+
+                {/* {events.map((event, index) => {
+                  return <Marker
+                    key={index.toString()}
+                    latitude={parseFloat(event.location.latitude)}
+                    longitude={parseFloat(event.location.longitude)}
+                  >
+                    <div className="marker" />
+                  </Marker>
+                })} */}
+
+                {/* {this.state.crimes.map((crime, index) => {
+                  if (this.state.showInfo) {
+                    return (
+                      <Popup
+                        key={index.toString()}
+                        tipSize={5}
+                        anchor="bottom-right"
+                        closeButton={false}
+                        closeOnClick={true}
+                        onClose={() => this.setState({ showInfo: false })}
+                        longitude={parseFloat(crime.location.longitude)}
+                        latitude={parseFloat(crime.location.latitude)}>
+                        <p>{crime.category}</p>
+                      </Popup> */}
+                {/* )
+                  }
+                })} */}
               </MapGL>
             </div>
           </div>
