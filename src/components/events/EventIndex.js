@@ -46,30 +46,6 @@ class EventIndex extends React.Component {
     })
   }
 
-  convertPostcodeEvent = async (event) => {
-    let latitude
-    let longitude
-    try {
-      const resMap = await axios.get(
-        `https://api.mapbox.com/geocoding/v5/mapbox.places/${event.postcode}.json?access_token=${mapboxToken}`
-      )
-      latitude = resMap.data.features[0].center[1]
-      longitude = resMap.data.features[0].center[0]
-
-      // console.log(this.state.events.indexOf(event))
-      const indexEvent = this.state.events.indexOf(event)
-      const updatedEvent = { ...this.state.events[indexEvent], latitude, longitude }
-      console.log(updatedEvent)
-      const changingEvents = [...this.state.events, updatedEvent]
-      console.log(changingEvents)
-      this.setState({ ...this.state, events: changingEvents })
-      // this.setState({
-      //   ...this.state, events: [...this.state.events, updatedEvent]
-      // })
-    } catch (err) {
-      console.log(err)
-    }
-  }
 
   // FILTER EVENTS BASED ON SEARCH
   // 1) CHECK CATEGORY
@@ -100,12 +76,7 @@ class EventIndex extends React.Component {
         noEventsMessage: `There are no ${searchData.category} events in your area yet. Here are some other suggestions.`
       })
       const sortedEvents = this.sortDateTime(eventsByCategory)
-      this.setState({ events: sortedEvents }, () => {
-        this.state.events.forEach(event => {
-          console.log(this.state.events)
-          this.convertPostcodeEvent(event)
-        })
-      })
+      this.setState({ events: sortedEvents })
       return
     }
 

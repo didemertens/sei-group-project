@@ -37,8 +37,9 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           location: 'Clapham Common',
           postcode: 'SW47AJ',
           description: 'Casual game of football on Clapham Common, next to the pond (but not too close...) Everybody and anybody is welcome!',
+          latitude: '51.46180',
+          longitude: '-0.13831',
           requiredPeople: 10,
-          longitude: '',
           user: createdUsers[0]
         }, {
           name: 'Field hockey game',
@@ -48,8 +49,9 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           location: 'Millfields Park',
           postcode: 'E50AR',
           description: 'We are going to play a game of field hockey. Bring your own equipment. We will meet at the entrance of Millfields Park, opposite the Millfields cafe.',
+          latitude: '51.55712',
+          longitude: '-0.04406',
           requiredPeople: 10,
-          longitude: '',
           user: createdUsers[0]
         }, {
           name: 'Badminton Doubles',
@@ -59,8 +61,9 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           location: 'Highbury Fields',
           postcode: 'N52AB',
           description: 'Desperately in need of one person to join our doubles championship! Please bring your own racket.',
+          latitude: '51.55352',
+          longitude: '-0.09818',
           requiredPeople: 2,
-          longitude: '',
           user: createdUsers[0]
         }, {
           name: 'Dogwalking',
@@ -68,10 +71,11 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           date: new Date('September 18, 2020'),
           time: '15:00 PM',
           location: 'Canning Town Tube Station',
-          postcode: 'E161DQ',
+          postcode: 'N52AB',
           description: 'We\'re going on a 10 mile walk from Canning Town station to the Greenwich Peninsula. Fancy coming?',
+          latitude: '51.5535',
+          longitude: '-0.09818',
           requiredPeople: 10,
-          longitude: '',
           user: createdUsers[0]
         }, {
           name: 'Bootcamp',
@@ -81,8 +85,9 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           location: 'Blackheath Common',
           postcode: 'SE37AP',
           description: 'This boot camp will be mainly working on plyometric based exercises that focuses on bodyweight to increase strength and increase heart rate',
+          latitude: '51.47444',
+          longitude: '0.01261',
           requiredPeople: 15,
-          longitude: '',
           user: createdUsers[0]
         }, {
           name: 'Fun Run',
@@ -91,9 +96,10 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           time: '10:00 AM',
           location: 'Brockwell Park',
           postcode: 'SE249BJ',
-          description: 'Fun run around Brockwell Park, taking in the views of London',
+          description: 'Fun run around Brockwell Park, taking in the views of London.',
+          latitude: '51.44637',
+          longitude: '-0.10615',
           requiredPeople: null,
-          longitude: '',
           user: createdUsers[0]
         }, {
           name: 'Power walking',
@@ -103,8 +109,9 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           location: 'Greenwich Park',
           postcode: 'SE108QY',
           description: 'For people not comfotable with running and would like to still get some light cardio come and join us on our long walk within the park where we will mix uphill and down hill walking around the park',
+          latitude: '51.47300',
+          longitude: '0.00298',
           requiredPeople: 10,
-          longitude: '',
           user: createdUsers[0]
         }, {
           name: 'Football Match',
@@ -115,6 +122,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           postcode: 'SW178JU',
           description: 'Dont have a team? no problem! Turn up, play and enjoy a game with us. We get a light warm up and stretch done then get into a match',
           requiredPeople: 22,
+          latitude: '',
           longitude: '',
           user: createdUsers[0]
         }, {
@@ -126,7 +134,8 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           postcode: 'SW114NJ',
           description: 'If you are new to yoga and dont know where to start come to our beginners class where you can learn with like minded people and start your journey',
           requiredPeople: 15,
-          longitude: '',
+          latitude: '51.43412',
+          longitude: '-0.14887',
           user: createdUsers[0]
         }, {
           name: 'Power walking',
@@ -137,7 +146,8 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           postcode: 'SW163BX',
           description: 'For people not comfotable with running and would like to still get some light cardio come and join us on our long walk within the park where we will mix uphill and down hill walking around the park',
           requiredPeople: 10,
-          longitude: '',
+          latitude: '51.4762',
+          longitude: '-0.16083',
           user: createdUsers[0]
         }, {
           name: 'Football Match',
@@ -148,7 +158,8 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           postcode: 'SE217EB',
           description: 'Dont have a team? no problem! Turn up, play and enjoy a game with us. We get a light warm up and stretch done then get into a match ',
           requiredPeople: 22,
-          longitude: '',
+          latitude: '51.44743',
+          longitude: '-0.07614',
           user: createdUsers[0]
         }, {
           name: 'Beginners Yoga',
@@ -159,7 +170,8 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           postcode: 'SW198AU',
           description: 'If you are new to yoga and dont know where to start come to our beginners class where you can learn with like minded people and start your journey',
           requiredPeople: 15,
-          longitude: '',
+          latitude: '51.4377',
+          longitude: '-0.20280',
           user: createdUsers[0]
         }, {
           name: 'Advanced Yoga',
@@ -170,7 +182,8 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           postcode: 'SE162TX',
           description: 'For experienced people that want to push themselves even further. Come and join us for this advanced class',
           requiredPeople: 15,
-          longitude: '',
+          latitude: '51.49533',
+          longitude: '-0.05355',
           user: createdUsers[0]
         }, {
           name: 'Tag Rugby For Beginners',
@@ -181,7 +194,8 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           postcode: 'E35TB',
           description: 'Interested in Rugby? come and learn the game and how it works without worrying about full contact',
           requiredPeople: 30,
-          longitude: '',
+          latitude: '51.53325',
+          longitude: '-0.04070',
           user: createdUsers[0]
         }, {
           name: 'Run Club',
@@ -192,7 +206,8 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           postcode: 'SE217EB',
           description: 'If you enjoy running but not alone then this is the place for you. Come and join our group of runners',
           requiredPeople: 20,
-          longitude: '',
+          latitude: '51.44743',
+          longitude: '-0.07614',
           user: createdUsers[0]
         }, {
           name: 'Run Run Run',
@@ -203,7 +218,8 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           postcode: 'SW177AA',
           description: 'If you enjoy running but not alone then this is the place for you. Come and join one of our group of runners where you can do 5k or 10k. Starting point and finishing point will be at the station',
           requiredPeople: 20,
-          longitude: '',
+          latitude: '51.43621',
+          longitude: '-0.15924',
           user: createdUsers[0]
         }, {
           name: 'Lunchtime Burst',
@@ -214,7 +230,8 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           postcode: 'E145NY',
           description: 'Like running but you dont want to run in the evenings? come and join us for a 5k run. comeplete a runa nd get back to your text all within a hour!',
           requiredPeople: 20,
-          longitude: '',
+          latitude: '51.50308',
+          longitude: '-0.01860',
           user: createdUsers[0]
         }, {
           name: 'Football For Fun',
@@ -225,7 +242,8 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           postcode: 'N41EE',
           description: 'Join us for a fun game of football without the commitment.',
           requiredPeople: 22,
-          longitude: '',
+          latitude: '51.57462',
+          longitude: '-0.10335',
           user: createdUsers[0]
         }, {
           name: 'Beginners Yoga',
@@ -236,7 +254,8 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           postcode: 'SE37AP',
           description: 'If you are new to yoga and dont know where to start come to our beginners class where you can learn with like minded people and start your journey',
           requiredPeople: 15,
-          longitude: '',
+          latitude: '51.47444',
+          longitude: '0.01261',
           user: createdUsers[0]
         }, {
           name: 'Power walking',
@@ -247,7 +266,8 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           postcode: 'SE108QY',
           description: 'For people not comfotable with running and would like to still get some light cardio come and join us on our long walk within the park where we will mix uphill and down hill walking around the park',
           requiredPeople: 10,
-          longitude: '',
+          latitude: '51.47300',
+          longitude: '0.00298',
           user: createdUsers[0]
         }, {
           name: 'Bootcamp',
@@ -257,8 +277,9 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           location: 'Battersea Park',
           postcode: 'SW114NJ',
           description: 'This boot camp will be mainly working on plyometric based exercises that focuses on bodyweight to increase strength and increase heart rate',
+          latitude: '51.47623',
+          longitude: '-0.16083',
           requiredPeople: 10,
-          longitude: '',
           user: createdUsers[0]
         }, {
           name: 'Bootcamp',
@@ -268,8 +289,9 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           location: 'Battersea Park',
           postcode: 'SW114NJ',
           description: 'This boot camp will be mainly working on plyometric based exercises that focuses on bodyweight to increase strength and increase heart rate',
+          latitude: '51.47623',
+          longitude: '-0.16083',
           requiredPeople: 10,
-          longitude: '',
           user: createdUsers[0]
         }, {
           name: 'Bootcamp',
@@ -279,8 +301,9 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           location: 'Battersea Park',
           postcode: 'SW114NJ',
           description: 'This boot camp will be mainly working on plyometric based exercises that focuses on bodyweight to increase strength and increase heart rate',
+          latitude: '51.47623',
+          longitude: '-0.16083',
           requiredPeople: 10,
-          longitude: '',
           user: createdUsers[0]
         }, {
           name: 'Bootcamp',
@@ -290,8 +313,9 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           location: 'Battersea Park',
           postcode: 'SW114NJ',
           description: 'This boot camp will be mainly working on plyometric based exercises that focuses on bodyweight to increase strength and increase heart rate',
+          latitude: '51.47623',
+          longitude: '-0.16083',
           requiredPeople: 10,
-          longitude: '',
           user: createdUsers[0]
         }, {
           name: 'Bootcamp',
@@ -301,8 +325,9 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           location: 'Battersea Park',
           postcode: 'SW114NJ',
           description: 'This boot camp will be mainly working on plyometric based exercises that focuses on bodyweight to increase strength and increase heart rate',
+          latitude: '51.47623',
+          longitude: '-0.16083',
           requiredPeople: 10,
-          longitude: '',
           user: createdUsers[0]
         }, {
           name: 'Bootcamp',
@@ -312,8 +337,9 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           location: 'Battersea Park',
           postcode: 'SW114NJ',
           description: 'This boot camp will be mainly working on plyometric based exercises that focuses on bodyweight to increase strength and increase heart rate',
+          latitude: '51.47623',
+          longitude: '-0.16083',
           requiredPeople: 10,
-          longitude: '',
           user: createdUsers[0]
         }, {
           name: 'Advanced Yoga',
@@ -323,8 +349,9 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           location: 'Victoria Park',
           postcode: 'E35TB',
           description: 'For experienced people that want to push themselves even further. Come and join us for this advanced class',
+          latitude: '51.53325',
+          longitude: '-0.04070',
           requiredPeople: 10,
-          longitude: '',
           user: createdUsers[0]
         }, {
           name: 'Advanced Yoga',
@@ -334,8 +361,9 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           location: 'Battersea Park',
           postcode: 'SW114NJ',
           description: 'For experienced people that want to push themselves even further. Come and join us for this advanced class',
+          latitude: '51.47623',
+          longitude: '-0.16083',
           requiredPeople: 10,
-          longitude: '',
           user: createdUsers[0]
         }, {
           name: 'Dogwalking',
@@ -345,8 +373,9 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           location: 'Tooting Bec Common',
           postcode: 'SW177AA',
           description: 'Come and join us on our leap year walk where we will be walking round the radius of the common and going through Balham triangle to end up in Clapham Common',
+          latitude: '51.43621',
+          longitude: '-0.15924',
           requiredPeople: 10,
-          longitude: '',
           user: createdUsers[0]
         }, {
           name: 'Football on the Common',
@@ -357,7 +386,8 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           postcode: 'SW47AJ',
           description: 'Casual game of football on Clapham Common, next to the pond (but not too close...) Everybody and anybody is welcome!',
           requiredPeople: 18,
-          longitude: '',
+          latitude: '51.46180',
+          longitude: '-0.13831',
           user: createdUsers[0]
         }, {
           name: 'Beginners Yoga',
@@ -368,7 +398,8 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           postcode: 'E50AR',
           description: 'If you are new to yoga and dont know where to start come to our beginners class where you can learn with like minded people and start your journey',
           requiredPeople: 15,
-          longitude: '',
+          latitude: '51.55712',
+          longitude: '-0.04406',
           user: createdUsers[0]
         }, {
           name: 'Field hockey game',
@@ -379,7 +410,8 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           postcode: 'SE37AP',
           description: 'We are going to play a game of field hockey. Bring your own equipment. We will meet at the entrance of Millfields Park, opposite the Millfields cafe.',
           requiredPeople: 10,
-          longitude: '',
+          latitude: '51.47444',
+          longitude: '0.01261',
           user: createdUsers[0]
         }, {
           name: 'Bootcamp',
@@ -390,7 +422,8 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           postcode: 'SE217EB',
           description: 'This boot camp will be mainly working on plyometric based exercises that focuses on bodyweight to increase strength and increase heart rate',
           requiredPeople: 10,
-          longitude: '',
+          latitude: '51.4474',
+          longitude: '-0.07614',
           user: createdUsers[0]
         }, {
           name: 'Beginners Yoga',
@@ -401,7 +434,8 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           postcode: 'SE217EB',
           description: 'If you are new to yoga and dont know where to start come to our beginners class where you can learn with like minded people and start your journey',
           requiredPeople: 10,
-          longitude: '',
+          latitude: '51.4474',
+          longitude: '-0.07614',
           user: createdUsers[0]
         }, {
           name: 'Bootcamp',
@@ -412,7 +446,8 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           postcode: 'SE217EB',
           description: 'This boot camp will be mainly working on plyometric based exercises that focuses on bodyweight to increase strength and increase heart rate',
           requiredPeople: 10,
-          longitude: '',
+          latitude: '51.4474',
+          longitude: '-0.07614',
           user: createdUsers[0]
         }, {
           name: 'Football on the Common',
@@ -423,7 +458,8 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           postcode: 'SE217EB',
           description: 'Casual game of football on Dulwich Park, located by the changing rooms. Everybody and anybody is welcome!',
           requiredPeople: 22,
-          longitude: '',
+          latitude: '51.4474',
+          longitude: '-0.07614',
           user: createdUsers[0]
         }, {
           name: 'Dogwalking',
@@ -434,7 +470,8 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           postcode: 'SE217EB',
           description: 'Come and join us on our walk where we will be walking round the radius of the park',
           requiredPeople: 10,
-          longitude: '',
+          latitude: '51.4474',
+          longitude: '-0.07614',
           user: createdUsers[0]
         }, {
           name: 'Advanced Yoga',
@@ -445,7 +482,8 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           postcode: 'SE217EB',
           description: 'For experienced people that want to push themselves even further. Come and join us for this advanced class',
           requiredPeople: 10,
-          longitude: '',
+          latitude: '51.4474',
+          longitude: '-0.07614',
           user: createdUsers[0]
         },{
           name: 'Power walking',
@@ -456,7 +494,8 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           postcode: 'SE217EB',
           description: 'For people not comfotable with running and would like to still get some light cardio come and join us on our long walk where we will be walking around the park',
           requiredPeople: 10,
-          longitude: '',
+          latitude: '51.4474',
+          longitude: '-0.07614',
           user: createdUsers[0]
         },{
           name: 'Power walking',
@@ -467,7 +506,8 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           postcode: 'E35TB',
           description: 'For people not comfotable with running and would like to still get some light cardio come and join us on our long walk where we will be walking around the park',
           requiredPeople: 10,
-          longitude: '',
+          latitude: '51.53325',
+          longitude: '-0.04070',
           user: createdUsers[0]
         }
 

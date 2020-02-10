@@ -10,12 +10,6 @@ function index(req, res) {
     .catch(err => res.json(err))
 }
 
-// const resMap = await axios.get(
-//       `https://api.mapbox.com/geocoding/v5/mapbox.places/${this.postcode}.json?access_token=${mapboxToken}`
-//     )
-//     // console.log(resMap.data)
-//     return resMap.data.features[0].center[1]
-
 async function getLat(postcode) {
   try {
     const resMap = await axios.get(`https://api.mapbox.com/geocoding/v5/mapbox.places/${postcode}.json?access_token=${mapboxToken}`)
@@ -25,15 +19,23 @@ async function getLat(postcode) {
   }
 }
 
+async function getLong(postcode) {
+  try {
+    const resMap = await axios.get(`https://api.mapbox.com/geocoding/v5/mapbox.places/${postcode}.json?access_token=${mapboxToken}`)
+    return resMap.data.features[0].center[0]
+  } catch (err) {
+    console.log(err)
+  }
+}
+
 async function create(req, res) {
   req.body.user = req.currentUser
   req.body.latitude = await getLat(req.body.postcode)
-  console.log(req.body, '1')
+  req.body.longitude = await getLong(req.body.postcode)
 
   Event
     .create(req.body)
     .then(createdEvent => {
-      console.log(req.body, '2')
       return res.status(201).json(createdEvent)
     })
     .catch(err => res.status(422).json(err))
