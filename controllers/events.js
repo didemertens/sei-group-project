@@ -50,5 +50,18 @@ function destroy(req, res) {
     .then(() => res.sendStatus(204))
     .catch(err => res.json(err))
 }
+function commentCreate(req, res) {
+  req.body.user = req.currentUser
+  Event
+    .findById(req.params.id)
+    .then(event => {
+      if (!event) return res.status(404).json({ message: 'Not Found ' })
+      event.comments.push(req.body)
+      return event.save()
+    })
+    .then(event => res.status(201).json(event))
+    .catch(err => res.json(err))
+}
 
-module.exports = { index, create, show, update, destroy }
+
+module.exports = { index, create, show, update, destroy, commentCreate }
