@@ -16,7 +16,6 @@ class EventShow extends React.Component {
   getEvent = async (id) => {
     try {
       const response = await axios.get(`/api/events/${id}`)
-      console.log(response)
       this.setState({ eventInfo: response.data })
     } catch (err) {
       this.props.history.push('/notfound')
@@ -40,12 +39,12 @@ class EventShow extends React.Component {
   render() {
     if (!this.state.eventInfo) return null
     // const { eventInfo } = this.state
-    console.log(this.state.eventInfo.user)
+    console.log(this.state.eventInfo)
     return (
       <div className="container">
         <div className="row">
           <div className="four columns">
-            <p>Event Info</p>
+            <h2>Event Info</h2>
             <p>Name</p><p>{this.state.eventInfo.name}</p>
             <p>Date</p><p>{this.state.eventInfo.date}</p>
             <p>Time</p><p>{this.state.eventInfo.time}</p>
@@ -53,12 +52,35 @@ class EventShow extends React.Component {
             <p>Description</p><p>{this.state.eventInfo.description}</p>
           </div>
           <div className="four columns">
-            <p>Attendees Info</p>
+            <h2>Attendees Info</h2>
+            <h4>Event Creator</h4>
             <p>{this.state.eventInfo.user.handle}</p>
             <p>{this.state.eventInfo.user.firstName} {this.state.eventInfo.user.surname}</p>
+            {this.state.eventInfo.attendees
+              ?
+              <>
+                <h4>Other Attendees</h4>
+                <p>{this.state.eventInfo.attendees.map(attendee => (
+                  <p key={attendee.user._id}>{attendee.user.handle}</p>
+                ))}</p>
+              </>
+              :
+              <div></div>
+            }
           </div>
           <div className="four columns">
-            <p>User Comments</p>
+            <h2>User Comments</h2>
+            {this.state.eventInfo.comments
+              ?
+              this.state.eventInfo.comments.map(comment => (
+                <div key={comment.user._id}>
+                  <p>{comment.user.handle}</p>
+                  <p>{comment.text}</p>
+                </div>
+              ))
+              :
+              <div></div>
+            }
           </div>
         </div>
       </div>

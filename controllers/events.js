@@ -20,6 +20,8 @@ function show(req, res) {
   Event
     .findById(req.params.id)
     .populate('user')
+    .populate('attendees.user')
+    .populate('comments.user')
     .then(event => {
       if (!event) return res.status(404)
       res.status(200).json(event)
