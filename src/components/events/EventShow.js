@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios'
+import moment from 'moment'
 // import { Link } from 'react-router-dom'
 // import Auth from '../../lib/auth'
 
@@ -46,7 +47,7 @@ class EventShow extends React.Component {
           <div className="four columns">
             <h2>Event Info</h2>
             <p>Name</p><p>{this.state.eventInfo.name}</p>
-            <p>Date</p><p>{this.state.eventInfo.date}</p>
+            <p>Date</p><p>{moment(this.state.eventInfo.date).format('DD/MM/YYYY')}</p>
             <p>Time</p><p>{this.state.eventInfo.time}</p>
             <p>Location</p><p>{this.state.eventInfo.location}</p>
             <p>Description</p><p>{this.state.eventInfo.description}</p>
