@@ -62,6 +62,7 @@ class EventIndex extends React.Component {
       console.log(updatedEvent)
       const events = [...this.state.events, updatedEvent]
       console.log(events)
+      this.setState({ events })
       // this.setState({
       //   ...this.state, events: [...this.state.events, updatedEvent]
       // })
