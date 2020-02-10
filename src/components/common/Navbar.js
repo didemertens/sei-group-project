@@ -1,4 +1,6 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+
 
 class Navbar extends React.Component {
   state = { navOpen: false }
@@ -16,20 +18,21 @@ class Navbar extends React.Component {
   render() {
     return (
       <>
-      <div className="container">
-        <div className="two columns">
-        </div>
-        <div id="nav" className="fourteen columns">
-          <ul>
-            <li><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-          </ul>
-          <div id="nav" className="fourteen columns">
+        <div className="container">
+          <div className="navbar-brand">
+            <div className="two columns">
+            </div>
+            <div id="nav" className="fourteen columns">
+              <ul>
+                <li><Link className="navbar-item" to="/">Out And About</Link></li>
+                <li><Link className="navbar-item" to="/register">Register</Link></li>
+                <li><Link className="navbar-item" to="/login">Login</Link></li>
+              </ul>
+              <div id="nav" className="fourteen columns">
+              </div>
+            </div>
           </div>
         </div>
-      </div>
     </>
     )
   }
