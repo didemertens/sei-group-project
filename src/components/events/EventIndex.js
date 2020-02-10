@@ -60,9 +60,9 @@ class EventIndex extends React.Component {
       const indexEvent = this.state.events.indexOf(event)
       const updatedEvent = { ...this.state.events[indexEvent], latitude, longitude }
       console.log(updatedEvent)
-      const events = [...this.state.events, updatedEvent]
-      console.log(events)
-      this.setState({ events })
+      const changingEvents = [...this.state.events, updatedEvent]
+      console.log(changingEvents)
+      this.setState({ ...this.state, events: changingEvents })
       // this.setState({
       //   ...this.state, events: [...this.state.events, updatedEvent]
       // })

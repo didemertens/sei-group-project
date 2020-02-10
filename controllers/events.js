@@ -84,7 +84,10 @@ function attend(req, res) {
     .then(event => {
       if (!event) return res.status(404).json({ message: 'Not Found ' })
       if (event.attendees.some(attendee => attendee.user.equals(req.currentUser._id))) return event
-      event.attendees.push(req.currentUser)
+      event.attendees.push({ user: req.currentUser })
+      
+      console.log('user', req.currentUser)
+      console.log('attendess', event.attendees)
       return event.save()
     })
     .then(event => res.status(202).json(event))
