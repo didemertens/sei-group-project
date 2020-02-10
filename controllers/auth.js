@@ -22,4 +22,13 @@ function login(req, res) {
     .catch(() => res.status(401).json({ message: 'Unauthorized' }))
 }
 
-module.exports = { register, login }
+function profile(req, res) {
+  User
+    .findById(req.currentUser._id)
+    .populate('createdEvents')
+    .populate('attendingEvents')
+    .then(user => res.status(200).json(user))
+    .catch(err => res.json(err))
+}
+
+module.exports = { register, login, profile }
