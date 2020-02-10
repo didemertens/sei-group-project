@@ -31,4 +31,7 @@ router.route('/register')
 router.route('/login')
   .post(users.login)
 
+router.route('/profile')
+  .get(secureRoute, users.profile)
+
 module.exports = router

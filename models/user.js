@@ -11,8 +11,21 @@ const userSchema = new mongoose.Schema({
   timestamps: true
 })
 
+userSchema.virtual('createdEvents', {
+  ref: 'Event',
+  localField: '_id',
+  foreignField: 'user'
+})
+
+userSchema.virtual('attendingEvents', {
+  ref: 'Event',
+  localField: '_id',
+  foreignField: 'attendees.user'
+})
+
 userSchema
   .set('toJSON', {
+    virtuals: true,
     transform(doc, json) {
       delete json.password
       return json
