@@ -12,6 +12,7 @@ router.route('/events')
 router.route('/events/:id')
   .get(events.show)
   .put(secureRoute, events.update)
+  .delete(secureRoute, events.destroy)
 
 // USER ROUTES
 
