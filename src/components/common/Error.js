@@ -2,10 +2,11 @@ import React from 'react'
 
 
 const ErrorPage = () => (
-  <section className="section hero">
+  <section className="background">
     <div className="container">
-      <h1 className="u-full-width u-purple">Event is no longer listed.</h1>
-    </div>
+      <h1 className="header has-text-centered">Event is no longer listed.</h1>
+      
+    </div> 
 
   </section>
 )
