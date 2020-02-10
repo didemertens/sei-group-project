@@ -386,7 +386,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           location: 'Clapham Common',
           postcode: 'SW47AJ',
           description: 'Casual game of football on Clapham Common, next to the pond (but not too close...) Everybody and anybody is welcome!',
-          requiredPeople: 10,
+          requiredPeople: 18,
           latitude: '',
           longitude: '',
           user: createdUsers[0]
@@ -426,7 +426,92 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           latitude: '',
           longitude: '',
           user: createdUsers[0]
+        }, {
+          name: 'Beginners Yoga',
+          category: 'Yoga',
+          date: new Date('February 22, 2020'),
+          time: '11:00 AM',
+          location: 'Dulwich Park',
+          postcode: 'SE217EB',
+          description: 'If you are new to yoga and dont know where to start come to our beginners class where you can learn with like minded people and start your journey',
+          requiredPeople: 10,
+          latitude: '',
+          longitude: '',
+          user: createdUsers[0]
+        }, {
+          name: 'Bootcamp',
+          category: 'Bootcamp',
+          date: new Date('February 22, 2020'),
+          time: '11:30 AM',
+          location: 'Dulwich Park',
+          postcode: 'SE217EB',
+          description: 'This boot camp will be mainly working on plyometric based exercises that focuses on bodyweight to increase strength and increase heart rate',
+          requiredPeople: 10,
+          latitude: '',
+          longitude: '',
+          user: createdUsers[0]
+        }, {
+          name: 'Football on the Common',
+          category: 'Football',
+          date: new Date('February 22, 2020'),
+          time: '11:45 AM',
+          location: 'Dulwich Park',
+          postcode: 'SE217EB',
+          description: 'Casual game of football on Dulwich Park, located by the changing rooms. Everybody and anybody is welcome!',
+          requiredPeople: 22,
+          latitude: '',
+          longitude: '',
+          user: createdUsers[0]
+        }, {
+          name: 'Dogwalking',
+          category: 'Walking',
+          date: new Date('February 22, 2020'),
+          time: '12:00 PM',
+          location: 'Dulwich Park',
+          postcode: 'SE217EB',
+          description: 'Come and join us on our walk where we will be walking round the radius of the park',
+          requiredPeople: 10,
+          latitude: '',
+          longitude: '',
+          user: createdUsers[0]
+        }, {
+          name: 'Advanced Yoga',
+          category: 'Yoga',
+          date: new Date('February 22, 2020'),
+          time: '01:00 PM',
+          location: 'Dulwich Park',
+          postcode: 'SE217EB',
+          description: 'For experienced people that want to push themselves even further. Come and join us for this advanced class',
+          requiredPeople: 10,
+          latitude: '',
+          longitude: '',
+          user: createdUsers[0]
+        },{
+          name: 'Power walking',
+          category: 'Walking',
+          date: new Date('February 22, 2020'),
+          time: '01:30 PM',
+          location: 'Dulwich Park',
+          postcode: 'SE217EB',
+          description: 'For people not comfotable with running and would like to still get some light cardio come and join us on our long walk where we will be walking around the park',
+          requiredPeople: 10,
+          latitude: '',
+          longitude: '',
+          user: createdUsers[0]
+        },{
+          name: 'Power walking',
+          category: 'Walking',
+          date: new Date('February 23, 2020'),
+          time: '01:30 PM',
+          location: 'Victoria park',
+          postcode: 'E35TB',
+          description: 'For people not comfotable with running and would like to still get some light cardio come and join us on our long walk where we will be walking around the park',
+          requiredPeople: 10,
+          latitude: '',
+          longitude: '',
+          user: createdUsers[0]
         }
+
       ])
     })
     .then(createdEvents => console.log(`${'🏃🏻‍♂️ '.repeat(createdEvents.length)} events created `))
