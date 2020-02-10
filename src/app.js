@@ -11,6 +11,7 @@ import EventShow from './components/events/EventShow'
 import Login from './components/auth/Login'
 import Register from './components/auth/Register'
 import ErrorPage from './components/common/Error'
+import UserProfile from './components/auth/UserProfile'
 
 class App extends React.Component {
   render() {
@@ -24,6 +25,7 @@ class App extends React.Component {
           </nav>
           <Switch>
             <Route exact path="/" component={Home} />
+            <Route path="/profile/:id" component={UserProfile} />
             <Route path="/events/:id" component={EventShow} />
             <Route path="/events" component={EventIndex} />
             <Route path="/register" component={Register} />
