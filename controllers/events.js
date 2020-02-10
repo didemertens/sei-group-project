@@ -63,5 +63,19 @@ function commentCreate(req, res) {
     .catch(err => res.json(err))
 }
 
+function commentDelete(req, res) {
+  Event
+    .findById(req.params.id)
+    .then(event => { 
+      if (!event) return res.status(404).json({ message: 'Not Found ' })
+      const comment = event.comments.id(req.params.commentId)
+      if (!comment) return res.status(404).json({ message: 'Not Found ' })
+      if (!comment.user.equals(req.currentUser._id)) return res.status(401).json({ message: 'Unauthorised' })
+      comment.remove()
+      return event.save()
+    })
+    .then(event => res.status(202).json(event))
+    .catch(err => res.json(err))
+}
 
-module.exports = { index, create, show, update, destroy, commentCreate }
+module.exports = { index, create, show, update, destroy, commentCreate, commentDelete }
