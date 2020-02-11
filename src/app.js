@@ -21,11 +21,6 @@ class App extends React.Component {
       <BrowserRouter>
         <Navbar />
         <main>
-          {/* <nav>
-            <Link to="/">Home</Link>
-            <Link to="/login">Login</Link>
-            <Link to="/register">Register</Link>
-          </nav> */}
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/profile/:id" component={UserProfile} />

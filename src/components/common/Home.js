@@ -13,7 +13,7 @@ class Home extends React.Component {
     }
   }
 
-  activityCategories = ['Football', 'Field Hockey', 'Badminton', 'Walking', 'Bootcamp', 'Running', 'Yoga', 'Rugby']
+  activityCategories = ['Football', 'Field Hockey', 'Badminton', 'Walking', 'Bootcamp', 'Running', 'Yoga', 'Rugby', 'Swimming']
 
   componentDidMount() {
     // to round the time up to the next 15 minutes of the hour (e.g. 10:15, 10:30)
