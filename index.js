@@ -6,6 +6,7 @@ const app = express()
 const { port, dbURI } = require('./config/environment')
 const logger = require('./lib/logger')
 const router = require('./config/router')
+const errorHandler = require('./lib/errorHandler')
 
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (err) => {
   if (err) return console.log(err)
@@ -17,6 +18,8 @@ app.use(bodyParser.json())
 app.use(logger)
 
 app.use('/api', router)
+
+app.use(errorHandler)
 
 app.listen(port, () => console.log(`Express is up and running on ${port}`))
 
