@@ -2,8 +2,9 @@ import React from 'react'
 import axios from 'axios'
 import moment from 'moment'
 import { Link } from 'react-router-dom'
-import MapGL, { Marker, Popup } from 'react-map-gl'
-import Geocoder from 'react-map-gl-geocoder'
+import MapGL, { Marker, Popup, NavigationControl } from 'react-map-gl'
+import { FaMapMarkerAlt } from 'react-icons/fa'
+import 'mapbox-gl/dist/mapbox-gl.css'
 
 const mapboxToken = process.env.MAPBOX_ACCESS_TOKEN
 
@@ -15,7 +16,8 @@ class EventIndex extends React.Component {
       latitude: 51.4558,
       longitude: 0.0255,
       zoom: 7
-    }
+    },
+    showInfo: true
   }
 
   async componentDidMount() {
@@ -23,17 +25,18 @@ class EventIndex extends React.Component {
     const searchData = this.props.history.location.state.searchData
     try {
       const res = await axios.get('/api/events')
-      this.convertPostcode(searchData)
       this.filterCategory(res, searchData)
+      this.convertPostcode(searchData)
     } catch (err) {
       console.log(err)
-      // this.props.history.push('/error')
+      this.props.history.push('/error')
     }
   }
 
-  convertPostcode = async (data) => {
+  convertPostcode = async (searchData) => {
+    const firstEvent = this.state.events[0] ? this.state.events[0] : searchData
     const resMap = await axios.get(
-      `https://api.mapbox.com/geocoding/v5/mapbox.places/${data.postcode}.json?access_token=${mapboxToken}`
+      `https://api.mapbox.com/geocoding/v5/mapbox.places/${firstEvent.postcode}.json?access_token=${mapboxToken}`
     )
     this.setState({
       ...this.state,
@@ -45,7 +48,6 @@ class EventIndex extends React.Component {
       }
     })
   }
-
 
   // FILTER EVENTS BASED ON SEARCH
   // 1) CHECK CATEGORY
@@ -160,31 +162,14 @@ class EventIndex extends React.Component {
     })
   }
 
-  // handleGeocoderViewportChange = (viewport) => {
-  //   console.log(viewport)
-  //   const geocoderDefaultOverrides = { transitionDuration: 3000 }
-  //   this.setState({ viewport: { latitude: viewport.latitude, longitude: viewport.longitude, zoom: viewport.zoom } })
-  //   console.log(this.state.viewport)
-  //   return this.handleViewportChange({
-  //     ...viewport,
-  //     ...geocoderDefaultOverrides
-  //   })
-  // }
-
-  onClickPin = x => {
-    this.setState({ crimeInfo: x })
-  }
-
   render() {
-    console.log(this.state)
     const { events, noEventsMessage, viewport } = this.state
     return (
       <section className="section" >
         <div className="container">
-          <h3>Events Page</h3>
+          <h3>Events</h3>
           <div className="row">
             <div className="six columns">
-              <p>Events</p>
               <div className="cards">
                 {noEventsMessage && <p>{noEventsMessage}</p>}
                 {events.map(event => (
@@ -210,39 +195,39 @@ class EventIndex extends React.Component {
                 width={'90vh'}
                 mapStyle="mapbox://styles/mapbox/streets-v11"
                 onViewportChange={this.handleViewportChange}>
-                {/* <Geocoder
-                  mapRef={this.mapRef}
-                  onViewportChange={this.handleGeocoderViewportChange}
-                  mapboxApiAccessToken={mapboxToken}
-                /> */}
-
-                {/* {events.map((event, index) => {
+                {events.map((event, index) => {
                   return <Marker
                     key={index.toString()}
-                    latitude={parseFloat(event.location.latitude)}
-                    longitude={parseFloat(event.location.longitude)}
+                    latitude={parseFloat(event.latitude)}
+                    longitude={parseFloat(event.longitude)}
                   >
-                    <div className="marker" />
+                    <FaMapMarkerAlt
+                      className="marker"
+                      onClick={() => this.setState({ showInfo: true })}
+                    />
                   </Marker>
-                })} */}
+                })}
 
-                {/* {this.state.crimes.map((crime, index) => {
+                {events.map((event, index) => {
                   if (this.state.showInfo) {
                     return (
                       <Popup
                         key={index.toString()}
                         tipSize={5}
                         anchor="bottom-right"
-                        closeButton={false}
-                        closeOnClick={true}
                         onClose={() => this.setState({ showInfo: false })}
-                        longitude={parseFloat(crime.location.longitude)}
-                        latitude={parseFloat(crime.location.latitude)}>
-                        <p>{crime.category}</p>
-                      </Popup> */}
-                {/* )
+                        closeButton={true}
+                        closeOnClick={false}
+                        longitude={parseFloat(event.longitude)}
+                        latitude={parseFloat(event.latitude)}>
+                        <p>{event.category}</p>
+                      </Popup>
+                    )
                   }
-                })} */}
+                })}
+                <div style={{ position: 'absolute', right: 0 }}>
+                  <NavigationControl />
+                </div>
               </MapGL>
             </div>
           </div>

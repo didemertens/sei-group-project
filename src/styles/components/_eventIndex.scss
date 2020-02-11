@@ -5,3 +5,21 @@
   margin-bottom: 5px;
   padding: 10px;
 }
+
+.marker {
+  color: $orange-colour;
+  height: 20px;
+}
+.mapboxgl-popup-content {
+  box-shadow: 3px 3px 2px grey;
+
+  .mapboxgl-popup-close-button {
+    transform: scale(1.5);
+    right: -22px;
+    top: -11px;
+      &:hover {
+        background-color: transparent;
+        color: $aqua-colour;
+      }
+  }
+}
