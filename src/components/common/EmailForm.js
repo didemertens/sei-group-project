@@ -1,27 +1,27 @@
 import React from 'react'
-
+import axios from 'axios'
 
 class EmailForm extends React.Component {
   state = {
     data: {
       email: '',
       category: ''
-    }
+    },
+    sendEmail: false
   }
 
-  handleSubmit = (e) => {
+  handleSubmit = async (e) => {
     e.preventDefault()
-
-
-    //   const msg = {
-    //     to,
-    //     from,
-    //     text,
-    //     subject
-    //   }
-    //   sgMail.send(msg)
-    // }
-
+    const emailData = {
+      from: this.state.data.email,
+      text: this.state.data.category
+    }
+    try {
+      axios.post('/api/email', emailData)
+      this.setState({ sendEmail: true })
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   handleChange = (e) => {
@@ -30,10 +30,11 @@ class EmailForm extends React.Component {
   }
 
   render() {
+    const { sendEmail } = this.state
     return (
       <section className="section">
         <h1>Email Form</h1>
-        <form onSubmit={this.handleSubmit}>
+        {!sendEmail && <form onSubmit={this.handleSubmit}>
           <div className="field">
             <label>Your email</label>
             <input
@@ -53,7 +54,8 @@ class EmailForm extends React.Component {
             />
           </div>
           <button className="button">Submit</button>
-        </form>
+        </form>}
+        {sendEmail && <p>Thanks! We'll take your suggestion into consideration.</p>}
       </section>
     )
   }
