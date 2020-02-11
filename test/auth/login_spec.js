@@ -17,6 +17,8 @@ describe('POST /login', () => {
   beforeEach(done => { 
     User.create({
       handle: 'test',
+      firstName: 'test',
+      surname: 'test',
       email: 'test@test.test', 
       password: 'test',
       passwordConfirmation: 'test'

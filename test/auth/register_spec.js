@@ -30,12 +30,12 @@ const testDataDuplicateEmail = {
 }
 
 const testDataCorrect = {
-  handle: 'test',
-  firstName: 'test',
-  surname: 'test',
-  email: 'test@test.test',
-  password: 'test',
-  passwordConfirmation: 'test'
+  handle: 'unique',
+  firstName: 'unique',
+  surname: 'unique',
+  email: 'unique@unique.unique',
+  password: 'unique',
+  passwordConfirmation: 'unique'
 }
 
 describe('POST /register', () => {
