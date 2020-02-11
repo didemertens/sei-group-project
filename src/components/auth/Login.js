@@ -1,6 +1,6 @@
 import React from 'react'
 import axios from 'axios'
-import Auth from '../../../lib/auth'
+import FrontAuth from '../common/FrontAuth'
 
 class Login extends React.Component {
   state = {
@@ -21,7 +21,7 @@ class Login extends React.Component {
 
     try {
       const res = await axios.post('/api/login', this.state.data)
-      Auth.setToken(res.data.token)
+      FrontAuth.setToken(res.data.token)
       this.props.history.push('/profile/:id')
     } catch (err) {
       this.setState({ error: 'Incorrect Credentials' })

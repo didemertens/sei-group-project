@@ -1,4 +1,4 @@
-class Auth {
+class FrontAuth {
   static setToken(token) {
     localStorage.setItem('token', token)
   }
@@ -30,4 +30,4 @@ class Auth {
   }
 }
 
-export default Auth
+export default FrontAuth
