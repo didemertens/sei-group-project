@@ -47,6 +47,7 @@ class EventShow extends React.Component {
           <div className="four columns">
             <h2>Event Info</h2>
             <p>Name</p><p>{this.state.eventInfo.name}</p>
+            <p>Category</p><p>{this.state.eventInfo.category}</p>
             <p>Date</p><p>{moment(this.state.eventInfo.date).format('DD/MM/YYYY')}</p>
             <p>Time</p><p>{this.state.eventInfo.time}</p>
             <p>Location</p><p>{this.state.eventInfo.location}</p>

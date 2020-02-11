@@ -1,6 +1,6 @@
 import React from 'react'
 import axios from 'axios'
-import Auth from '../../../lib/auth'
+import FrontAuth from '../common/FrontAuth'
 
 class UserProfile extends React.Component {
   state = {
@@ -22,9 +22,9 @@ class UserProfile extends React.Component {
 
   getUserData = async (id) => {
     try {
-      Auth.getToken()
+      FrontAuth.getToken()
       const response = await axios.get(`/api/profile/${id}`, {
-        headers: { Authorization: `Bearer ${Auth.getToken()}` }
+        headers: { Authorization: `Bearer ${FrontAuth.getToken()}` }
       })
       this.setState({ userData: response.data })
     } catch (err) {
