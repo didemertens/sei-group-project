@@ -27,6 +27,7 @@ class Navbar extends React.Component {
                 <li><Link className="navbar-item" to="/">Out And About</Link></li>
                 <li><Link className="navbar-item" to="/register">Register</Link></li>
                 <li><Link className="navbar-item" to="/login">Login</Link></li>
+                <li><Link className="navbar-item" to="/create">Create an Event</Link></li>
               </ul>
               <div id="nav" className="fourteen columns">
               </div>
