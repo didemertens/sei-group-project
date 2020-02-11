@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import MapGL, { Marker, Popup, NavigationControl } from 'react-map-gl'
 import { FaMapMarkerAlt } from 'react-icons/fa'
 import 'mapbox-gl/dist/mapbox-gl.css'
+// import SearchBar from '../common/SearchBar'
 
 const mapboxToken = process.env.MAPBOX_ACCESS_TOKEN
 
@@ -17,7 +18,8 @@ class EventIndex extends React.Component {
       longitude: 0.0255,
       zoom: 7
     },
-    showInfo: true
+    showInfo: true,
+    searchTerm: ''
   }
 
   async componentDidMount() {
@@ -152,6 +154,16 @@ class EventIndex extends React.Component {
   //   this.setState({ filterEvents })
   // }
 
+  handleSearch = (e) => {
+    this.setState({ searchTerm: e.target.value })
+  }
+
+  //may need to write if/else condition on search box
+  filterEvents = () => {
+    const searchTerm = new RegExp(this.state.searchTerm, 'i')
+    return this.state.events.filter(event => searchTerm.test(event.location) || searchTerm.test(event.name))
+  }
+
 
   // MAP
   mapRef = React.createRef()
@@ -163,16 +175,28 @@ class EventIndex extends React.Component {
   }
 
   render() {
+    console.log(this.state)
     const { events, noEventsMessage, viewport } = this.state
+    this.filterEvents()
     return (
       <section className="section" >
+        {/* <div>
+          <input type="text" className="input" placeholder="Search..." />
+          <ul>
+            <Link to={SearchBar}></Link>
+          </ul>
+        </div> */}
+      
         <div className="container">
           <h3>Events</h3>
+          <input
+            onChange={this.handleSearch} 
+          />
           <div className="row">
             <div className="six columns">
               <div className="cards">
                 {noEventsMessage && <p>{noEventsMessage}</p>}
-                {events.map(event => (
+                {this.filterEvents().map(event => (
                   <Link to={`/events/${event._id}`} key={event._id}>
                     <div className="card">
                       <h5>{event.name}</h5>
