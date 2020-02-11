@@ -55,7 +55,7 @@ class EmailForm extends React.Component {
           </div>
           <button className="button">Submit</button>
         </form>}
-        {sendEmail && <p>Thanks! We'll take your suggestion into consideration.</p>}
+        {sendEmail && <p>Thanks! We'll respond within 7 working days.</p>}
       </section>
     )
   }
