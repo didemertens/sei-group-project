@@ -1,13 +1,15 @@
 import React from 'react'
 import Select from 'react-select'
+import DatePicker from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css'
 
 class EventForm extends React.Component {
   state = {
     formData: {
       name: '',
-      date: '',
+      date: new Date,
       description: '',
-      time: '',
+      time: new Date,
       location: '',
       postcode: '',
       requiredPeople: '',
@@ -31,7 +33,8 @@ class EventForm extends React.Component {
     { value: 'dogwalking', label: 'Dog Walking' },
     { value: 'running', label: 'Running' },
     { value: 'walking', label: 'Walking' },
-    { value: 'fieldhockey', label: 'Field Hockey' }
+    { value: 'fieldhockey', label: 'Field Hockey' },
+    { value: 'swimming', label: 'Swimming' }
   ]
   handleChange = ({ target: { name, value, checked, type } }) => {
     const newValue = type === 'checkbox' ? checked : value
@@ -42,6 +45,15 @@ class EventForm extends React.Component {
     const category = selected ? selected.map(item => item.value) : []
     const formData = { ...this.state.formData, category }
     this.setState({ formData })
+  }
+
+  handleTime = (time) => {
+    const data = { ...this.state.data, time }
+    this.setState({ data })
+  }
+  handleDate = (date) => {
+    const data = { ...this.state.data, date }
+    this.setState({ data })
   }
 
   render() {
@@ -64,14 +76,14 @@ class EventForm extends React.Component {
             </div>
             <div className="field">
               <label className="label">date</label>
-              <div className="control">
-                <input
-                  className="input"
-                  name="date"
-                  value={formData.date}
-                  onChange={this.handleChange}
-                />
-              </div>
+
+              <DatePicker
+                selected={this.state.date}
+                onChange={this.handleDate}
+                dateFormat="d MMMM yyyy"
+                name="date"
+              />
+
             </div>
             <div className="field">
               <label className="label">Description</label>
@@ -86,14 +98,17 @@ class EventForm extends React.Component {
             </div>
             <div className="field">
               <label className="Time">
-                Time
-                <input
-                  name="time"
-                  type="time"
-                  onChange={this.handleChange}
-                  checked={formData.time}
-                />
-              </label>
+                Time </label>
+              <DatePicker
+                selected={this.state.time}
+                onChange={this.handleTime}
+                showTimeSelect
+                showTimeSelectOnly
+                timeIntervals={15}
+                timeCaption="Time"
+                dateFormat="h:mm aa"
+              />
+
             </div>
             <div className="field">
               <label className="label">location</label>
