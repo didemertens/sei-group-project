@@ -1,9 +1,10 @@
 import React from 'react'
 import axios from 'axios'
+import ImageUpload from './ImageUpload'
 
 class Register extends React.Component {
   state = {
-    data: {
+    formData: {
       handle: '',
       firstName: '',
       surname: '',
@@ -15,9 +16,9 @@ class Register extends React.Component {
   }
 
   handleChange = e => {
-    const data = { ...this.state.data, [e.target.name]: e.target.value }
+    const formData = { ...this.state.formData, [e.target.name]: e.target.value }
     const errors = { ...this.state.errors, [e.target.name]: '' }
-    this.setState({ data, errors })
+    this.setState({ formData, errors })
   }
 
   handleSubmit = async e => {
@@ -27,11 +28,14 @@ class Register extends React.Component {
       await axios.post('/api/register', this.state.data)
       this.props.history.push('/login')
     } catch (err) {
-      this.setState({ errors: err.response.data.errors })
+      console.log(err.response.formData.errors)
+      this.setState({ errors: err.response.formData.errors })
     }
   }
 
   render() {
+    const { formData } = this.state
+    console.log(formData)
     return (
         <>
         <h1>Registration Page</h1>
@@ -56,9 +60,10 @@ class Register extends React.Component {
               <input type="text" 
                 name="firstName" 
                 placeholder="First Name" 
-                className="u-full-width" 
+                className={`u-full-width input ${this.state.errors.firstName} ? : 'has-error' : '' `} 
                 onChange={this.handleChange}
               />
+              {this.state.errors.firstName && <small className="help has-error">{this.state.errors.firstName.message}</small>}
             </div>
           </div>
 
@@ -67,9 +72,10 @@ class Register extends React.Component {
               <input type="text"
                 name="surname" 
                 placeholder="Surname" 
-                className="u-full-width" 
+                className={`u-full-width input ${this.state.errors.surname} ? : 'has-error' : '' `} 
                 onChange={this.handleChange}
               />
+              {this.state.errors.surname && <small className="help has-error">{this.state.errors.surname.message}</small>}
             </div>
           </div>
 
@@ -78,9 +84,10 @@ class Register extends React.Component {
               <input type="text" 
                 name="email" 
                 placeholder="Email Address" 
-                className="u-full-width" 
+                className={`u-full-width input ${this.state.errors.email} ? : 'has-error' : '' `} 
                 onChange={this.handleChange}
               />
+              {this.state.errors.email && <small className="help has-error">{this.state.errors.email.message}</small>}
             </div>
           </div>
 
@@ -89,9 +96,10 @@ class Register extends React.Component {
               <input type="text" 
                 name="password" 
                 placeholder="Password" 
-                className="u-full-width" 
+                className={`u-full-width input ${this.state.errors.password} ? : 'has-error' : '' `} 
                 onChange={this.handleChange}
               />
+              {this.state.errors.password && <small className="help has-error">{this.state.errors.password.message}</small>}
             </div>
           </div>
 
@@ -101,9 +109,10 @@ class Register extends React.Component {
               <input type="text" 
                 name="passwordConfirmation" 
                 placeholder="Please confirm your password here" 
-                className="u-full-width" 
+                className={`u-full-width input ${this.state.errors.passwordConfirmation} ? : 'has-error' : '' `} 
                 onChange={this.handleChange}
               />
+              {this.state.errors.passwordConfirmation && <small className="help has-error">{this.state.errors.passwordConfirmation.message}</small>}
             </div>
           </div>
 
@@ -113,6 +122,21 @@ class Register extends React.Component {
                 className="button-primary u-fullwidth" 
                 value="Login"
               />
+            </div>
+          </div>
+
+          <div className="row">
+            <div className="five columns">
+              <label className="label">Upload your photo</label>
+              <div className="control">
+                <ImageUpload 
+                  labelText="My custom label text"
+                  handleChange={this.handleChange}
+                  fieldName="profileImage"
+                  labelClassName="my-label-class"
+                  inputClassName="my-input-class"
+                />
+              </div>
             </div>
           </div>
         </form>
