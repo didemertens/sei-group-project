@@ -1,6 +1,6 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
-
+import { Link, withRouter } from 'react-router-dom'
+import FrontAuth from '../common/FrontAuth'
 
 class Navbar extends React.Component {
   state = { navOpen: false }
@@ -8,11 +8,16 @@ class Navbar extends React.Component {
   toggleNavbar = () => {
     this.setState({ navOpen: !this.state.navOpen })
   }
-  
+
   componentDidUpdate(prevProps) {
     if (this.props.location.pathname !== prevProps.location.pathname) {
       this.setState({ navOpen: false })
     }
+  }
+
+  handleLogout = () => {
+    FrontAuth.logout()
+    this.props.history.push('/')
   }
 
   render() {
@@ -25,22 +30,21 @@ class Navbar extends React.Component {
             <div id="nav" className="fourteen columns">
               <ul>
                 <li><Link className="navbar-item" to="/">Out And About</Link></li>
-                <li><Link className="navbar-item" to="/register">Register</Link></li>
-                <li><Link className="navbar-item" to="/login">Login</Link></li>
-                <li><Link className="navbar-item" to="/create">Create an Event</Link></li>
+                {!FrontAuth.isAuthenticated() && <li><Link className="navbar-item" to="/register">Register</Link></li>}
+                {!FrontAuth.isAuthenticated() && <li><Link className="navbar-item" to="/login">Login</Link></li>}
+                {FrontAuth.isAuthenticated() && <li><Link className="navbar-item" to="/create">Create an Event</Link></li>}
+                {FrontAuth.isAuthenticated() && <a href="#" className="navbar-item" onClick={this.handleLogout}>Logout</a>}
               </ul>
               <div id="nav" className="fourteen columns">
               </div>
             </div>
           </div>
         </div>
-    </>
+      </>
     )
   }
-
 }
 
-export default Navbar
-
+export default withRouter(Navbar)
 
 
