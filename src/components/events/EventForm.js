@@ -35,7 +35,11 @@ const EventForm = ({ formData, handleChange, handleTime, handleDate, handleSubmi
                   name="category"
                   required={true}
                 >
-                  <option value="" defaultValue>Choose activity</option>
+                  {formData.category ?
+                    <option value={formData.category}>{formData.category}</option>
+                    :
+                    <option value="" defaultValue>Choose activity</option>
+                  }
                   {activityCategories.map(category => (
                     <option key={category} value={category}>{category}</option>
                   ))}

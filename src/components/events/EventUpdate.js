@@ -2,14 +2,15 @@ import React from 'react'
 import axios from 'axios'
 import FrontAuth from '../common/FrontAuth'
 import EventForm from './EventForm'
+import moment from 'moment'
 
-class EventCreate extends React.Component {
+class EventUpdate extends React.Component {
   state = {
     formData: {
       name: '',
-      date: new Date,
+      date: '',
       description: '',
-      time: new Date,
+      time: '',
       location: '',
       postcode: '',
       requiredPeople: '',
@@ -17,12 +18,25 @@ class EventCreate extends React.Component {
     }
   }
 
-  componentDidMount() {
-    // to round the time up to the next 15 minutes of the hour (e.g. 10:15, 10:30)
-    const coeff = 1000 * 60 * 15
-    const roundedTime = new Date(Math.ceil(new Date() / coeff) * coeff)
-    const formData = { ...this.state.formData, time: roundedTime }
-    this.setState({ formData })
+  async componentDidMount() {
+    try {
+      const res = await axios.get(`/api/events/${this.props.match.params.id}`)
+      const formatTime = moment(res.data.time, ['h:mm A']).format('HH:mm:00')
+      const timeAndDate = `${moment(res.data.date).format('YYYY-MM-DD')}T${(formatTime)}`
+      const timeConvert = moment(timeAndDate).format()
+      const newTime = new Date(timeConvert)
+      const newDate = new Date(res.data.date)
+
+      const eventData = {
+        ...res.data,
+        date: newDate,
+        time: newTime
+      }
+      this.setState({ formData: eventData })
+
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   handleChange = ({ target: { name, value } }) => {
@@ -51,8 +65,8 @@ class EventCreate extends React.Component {
     }
 
     try {
-      const res = await axios.post('/api/events', createData, { headers: { Authorization: `Bearer ${FrontAuth.getToken()}` } })
-      this.props.history.push(`/events/${res.data._id}`)
+      await axios.put(`/api/events/${this.props.match.params.id}`, createData, { headers: { Authorization: `Bearer ${FrontAuth.getToken()}` } })
+      this.props.history.push(`/events/${this.props.match.params.id}`)
     } catch (err) {
       console.log(err)
     }
@@ -60,6 +74,7 @@ class EventCreate extends React.Component {
 
   render() {
     const { formData } = this.state
+    console.log(formData)
     return (
       <EventForm
         formData={formData}
@@ -74,4 +89,4 @@ class EventCreate extends React.Component {
 
 }
 
-export default EventCreate
+export default EventUpdate
