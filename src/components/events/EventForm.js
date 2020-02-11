@@ -36,9 +36,9 @@ class EventForm extends React.Component {
     { value: 'fieldhockey', label: 'Field Hockey' },
     { value: 'swimming', label: 'Swimming' }
   ]
-  handleChange = ({ target: { name, value, checked, type } }) => {
-    const newValue = type === 'checkbox' ? checked : value
-    const formData = { ...this.state.formData, [name]: newValue }
+  handleChange = ({ target: { name, value } }) => {
+
+    const formData = { ...this.state.formData, [name]: value }
     this.setState({ formData })
   }
   handdleMultiChange = (selected) => {
@@ -56,107 +56,131 @@ class EventForm extends React.Component {
     this.setState({ data })
   }
 
+  handleSubmit = (e) => {
+    e.preventDefault()
+    console.log('hello')
+    //make all data the same as in the database
+    const createData = {
+      ...this.state.formData,
+      postcode: this.state.formData.postcode.replace(' ', ''),
+      date: this.state.formData.date.toISOString(),
+      time: this.state.formData.time.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true }) // e.g. "10:00 AM"
+    }
+    console.log(createData)
+    // send above searchData to the index page, and send user there as well
+    // this.props.history.push({
+    //   pathname: '/events',
+    //   search: '',
+    //   state: { searchData }
+    //})
+  }
+
   render() {
     const { formData } = this.state
     console.log(formData)
     return (
+
       <main className="section">
+
         <div className="columns is-mobile">
           <div className="column is-6-tablet is-offset-3-tablet is-8-mobile is-offset-2-mobile card">
-            <div className="field">
-              <label className="label">Name</label>
-              <div className="control">
-                <input
-                  className="input"
-                  name="Name"
-                  value={formData.name}
-                  onChange={this.handleChange}
-                />
-              </div>
-            </div>
-            <div className="field">
-              <label className="label">date</label>
+            <form onSubmit= {this.handleSubmit}>
 
-              <DatePicker
-                selected={this.state.date}
-                onChange={this.handleDate}
-                dateFormat="d MMMM yyyy"
-                name="date"
-              />
-
-            </div>
-            <div className="field">
-              <label className="label">Description</label>
-              <div className="control">
-                <textarea
-                  className="textarea"
-                  name="description"
-                  value={formData.description}
-                  onChange={this.handleChange}
-                />
-              </div>
-            </div>
-            <div className="field">
-              <label className="Time">
-                Time </label>
-              <DatePicker
-                selected={this.state.time}
-                onChange={this.handleTime}
-                showTimeSelect
-                showTimeSelectOnly
-                timeIntervals={15}
-                timeCaption="Time"
-                dateFormat="h:mm aa"
-              />
-
-            </div>
-            <div className="field">
-              <label className="label">location</label>
-              <div className="control">
-                <input
-                  className="input"
-                  name="location"
-                  value={formData.location}
-                  onChange={this.handleChange}
-                />
-              </div>
               <div className="field">
-                <label className="label">Post code</label>
+                <label className="label">Name</label>
                 <div className="control">
                   <input
                     className="input"
-                    name="Name"
-                    value={formData.postcode}
+                    name="name"
+                    value={formData.name}
                     onChange={this.handleChange}
                   />
                 </div>
               </div>
-            </div>
-            <div className="field">
-              <label className="label">Required people</label>
-              <div className="control">
-                <input
-                  className="input"
-                  name="age"
-                  type="number"
-                  onChange={this.handleChange}
-                  value={formData.requiredPeople}
+              <div className="field">
+                <label className="label">date</label>
+
+                <DatePicker
+                  selected={formData.date}
+                  onChange={this.handleDate}
+                  dateFormat="d MMMM yyyy"
+                  name="date"
                 />
+
               </div>
-            </div>
-            <div className="field">
-              <label className="label">Category</label>
-              <div className="control">
-                <Select
-                  options={this.options}
-                  isMulti
-                  onChange={this.handleChange}
+              <div className="field">
+                <label className="label">Description</label>
+                <div className="control">
+                  <textarea
+                    className="textarea"
+                    name="description"
+                    value={formData.description}
+                    onChange={this.handleChange}
+                  />
+                </div>
+              </div>
+              <div className="field">
+                <label className="Time">
+                  Time </label>
+                <DatePicker
+                  selected={formData.time}
+                  onChange={this.handleTime}
+                  showTimeSelect
+                  showTimeSelectOnly
+                  timeIntervals={15}
+                  timeCaption="Time"
+                  dateFormat="h:mm aa"
                 />
+
               </div>
-            </div>
-            <div className="field">
-              <button type="submit" className="">Confirm </button>
-            </div>
+              <div className="field">
+                <label className="label">location</label>
+                <div className="control">
+                  <input
+                    className="input"
+                    name="location"
+                    value={formData.location}
+                    onChange={this.handleChange}
+                  />
+                </div>
+                <div className="field">
+                  <label className="label">Post code</label>
+                  <div className="control">
+                    <input
+                      className="input"
+                      name="postcode"
+                      value={formData.postcode}
+                      onChange={this.handleChange}
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="field">
+                <label className="label">Required people</label>
+                <div className="control">
+                  <input
+                    className="input"
+                    name="requiredPeople"
+                    type="number"
+                    onChange={this.handleChange}
+                    value={formData.requiredPeople}
+                  />
+                </div>
+              </div>
+              <div className="field">
+                <label className="label">Category</label>
+                <div className="control">
+                  <Select
+                    options={this.options}
+                    isMulti
+                    onChange={this.handleChange}
+                  />
+                </div>
+              </div>
+              <div className="field">
+                <button type="submit" className=""> Confirm </button>
+              </div>
+            </form>
           </div>
         </div>
       </main>
