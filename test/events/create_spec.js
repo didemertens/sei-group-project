@@ -8,11 +8,13 @@ const testEvent = {
   name: 'Football on the Common',
   category: 'Football',
   date: new Date('June 18, 2020'),
-  time: '0600 PM',
+  time: '06:00 PM',
   location: 'Clapham Common',
   postcode: 'SW47AJ',
   description: 'Casual game of football on Clapham Common, next to the pond (but not too close...) Everybody and anybody is welcome!',
-  requiredPeople: 10
+  requiredPeople: 10,
+  latitude: '51.46180',
+  longitude: '-0.13831'
 }
 
 const wrongTestEvent = {
@@ -30,7 +32,7 @@ const testUser = {
 }
 
 describe('POST /events', () => {
-  let token = null
+  let token
 
   beforeEach(done => {
     User.create(testUser)
@@ -77,6 +79,7 @@ describe('POST /events', () => {
 
   it('should return an object', done => {
     api.post('/api/events')
+      .set('Authorization', `Bearer ${token}`)
       .send(testEvent)
       .end((err, res) => {
         expect(res.body).to.be.an('object')
@@ -86,6 +89,7 @@ describe('POST /events', () => {
 
   it('should return an object with the correct fields', done => {
     api.post('/api/events')
+      .set('Authorization', `Bearer ${token}`)
       .send(testEvent)
       .end((err, res) => {
         expect(res.body).to.contains.keys([
@@ -96,7 +100,10 @@ describe('POST /events', () => {
           'time',
           'location',
           'postcode',
-          'description'
+          'description',
+          'requiredPeople',
+          'longitude',
+          'latitude'
         ])
         done()
       })
@@ -104,6 +111,7 @@ describe('POST /events', () => {
 
   it('should return an object with the correct fields and value types', done => {
     api.post('/api/events')
+      .set('Authorization', `Bearer ${token}`)
       .send(testEvent)
       .end((err, res) => {
         const event = res.body

@@ -4,7 +4,6 @@ const User = require('../../models/user')
 const jwt = require('jsonwebtoken')
 const { secret } = require('../../config/environment')
 
-
 const testUserData = [{
   handle: 'test',
   firstName: 'test',
@@ -39,7 +38,10 @@ describe('PUT /events/:id', () => {
           location: 'Clapham Common',
           postcode: 'SW47AJ',
           description: 'Casual game of football on Clapham Common, next to the pond (but not too close...) Everybody and anybody is welcome!',
-          requiredPeople: 10
+          latitude: '51.46180',
+          longitude: '-0.13831',
+          requiredPeople: 10,
+          user: users[0]
         })
       })
       .then(createdEvent => {
@@ -125,7 +127,7 @@ describe('PUT /events/:id', () => {
       .set('Authorization', `Bearer ${incorrectToken}`)
       .send({ name: 'Test' })
       .end((err, res) => {
-        expect(res.body).to.eq(401)
+        expect(res.status).to.eq(401)
         done()
       })
   })

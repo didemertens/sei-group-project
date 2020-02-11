@@ -38,7 +38,10 @@ describe('DELETE /events/:id', () => {
           location: 'Clapham Common',
           postcode: 'SW47AJ',
           description: 'Casual game of football on Clapham Common, next to the pond (but not too close...) Everybody and anybody is welcome!',
-          requiredPeople: 10
+          requiredPeople: 10,
+          latitude: '51.46180',
+          longitude: '-0.13831',
+          user: users[0]
         })
       })
       .then(createdEvent => {
@@ -56,6 +59,7 @@ describe('DELETE /events/:id', () => {
   it('should return a 401 response without a token', done => {
     api.delete(`/api/events/${event._id}`)
       .end((err, res) => {
+        console.log('THIS IS THE RES STATUS', res.status)
         expect(res.status).to.eq(401)
         done()
       })

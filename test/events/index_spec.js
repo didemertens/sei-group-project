@@ -1,33 +1,51 @@
 /* global describe, beforeEach, afterEach, it, api, expect */
 const Event = require('../../models/event')
+const User = require('../../models/user')
 
 describe('GET /events', () => {
   beforeEach(done => {
-    Event.create([
-      {
-        name: 'Football on the Common',
-        category: 'Football',
-        date: new Date('June 18, 2020'),
-        time: '0600PM',
-        location: 'Clapham Common',
-        postcode: 'SW4 7AJ',
-        description: 'Casual game of football on Clapham Common, next to the pond (but not too close...) Everybody and anybody is welcome!',
-        requiredPeople: 10
-      }, {
-        name: 'Field hockey game',
-        category: 'Field Hockey',
-        date: new Date('February 14, 2020'),
-        time: '0300PM',
-        location: 'Millfields Park',
-        postcode: 'E5 0AR',
-        description: 'We are going to play a game of field hockey. Bring your own equipment. We will meet at the entrance of Millfields Park, opposite the Millfields cafe.'
-      }
-    ])
+    User.create({
+      handle: 'test',
+      firstName: 'test',
+      surname: 'test',
+      email: 'test@email.test',
+      password: 'test',
+      passwordConfirmation: 'test'
+    })
+      .then(user => {
+        Event.create([
+          {
+            name: 'Football on the Common',
+            category: 'Football',
+            date: new Date('June 18, 2020'),
+            time: '06:00 PM',
+            location: 'Clapham Common',
+            postcode: 'SW47AJ',
+            description: 'Casual game of football on Clapham Common, next to the pond (but not too close...) Everybody and anybody is welcome!',
+            latitude: '51.46180',
+            longitude: '-0.13831',
+            requiredPeople: 10,
+            user: user
+          }, {
+            name: 'Field hockey game',
+            category: 'Field Hockey',
+            date: new Date('February 14, 2020'),
+            time: '03:00 PM',
+            location: 'Millfields Park',
+            postcode: 'E50AR',
+            description: 'We are going to play a game of field hockey. Bring your own equipment. We will meet at the entrance of Millfields Park, opposite the Millfields cafe.',
+            latitude: '51.55712',
+            longitude: '-0.04406',
+            requiredPeople: 10,
+            user
+          }
+        ])
+      })
       .then(() => done())
   })
 
   afterEach(done => {
-    Event.deleteMany()
+    User.deleteMany()
       .then(() => Event.deleteMany())
       .then(() => done())
   })
