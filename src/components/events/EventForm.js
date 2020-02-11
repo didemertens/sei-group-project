@@ -1,7 +1,7 @@
 import React from 'react'
-
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
+import { FaPlusCircle } from 'react-icons/fa'
 import axios from 'axios'
 import FrontAuth from '../common/FrontAuth'
 
@@ -16,40 +16,15 @@ class EventForm extends React.Component {
       postcode: '',
       requiredPeople: '',
       category: ''
-
     }
   }
-  activityCategories = ['Football', 'Field Hockey', 'Badminton', 'Walking', 'Bootcamp', 'Running', 'Yoga', 'Rugby', 'Swimming']
-  // {
-  //   "name": "Yin Yoga",
-  //   "category": "Yoga",
-  //   "date": "February 14, 2020",
-  //   "time": "06:00 PM",
-  //   "location": "Millfields Park",
-  //   "postcode": "e50la",
-  //   "description": "Some relaxing yoga in the park."
-  // }
-  options = [
-    { value: 'football', label: 'Football' },
-    { value: 'yoga', label: 'Yoga' },
-    { value: 'bootcamp', label: 'Bootcamp' },
-    { value: 'dogwalking', label: 'Dog Walking' },
-    { value: 'running', label: 'Running' },
-    { value: 'walking', label: 'Walking' },
-    { value: 'fieldhockey', label: 'Field Hockey' },
-    { value: 'swimming', label: 'Swimming' }
-  ]
-  handleChange = ({ target: { name, value } }) => {
 
+  activityCategories = ['Football', 'Field Hockey', 'Badminton', 'Walking', 'Bootcamp', 'Running', 'Yoga', 'Rugby', 'Swimming']
+
+  handleChange = ({ target: { name, value } }) => {
     const formData = { ...this.state.formData, [name]: value }
     this.setState({ formData })
   }
-  handleMultiChange = (selected) => {
-    const category = selected ? selected.map(item => item.value) : ''
-    const formData = { ...this.state.formData, category }
-    this.setState({ formData })
-  }
-
   handleTime = (time) => {
     const data = { ...this.state.data, time }
     this.setState({ data })
@@ -69,34 +44,22 @@ class EventForm extends React.Component {
       date: this.state.formData.date.toISOString(),
       time: this.state.formData.time.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true }) // e.g. "10:00 AM"
     }
-    console.log(createData)
 
     try {
-
       const res = await axios.post('/api/events', createData, { headers: { Authorization: `Bearer ${FrontAuth.getToken()}` } })
       this.props.history.push(`/events/${res.data._id}`)
     } catch (err) {
       console.log(err)
     }
-    // send above searchData to the index page, and send user there as well
-    // this.props.history.push({
-    //   pathname: '/events',
-    //   search: '',
-    //   state: { searchData }
-    //})
   }
 
   render() {
     const { formData } = this.state
-    console.log(formData)
     return (
-
       <main className="section">
-
         <div className="columns is-mobile">
-          <div className="column is-6-tablet is-offset-3-tablet is-8-mobile is-offset-2-mobile card">
+          <div className="column is-6-tablet is-offset-3-tablet is-8-mobile is-offset-2-mobile">
             <form onSubmit={this.handleSubmit}>
-
               <div className="field">
                 <label className="label">Name</label>
                 <div className="control">
@@ -110,14 +73,12 @@ class EventForm extends React.Component {
               </div>
               <div className="field">
                 <label className="label">date</label>
-
                 <DatePicker
                   selected={formData.date}
                   onChange={this.handleDate}
                   dateFormat="d MMMM yyyy"
                   name="date"
                 />
-
               </div>
               <div className="field">
                 <label className="label">Description</label>
@@ -142,7 +103,6 @@ class EventForm extends React.Component {
                   timeCaption="Time"
                   dateFormat="h:mm aa"
                 />
-
               </div>
               <div className="field">
                 <label className="label">location</label>
@@ -181,7 +141,11 @@ class EventForm extends React.Component {
               <div className="field">
                 <label className="label">Category</label>
                 <div className="control">
-                  <label>Activity</label>
+                  <label>Activity
+                      <a href="/email" data-tooltip="Can't see the category that you're looking for? Click here to send a request.">
+                        <FaPlusCircle />
+                        </a>
+                  </label>
                   <select
                     className="u-full-width"
                     onChange={this.handleChange}
@@ -205,7 +169,5 @@ class EventForm extends React.Component {
     )
   }
 }
-
-
 
 export default EventForm
