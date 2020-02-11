@@ -2,6 +2,8 @@ import React from 'react'
 import Select from 'react-select'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
+import axios from 'axios'
+import FrontAuth from '../common/FrontAuth'
 
 class EventForm extends React.Component {
   state = {
@@ -41,7 +43,7 @@ class EventForm extends React.Component {
     const formData = { ...this.state.formData, [name]: value }
     this.setState({ formData })
   }
-  handdleMultiChange = (selected) => {
+  handleMultiChange = (selected) => {
     const category = selected ? selected.map(item => item.value) : []
     const formData = { ...this.state.formData, category }
     this.setState({ formData })
@@ -67,6 +69,12 @@ class EventForm extends React.Component {
       time: this.state.formData.time.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true }) // e.g. "10:00 AM"
     }
     console.log(createData)
+
+    try {
+      axios.post('/api/events', createData, { headers: { Authorization: `Bearer ${FrontAuth.getToken()}` } })
+    } catch (err) {
+      console.log(err)
+    }
     // send above searchData to the index page, and send user there as well
     // this.props.history.push({
     //   pathname: '/events',
@@ -84,7 +92,7 @@ class EventForm extends React.Component {
 
         <div className="columns is-mobile">
           <div className="column is-6-tablet is-offset-3-tablet is-8-mobile is-offset-2-mobile card">
-            <form onSubmit= {this.handleSubmit}>
+            <form onSubmit={this.handleSubmit}>
 
               <div className="field">
                 <label className="label">Name</label>
@@ -173,7 +181,7 @@ class EventForm extends React.Component {
                   <Select
                     options={this.options}
                     isMulti
-                    onChange={this.handleChange}
+                    onChange={this.handleMultiChange}
                   />
                 </div>
               </div>
