@@ -2,14 +2,14 @@ const User = require('../models/user')
 const jwt = require('jsonwebtoken')
 const { secret } = require('../config/environment')
 
-function register(req, res) {
+function register(req, res, next) {
   User
     .create(req.body)
     .then(user => res.status(201).json({ message: `Thanks for registering ${user.handle}` }))
-    .catch(err => res.json(err))
+    .catch(next)
 }
 
-function login(req, res) {
+function login(req, res, next) {
   User
     .findOne({ email: req.body.email })
     .then(user => {
@@ -19,16 +19,16 @@ function login(req, res) {
       const token = jwt.sign({ sub: user._id }, secret, { expiresIn: '24h' })
       res.status(202).json({ message: `Welcome Back ${user.firstName}`, token })
     })
-    .catch(() => res.status(401).json({ message: 'Unauthorized' }))
+    .catch(next)
 }
 
-function profile(req, res) {
+function profile(req, res, next) {
   User
     .findById(req.currentUser._id)
     .populate('createdEvents')
     .populate('attendingEvents')
     .then(user => res.status(200).json(user))
-    .catch(err => res.json(err))
+    .catch(next)
 }
 
 module.exports = { register, login, profile }

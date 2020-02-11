@@ -2,7 +2,7 @@ const router = require('express').Router()
 const events = require('../controllers/events')
 const users = require('../controllers/auth')
 const secureRoute = require('../lib/secureRoute')
-
+const other = require('../controllers/other')
 // EVENT ROUTES
 
 router.route('/events')
@@ -20,7 +20,7 @@ router.route('/events/:id/attend')
 router.route('/events/:id/comments')
   .post(secureRoute, events.commentCreate)
 
-router.route('/events/:id/comments/:commentId') 
+router.route('/events/:id/comments/:commentId')
   .delete(secureRoute, events.commentDelete)
 
 // USER ROUTES
@@ -33,5 +33,9 @@ router.route('/login')
 
 router.route('/profile/:id')
   .get(secureRoute, users.profile)
+
+// OTHER ROUTES
+router.route('/email')
+  .post(other.sendEmail)
 
 module.exports = router
