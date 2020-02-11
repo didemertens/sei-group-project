@@ -49,7 +49,7 @@ function show(req, res, next) {
     .populate('attendees.user')
     .populate('comments.user')
     .then(event => {
-      if (!event) return res.status(404).json({ message: 'Not Found ' })
+      if (!event) throw new Error('NotFound')
       res.status(200).json(event)
     })
     .catch(next)
@@ -65,7 +65,7 @@ function update(req, res, next) {
       return event.save()
     })
     .then(updatedEvent => res.status(202).json(updatedEvent))
-    .catch(err => res.json(err))
+    .catch(next)
 }
 
 function destroy(req, res, next) {
