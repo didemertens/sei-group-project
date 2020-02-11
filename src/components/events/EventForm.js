@@ -155,6 +155,7 @@ class EventForm extends React.Component {
               </div>
             </div>
             <div className="field">
+              <button type="submit" className="">Confirm </button>
             </div>
           </div>
         </div>
