@@ -28,14 +28,11 @@ class Register extends React.Component {
       await axios.post('/api/register', this.state.data)
       this.props.history.push('/login')
     } catch (err) {
-      console.log(err.response.formData.errors)
-      this.setState({ errors: err.response.formData.errors })
+      this.setState({ errors: err.response.data.errors })
     }
   }
 
   render() {
-    const { formData } = this.state
-    console.log(formData)
     return (
         <>
         <h1>Registration Page</h1>
@@ -48,10 +45,10 @@ class Register extends React.Component {
               <input type="text" 
                 name="handle" 
                 placeholder="Handle Name" 
-                className={`u-full-width input ${this.state.errors.username} ? : 'has-error' : '' `} 
+                className={`u-full-width input ${this.state.errors.handle} ? : 'has-error' : '' `} 
                 onChange={this.handleChange}
               />
-              {this.state.errors.handle && <small className="help has-error">{this.state.errors.handle.message}</small>}
+              {this.state.errors.handle && <small className="help has-error">{this.state.errors.handle}</small>}
             </div>
           </div>
 
@@ -63,7 +60,7 @@ class Register extends React.Component {
                 className={`u-full-width input ${this.state.errors.firstName} ? : 'has-error' : '' `} 
                 onChange={this.handleChange}
               />
-              {this.state.errors.firstName && <small className="help has-error">{this.state.errors.firstName.message}</small>}
+              {this.state.errors.firstName && <small className="help has-error">{this.state.errors.firstName}</small>}
             </div>
           </div>
 
@@ -75,7 +72,7 @@ class Register extends React.Component {
                 className={`u-full-width input ${this.state.errors.surname} ? : 'has-error' : '' `} 
                 onChange={this.handleChange}
               />
-              {this.state.errors.surname && <small className="help has-error">{this.state.errors.surname.message}</small>}
+              {this.state.errors.surname && <small className="help has-error">{this.state.errors.surname}</small>}
             </div>
           </div>
 
@@ -87,13 +84,13 @@ class Register extends React.Component {
                 className={`u-full-width input ${this.state.errors.email} ? : 'has-error' : '' `} 
                 onChange={this.handleChange}
               />
-              {this.state.errors.email && <small className="help has-error">{this.state.errors.email.message}</small>}
+              {this.state.errors.email && <small className="help has-error">{this.state.errors.email}</small>}
             </div>
           </div>
 
           <div className="row">
             <div className="five columns">
-              <input type="text" 
+              <input type="password" 
                 name="password" 
                 placeholder="Password" 
                 className={`u-full-width input ${this.state.errors.password} ? : 'has-error' : '' `} 
@@ -106,7 +103,7 @@ class Register extends React.Component {
 
           <div className="row">
             <div className="five columns">
-              <input type="text" 
+              <input type="password" 
                 name="passwordConfirmation" 
                 placeholder="Please confirm your password here" 
                 className={`u-full-width input ${this.state.errors.passwordConfirmation} ? : 'has-error' : '' `} 
@@ -120,7 +117,7 @@ class Register extends React.Component {
             <div className="five columns">
               <input type="submit" 
                 className="button-primary u-fullwidth" 
-                value="Login"
+                value="Register"
               />
             </div>
           </div>

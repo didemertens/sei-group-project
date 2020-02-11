@@ -22,8 +22,10 @@ class Login extends React.Component {
     try {
       const res = await axios.post('/api/login', this.state.data)
       FrontAuth.setToken(res.data.token)
-      this.props.history.push('/profile/:id')
+      console.log(res.data)
+      this.props.history.push(`/profile/${res.data.user._id}`)
     } catch (err) {
+      console.log('this is the login page')
       this.setState({ error: 'Incorrect Credentials' })
     }
   }
@@ -47,7 +49,7 @@ class Login extends React.Component {
 
         <div className="row">
           <div className="five columns">
-            <input type="text" 
+            <input type="password" 
               name="password" 
               placeholder="Password" 
               className={`u-full-width input ${this.state.error} ? : help 'has-error' : '' `}
