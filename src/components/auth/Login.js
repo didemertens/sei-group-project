@@ -22,7 +22,7 @@ class Login extends React.Component {
     try {
       const res = await axios.post('/api/login', this.state.data)
       Auth.setToken(res.data.token)
-      this.props.history.push('/events')
+      this.props.history.push('/profile/:id')
     } catch (err) {
       this.setState({ error: 'Incorrect Credentials' })
     }
@@ -39,9 +39,8 @@ class Login extends React.Component {
             <input type="text" 
               name="email" 
               placeholder="Email Address" 
-              className="u-full-width" 
+              className={`u-full-width input ${this.state.error} ? : help 'has-error' : '' `}
               onChange={this.handleChange}
-              required={true}
             />
           </div>
         </div>
@@ -51,9 +50,8 @@ class Login extends React.Component {
             <input type="text" 
               name="password" 
               placeholder="Password" 
-              className="u-full-width" 
+              className={`u-full-width input ${this.state.error} ? : help 'has-error' : '' `}
               onChange={this.handleChange}
-              required={true}
             />
           </div>
         </div>

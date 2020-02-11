@@ -1,0 +1,11 @@
+.help {
+  &:has-error {
+    color: red;
+  }
+}
+
+.input {
+  &:has-error {
+    border-color: red;
+  }
+}
