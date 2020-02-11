@@ -25,7 +25,7 @@ class Register extends React.Component {
     e.preventDefault()
     
     try {
-      await axios.post('/api/register', this.state.data)
+      await axios.post('/api/register', this.state.formData)
       this.props.history.push('/login')
     } catch (err) {
       this.setState({ errors: err.response.data.errors })
