@@ -42,19 +42,20 @@ async function create(req, res) {
 
 }
 
-function show(req, res) {
+function show(req, res, next) {
   Event
     .findById(req.params.id)
     .populate('user')
     .populate('attendees.user')
     .populate('comments.user')
     .then(event => {
-      if (!event) return res.status(404)
+      if (!event) return res.status(404).json({ message: 'Not Found ' })
       res.status(200).json(event)
     })
+    .catch(next)
 }
 
-function update(req, res) {
+function update(req, res, next) {
   Event
     .findById(req.params.id)
     .then(event => {
@@ -64,10 +65,10 @@ function update(req, res) {
       return event.save()
     })
     .then(updatedEvent => res.status(202).json(updatedEvent))
-    .catch(err => console.log(err))
+    .catch(err => res.json(err))
 }
 
-function destroy(req, res) {
+function destroy(req, res, next) {
   Event
     .findById(req.params.id)
     .then(event => {
@@ -76,7 +77,7 @@ function destroy(req, res) {
       return event.remove()
     })
     .then(() => res.sendStatus(204))
-    .catch(err => res.json(err))
+    .catch(next)
 }
 function commentCreate(req, res) {
   req.body.user = req.currentUser

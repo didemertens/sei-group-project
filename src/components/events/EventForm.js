@@ -1,5 +1,5 @@
 import React from 'react'
-import Select from 'react-select'
+
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import axios from 'axios'
@@ -15,10 +15,11 @@ class EventForm extends React.Component {
       location: '',
       postcode: '',
       requiredPeople: '',
-      category: ['']
+      category: ''
 
     }
   }
+  activityCategories = ['Football', 'Field Hockey', 'Badminton', 'Walking', 'Bootcamp', 'Running', 'Yoga', 'Rugby', 'Swimming']
   // {
   //   "name": "Yin Yoga",
   //   "category": "Yoga",
@@ -44,7 +45,7 @@ class EventForm extends React.Component {
     this.setState({ formData })
   }
   handleMultiChange = (selected) => {
-    const category = selected ? selected.map(item => item.value) : []
+    const category = selected ? selected.map(item => item.value) : ''
     const formData = { ...this.state.formData, category }
     this.setState({ formData })
   }
@@ -58,7 +59,7 @@ class EventForm extends React.Component {
     this.setState({ data })
   }
 
-  handleSubmit = (e) => {
+  handleSubmit = async (e) => {
     e.preventDefault()
     console.log('hello')
     //make all data the same as in the database
@@ -71,7 +72,9 @@ class EventForm extends React.Component {
     console.log(createData)
 
     try {
-      axios.post('/api/events', createData, { headers: { Authorization: `Bearer ${FrontAuth.getToken()}` } })
+
+      const res = await axios.post('/api/events', createData, { headers: { Authorization: `Bearer ${FrontAuth.getToken()}` } })
+      this.props.history.push(`/events/${res.data._id}`)
     } catch (err) {
       console.log(err)
     }
@@ -178,11 +181,18 @@ class EventForm extends React.Component {
               <div className="field">
                 <label className="label">Category</label>
                 <div className="control">
-                  <Select
-                    options={this.options}
-                    isMulti
-                    onChange={this.handleMultiChange}
-                  />
+                  <label>Activity</label>
+                  <select
+                    className="u-full-width"
+                    onChange={this.handleChange}
+                    name="category"
+                    required={true}
+                  >
+                    <option value="" defaultValue>Choose activity</option>
+                    {this.activityCategories.map(category => (
+                      <option key={category} value={category}>{category}</option>
+                    ))}
+                  </select>
                 </div>
               </div>
               <div className="field">
