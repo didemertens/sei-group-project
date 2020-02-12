@@ -18,7 +18,7 @@ class EventIndex extends React.Component {
       longitude: 0.0255,
       zoom: 12
     },
-    showInfo: true
+    showInfo: null
   }
 
   async componentDidMount() {
@@ -29,7 +29,7 @@ class EventIndex extends React.Component {
       this.filterCategory(res, searchData)
       this.convertPostcode(searchData)
     } catch (err) {
-      
+
       this.props.history.push('/error')
     }
   }
@@ -208,28 +208,21 @@ class EventIndex extends React.Component {
                   >
                     <FaMapMarkerAlt
                       className="marker"
-                      onClick={() => this.setState({ showInfo: true })}
+                      src={event}
+                      onMouseOver={() => this.setState({ showInfo: event })}
+                      onMouseOut={() => this.setState({ showInfo: null })}
                     />
                   </Marker>
                 })}
-                {events.map((event, index) => {
-                  if (this.state.showInfo) {
-                    return (
-                      <Popup
-                        key={index.toString()}
-                        tipSize={5}
-                        anchor="bottom-right"
-                        onClose={() => this.setState({ showInfo: false })}
-                        closeButton={true}
-                        closeOnClick={false}
-                        latitude={parseFloat(event.latitude)}
-                        longitude={parseFloat(event.longitude)}
-                      >
-                        <p>{event.category}</p>
-                      </Popup>
-                    )
-                  }
-                })}
+                {this.state.showInfo &&
+                  <Popup tipSize={5}
+                    anchor="bottom-right"
+                    closeButton={false}
+                    longitude={Number(this.state.showInfo.longitude)}
+                    latitude={Number(this.state.showInfo.latitude)}>
+                    <p>{this.state.showInfo.category}</p>
+                  </Popup>
+                }
                 <div style={{ position: 'absolute', right: 0 }}>
                   <NavigationControl />
                 </div>
