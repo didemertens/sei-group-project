@@ -31,6 +31,7 @@ class Login extends React.Component {
   }
 
   render() {
+    console.log(this.state.error)
     return (
       <>
       <h1>Login</h1>
@@ -44,6 +45,7 @@ class Login extends React.Component {
               className={`u-full-width input ${this.state.error} ? : help 'has-error' : '' `}
               onChange={this.handleChange}
             />
+            {this.state.error && <small className="help has-error">{this.state.error}</small>}
           </div>
         </div>
 
@@ -55,6 +57,7 @@ class Login extends React.Component {
               className={`u-full-width input ${this.state.error} ? : help 'has-error' : '' `}
               onChange={this.handleChange}
             />
+            {this.state.error && <small className="help has-error">{this.state.error}</small>}
           </div>
         </div>
 
