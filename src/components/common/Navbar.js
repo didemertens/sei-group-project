@@ -36,7 +36,7 @@ class Navbar extends React.Component {
                 {!FrontAuth.isAuthenticated() && <li><Link className="navbar-item" to="/login">Login</Link></li>}
                 {FrontAuth.isAuthenticated() && <li><Link className="navbar-item" to="/create">Create an Event</Link></li>}
                 {FrontAuth.isAuthenticated() && <a href="#" className="navbar-item" onClick={this.handleLogout}>Logout</a>}
-                {FrontAuth.isAuthenticated() && <li><Link className="navbar-item" to="/profile/:id"><FaUserAlt /></Link></li>}
+                {FrontAuth.isAuthenticated() && <li><Link className="navbar-item" to={`/profile/${FrontAuth.getPayload().sub}`}><FaUserAlt /></Link></li>}
               </ul>
               <div id="nav" className="fourteen columns">
               </div>
