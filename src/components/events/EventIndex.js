@@ -16,10 +16,9 @@ class EventIndex extends React.Component {
     viewport: {
       latitude: 51.4558,
       longitude: 0.0255,
-      zoom: 7
+      zoom: 12
     },
-    showInfo: true,
-    searchTerm: ''
+    showInfo: null
   }
 
   async componentDidMount() {
@@ -30,7 +29,7 @@ class EventIndex extends React.Component {
       this.filterCategory(res, searchData)
       this.convertPostcode(searchData)
     } catch (err) {
-      console.log(err)
+
       this.props.history.push('/error')
     }
   }
@@ -46,7 +45,7 @@ class EventIndex extends React.Component {
         ...this.state.viewport,
         latitude: resMap.data.features[0].center[1],
         longitude: resMap.data.features[0].center[0],
-        zoom: 13
+        zoom: 12
       }
     })
   }
@@ -55,11 +54,17 @@ class EventIndex extends React.Component {
   // 1) CHECK CATEGORY
   filterCategory = (res, searchData) => {
     // filter out old events
-    const newEvents = res.data.filter(event => (new Date() - new Date(event.date) < 0))
+    const newEvents = res.data.filter(event => (new Date() - new Date(event.date) <= 0))
 
-    const eventsByCategory = newEvents.filter(event => {
-      return event.category === searchData.category
-    })
+    // if searched for all categories, don't filter
+    let eventsByCategory = []
+    if (searchData.category === 'All') {
+      eventsByCategory = newEvents
+    } else {
+      eventsByCategory = newEvents.filter(event => {
+        return event.category === searchData.category
+      })
+    }
 
     // no events with that category, try search again
     if (eventsByCategory.length === 0) {
@@ -149,24 +154,9 @@ class EventIndex extends React.Component {
     return sortedArray
   }
 
-  // handleChange = e => {
-  //   e.preventDefault()
-  //   console.log(e.target.value)
-  //   const eventSelected = e.target.value
-  //   const filterEvents = this.state.events.filter(event => (event.name === eventSelected || eventSelected === 'All'))
-  //   this.setState({ filterEvents })
-  // }
-
   handleSearch = (e) => {
     this.setState({ searchTerm: e.target.value })
   }
-
-  //may need to write if/else condition on search box
-  filterEvents = () => {
-    const searchTerm = new RegExp(this.state.searchTerm, 'i')
-    return this.state.events.filter(event => searchTerm.test(event.location) || searchTerm.test(event.name))
-  }
-
 
   // MAP
   mapRef = React.createRef()
@@ -179,26 +169,15 @@ class EventIndex extends React.Component {
 
   render() {
     const { events, noEventsMessage, viewport } = this.state
-    this.filterEvents()
     return (
       <section className="section" >
-        {/* <div>
-          <input type="text" className="input" placeholder="Search..." />
-          <ul>
-            <Link to={SearchBar}></Link>
-          </ul>
-        </div> */}
-
         <div className="container">
           <h3>Events</h3>
-          <input
-            onChange={this.handleSearch}
-          />
           <div className="row">
             <div className="six columns">
               <div className="cards">
                 {noEventsMessage && <p>{noEventsMessage}</p>}
-                {this.filterEvents().map(event => (
+                {events.map(event => (
                   <Link to={`/events/${event._id}`} key={event._id}>
                     <div className="card">
                       <h5>{event.name}</h5>
@@ -229,28 +208,21 @@ class EventIndex extends React.Component {
                   >
                     <FaMapMarkerAlt
                       className="marker"
-                      onClick={() => this.setState({ showInfo: true })}
+                      src={event}
+                      onMouseOver={() => this.setState({ showInfo: event })}
+                      onMouseOut={() => this.setState({ showInfo: null })}
                     />
                   </Marker>
                 })}
-
-                {events.map((event, index) => {
-                  if (this.state.showInfo) {
-                    return (
-                      <Popup
-                        key={index.toString()}
-                        tipSize={5}
-                        anchor="bottom-right"
-                        onClose={() => this.setState({ showInfo: false })}
-                        closeButton={true}
-                        closeOnClick={false}
-                        longitude={parseFloat(event.longitude)}
-                        latitude={parseFloat(event.latitude)}>
-                        <p>{event.category}</p>
-                      </Popup>
-                    )
-                  }
-                })}
+                {this.state.showInfo &&
+                  <Popup tipSize={5}
+                    anchor="bottom-right"
+                    closeButton={false}
+                    longitude={Number(this.state.showInfo.longitude)}
+                    latitude={Number(this.state.showInfo.latitude)}>
+                    <p>{this.state.showInfo.category}</p>
+                  </Popup>
+                }
                 <div style={{ position: 'absolute', right: 0 }}>
                   <NavigationControl />
                 </div>
