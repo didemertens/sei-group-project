@@ -178,7 +178,14 @@ class EventIndex extends React.Component {
               <div className="cards">
                 {noEventsMessage && <p>{noEventsMessage}</p>}
                 {events.map(event => (
-                  <Link to={`/events/${event._id}`} key={event._id}>
+                  <Link
+                    key={event._id}
+                    to={{
+                      pathname: `/events/${event._id}`,
+                      state: {
+                        fromNotifications: true
+                      }
+                    }}>
                     <div className="card">
                       <h5>{event.name}</h5>
                       <p>{event.category}</p>

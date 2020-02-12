@@ -117,8 +117,17 @@ class EventShow extends React.Component {
 
   render() {
     if (!this.state.eventInfo) return null
+    console.log('state', this.props.location.state )
     return (
       <div className="container">
+        <div className="row">
+          {this.props.location.state
+            ?
+            <button onClick={() => this.props.history.goBack()}>Back to Search</button>
+            :
+            null
+          }
+        </div>
         <div className="row">
           <h2>{this.state.eventInfo.name}</h2>
           <div className="four columns">
@@ -164,7 +173,6 @@ class EventShow extends React.Component {
         <div className="row">
           <div className="four columns">
             <h2>Event Info</h2>
-            {/* <p>Name</p><p>{this.state.eventInfo.name}</p> */}
             <p>Category</p><p>{this.state.eventInfo.category}</p>
             <p>Date</p><p>{moment(this.state.eventInfo.date).format('DD/MM/YYYY')}</p>
             <p>Time</p><p>{this.state.eventInfo.time}</p>
@@ -178,8 +186,6 @@ class EventShow extends React.Component {
               mapStyle="mapbox://styles/mapbox/streets-v11"
               onViewportChange={this.handleViewportChange}
               {...this.state.viewport}
-              // latitude={this.state.eventInfo.latitude * 1}
-              // longitude={this.state.eventInfo.longitude * 1}
             >
               <Marker
                 latitude={this.state.eventInfo.latitude * 1}
