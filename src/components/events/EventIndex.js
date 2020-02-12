@@ -29,7 +29,7 @@ class EventIndex extends React.Component {
       this.filterCategory(res, searchData)
       this.convertPostcode(searchData)
     } catch (err) {
-      console.log(err)
+      
       this.props.history.push('/error')
     }
   }
