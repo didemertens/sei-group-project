@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import FrontAuth from '../common/FrontAuth'
+import ImageUpload from '../auth/ImageUpload'
 
 class UserProfile extends React.Component {
   state = {
@@ -8,7 +9,7 @@ class UserProfile extends React.Component {
       name: '',
       handle: '',
       email: '',
-      imageURL: '',
+      profileImage: '',
       createdEvents: [],
       attendingEvents: []
     },
@@ -33,14 +34,39 @@ class UserProfile extends React.Component {
     }
   }
 
+  handleChange = async e => {
+    console.log(e.target.name, e.target.value)
+    const userData = { ...this.state.userData, [e.target.name]: e.target.value }
+    this.setState({ userData })
+    try {
+      await axios.post('/api/register', this.state.formData)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   render() {
+    console.log(this.state)
     if (!this.state.userData) return null
     const { userData } = this.state
     return (
       <div className="container">
         <div className="row">
           <div className="six columns">
-            <h1>[User Profile Picture]</h1>
+            <h1>Profile Page</h1>
+            {!userData.profileImage ? 
+              <img src="https://res.cloudinary.com/dqwdkxz64/image/upload/v1581504737/tennis-ball_umh6q0.jpg" alt="Profile Picture"/> 
+              
+              : 
+              <img src={this.state.userData.profileImage} alt="Profile Picture"/> }
+            <ImageUpload 
+              name="imageURL"
+              labelText="My custom label text"
+              handleChange={this.handleChange}
+              fieldName="profileImage"
+              labelClassName="my-label-class"
+              inputClassName="my-input-class"
+            />
             {userData.attendingEvents.length !== 0
               ?
               <>
