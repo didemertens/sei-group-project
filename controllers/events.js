@@ -114,13 +114,26 @@ function attend(req, res) {
       if (!event) return res.status(404).json({ message: 'Not Found ' })
       if (event.attendees.some(attendee => attendee.user.equals(req.currentUser._id))) return event
       event.attendees.push({ user: req.currentUser })
-      
-      console.log('user', req.currentUser)
-      console.log('attendess', event.attendees)
       return event.save()
     })
     .then(event => res.status(202).json(event))
     .catch(err => res.json(err))
 }
 
-module.exports = { index, create, show, update, destroy, commentCreate, commentDelete, attend }
+function notAttend(req, res) {
+  Event
+    .findById(req.params.id)
+    .then(event => { 
+      if (!event) return res.status(404).json({ message: 'Not Found ' })
+      const attend = event.attendees.id(req.params.attendId)
+      // console.log('REQ', req)
+      if (!attend) return res.status(404).json({ message: 'Not Found ' })
+      if (!attend.user.equals(req.currentUser._id)) return res.status(401).json({ message: 'Unauthorised' })
+      attend.remove()
+      return event.save()
+    })
+    .then(event => res.status(202).json(event))
+    .catch(err => res.json(err))
+}
+
+module.exports = { index, create, show, update, destroy, commentCreate, commentDelete, attend, notAttend }

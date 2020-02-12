@@ -30,7 +30,34 @@ class EventShow extends React.Component {
     this.setState({ comment })
   }
 
-  handleSubmit = async (e) => {
+  handleSubmitAttend = async (e) => {
+    e.preventDefault()
+    const eventId = this.props.match.params.id
+    try {
+      await axios.get(`/api/events/${eventId}/attend`, {
+        headers: { Authorization: `Bearer ${FrontAuth.getToken()}` }
+      })
+      this.getEvent(eventId)
+    } catch (err) {
+      this.setState({ errors: err })
+    }
+  }
+
+  handleSubmitNotAttend = async (e) => {
+    e.preventDefault()
+    const eventId = this.props.match.params.id
+    const attendId = this.state.eventInfo.attendees.filter(attendee => attendee.user._id === FrontAuth.getPayload().sub)[0]._id
+    try {
+      await axios.delete(`/api/events/${eventId}/attend/${attendId}`, {
+        headers: { Authorization: `Bearer ${FrontAuth.getToken()}` }
+      })
+      this.getEvent(eventId)
+    } catch (err) {
+      this.setState({ errors: err })
+    }
+  }
+
+  handleSubmitComment = async (e) => {
     e.preventDefault()
     const eventId = this.props.match.params.id
     try {
@@ -60,7 +87,10 @@ class EventShow extends React.Component {
 
   render() {
     if (!this.state.eventInfo) return null
-    console.log(this.state.eventInfo)
+    // console.log(this.state.eventInfo.attendees.filter(attendee => attendee.user._id === FrontAuth.getPayload().sub)[0]._id)
+    // const attendId = this.state.eventInfo.attendees.filter()
+    // console.log('ATTENDEES', this.state.eventInfo.attendees[0].user._id)
+    // console.log('PAYLOAD', FrontAuth.getPayload().sub)
     return (
       <div className="container">
         <div className="row">
@@ -91,7 +121,12 @@ class EventShow extends React.Component {
           </div>
           <div className="four columns">
             <h2>Attendees Info</h2>
-            
+            <form onSubmit={this.handleSubmitAttend}>
+              <button type="submit">Attending</button>
+            </form>
+            <form onSubmit={this.handleSubmitNotAttend}>
+              <button type="submit">Not Attending</button>
+            </form>
             <h4>Event Creator</h4>
             <p>{this.state.eventInfo.user.handle}</p>
             <p>{this.state.eventInfo.user.firstName} {this.state.eventInfo.user.surname}</p>
@@ -99,9 +134,9 @@ class EventShow extends React.Component {
               ?
               <>
                 <h4>Other Attendees</h4>
-                <p>{this.state.eventInfo.attendees.map(attendee => (
+                {this.state.eventInfo.attendees.map(attendee => (
                   <p key={attendee.user._id}>{attendee.user.handle}</p>
-                ))}</p>
+                ))}
               </>
               :
               <div></div>
@@ -109,7 +144,7 @@ class EventShow extends React.Component {
           </div>
           <div className="four columns">
             <h2>User Comments</h2>
-            <form onSubmit={this.handleSubmit}>
+            <form onSubmit={this.handleSubmitComment}>
               <textarea name="comment" onChange={this.handleChange} value={this.state.comment}></textarea>
               <button type="submit">Send</button>
             </form>
