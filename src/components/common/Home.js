@@ -13,7 +13,7 @@ class Home extends React.Component {
     }
   }
 
-  activityCategories = ['Football', 'Field Hockey', 'Badminton', 'Walking', 'Bootcamp', 'Running', 'Yoga', 'Rugby', 'Swimming']
+  activityCategories = ['All', 'Football', 'Field Hockey', 'Badminton', 'Walking', 'Bootcamp', 'Running', 'Yoga', 'Rugby', 'Swimming']
 
   componentDidMount() {
     // if user token is expired, logout user
