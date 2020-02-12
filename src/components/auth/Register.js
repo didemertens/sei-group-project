@@ -117,15 +117,6 @@ class Register extends React.Component {
 
           <div className="row">
             <div className="five columns">
-              <input type="submit" 
-                className="button-primary u-fullwidth" 
-                value="Register"
-              />
-            </div>
-          </div>
-
-          <div className="row">
-            <div className="five columns">
               <label className="label">Upload your photo</label>
               <div className="control">
                 <img src={this.state.formData.profileImage} />
@@ -140,6 +131,16 @@ class Register extends React.Component {
               </div>
             </div>
           </div>
+
+          <div className="row">
+            <div className="five columns">
+              <input type="submit" 
+                className="button-primary u-fullwidth" 
+                value="Register"
+              />
+            </div>
+          </div>
+
         </form>
       </>
     )
