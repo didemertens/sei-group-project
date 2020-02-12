@@ -17,6 +17,7 @@ class UserProfile extends React.Component {
 
   componentDidMount() {
     const userId = this.props.match.params.id
+    console.log(this.props.match.params.id)
     this.getUserData(userId)
   }
 

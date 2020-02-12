@@ -7,14 +7,17 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
 import Home from './components/common/Home'
 import Navbar from './components/common/Navbar'
+import ErrorPage from './components/common/Error'
+import EmailForm from './components/common/EmailForm'
+
 import EventIndex from './components/events/EventIndex'
 import EventShow from './components/events/EventShow'
+import EventCreate from './components/events/EventCreate'
+import EventUpdate from './components/events/EventUpdate'
+
 import Login from './components/auth/Login'
 import Register from './components/auth/Register'
-import ErrorPage from './components/common/Error'
 import UserProfile from './components/auth/UserProfile'
-import EventForm from './components/events/EventForm'
-import EmailForm from './components/common/EmailForm'
 
 class App extends React.Component {
   render() {
@@ -25,10 +28,11 @@ class App extends React.Component {
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/profile/:id" component={UserProfile} />
+            <Route path="/events/:id/edit" component={EventUpdate} />
             <Route path="/events/:id" component={EventShow} />
             <Route path="/events" component={EventIndex} />
             <Route path="/register" component={Register} />
-            <Route path="/create" component={EventForm} />
+            <Route path="/create" component={EventCreate} />
             <Route path="/login" component={Login} />
             <Route path="/email" component={EmailForm} />
             <Route path="/*" component={ErrorPage} />
