@@ -3,10 +3,22 @@ import axios from 'axios'
 import moment from 'moment'
 import { Link } from 'react-router-dom'
 import FrontAuth from '../common/FrontAuth'
+import { FaMapMarkerAlt } from 'react-icons/fa'
+
+import MapGL, { Marker, NavigationControl } from 'react-map-gl'
+import 'mapbox-gl/dist/mapbox-gl.css'
+const mapboxToken = process.env.MAPBOX_ACCESS_TOKEN
+
+
 
 class EventShow extends React.Component {
   state = {
     eventInfo: null,
+    viewport: {
+      latitude: 0,
+      longitude: 0,
+      zoom: 0
+    },
     comment: '',
     errors: ''
   }
@@ -19,7 +31,17 @@ class EventShow extends React.Component {
   getEvent = async (id) => {
     try {
       const response = await axios.get(`/api/events/${id}`)
+      console.log(response)
       this.setState({ eventInfo: response.data })
+      this.setState({
+        ...this.state,
+        viewport: {
+          ...this.state.viewport,
+          latitude: Number(response.data.latitude),
+          longitude: Number(response.data.longitude),
+          zoom: 14
+        }
+      })
     } catch (err) {
       this.props.history.push('/notfound')
     }
@@ -85,12 +107,16 @@ class EventShow extends React.Component {
     }
   }
 
+  mapRef = React.createRef()
+
+  handleViewportChange = (viewport) => {
+    this.setState({
+      viewport: { ...this.state.viewport, ...viewport }
+    })
+  }
+
   render() {
     if (!this.state.eventInfo) return null
-    // console.log(this.state.eventInfo.attendees.filter(attendee => attendee.user._id === FrontAuth.getPayload().sub)[0]._id)
-    // const attendId = this.state.eventInfo.attendees.filter()
-    // console.log('ATTENDEES', this.state.eventInfo.attendees[0].user._id)
-    // console.log('PAYLOAD', FrontAuth.getPayload().sub)
     return (
       <div className="container">
         <div className="row">
@@ -99,10 +125,36 @@ class EventShow extends React.Component {
             <p>Hosted by {this.state.eventInfo.user.firstName} {this.state.eventInfo.user.surname}</p>
           </div>
           <div className="two columns">
+            <form onSubmit={this.handleSubmitAttend}>
+              {!(this.state.eventInfo.attendees ? this.state.eventInfo.attendees.filter(attendee => attendee.user._id === FrontAuth.getPayload().sub)[0] : 'none') && this.state.eventInfo.requiredPeople - this.state.eventInfo.attendees.length !== 0 && <button type="submit">Going</button>}
+            </form>
+            {this.state.eventInfo.attendees.filter(attendee => attendee.user._id === FrontAuth.getPayload().sub)[0]
+              ?
+              <p>You are going to this event!</p>
+              :
+              <div></div>
+            }
+            {!!(this.state.eventInfo.attendees ? this.state.eventInfo.attendees.filter(attendee => attendee.user._id === FrontAuth.getPayload().sub)[0] : 'none') &&
+            <form onSubmit={this.handleSubmitNotAttend}>
+              <button type="submit">Not Going</button>
+            </form>
+            }
+            {this.state.eventInfo.requiredPeople - this.state.eventInfo.attendees.length === 0
+              ?
+              <p>This event is full!</p>
+              :
+              this.state.eventInfo.requiredPeople - this.state.eventInfo.attendees.length === 1
+                ?
+                <p>{this.state.eventInfo.requiredPeople - this.state.eventInfo.attendees.length} space left</p>
+                :
+                <p>{this.state.eventInfo.requiredPeople - this.state.eventInfo.attendees.length} spaces left</p>
+            }
+          </div>
+          <div className="two columns">
             {this.isOwner() && 
               <>
                 <Link to={`/events/${this.state.eventInfo._id}/edit`}>
-                  Update Event
+                  <button>Update Event</button>
                 </Link>
                 <button onClick={this.handleDelete}>Delete Event</button>
               </>
@@ -118,24 +170,44 @@ class EventShow extends React.Component {
             <p>Time</p><p>{this.state.eventInfo.time}</p>
             <p>Location</p><p>{this.state.eventInfo.location}</p>
             <p>Description</p><p>{this.state.eventInfo.description}</p>
+            <MapGL
+              mapboxApiAccessToken={mapboxToken}
+              ref={this.mapRef}
+              height={'300px'}
+              width={'300px'}
+              mapStyle="mapbox://styles/mapbox/streets-v11"
+              onViewportChange={this.handleViewportChange}
+              {...this.state.viewport}
+              // latitude={this.state.eventInfo.latitude * 1}
+              // longitude={this.state.eventInfo.longitude * 1}
+            >
+              <Marker
+                latitude={this.state.eventInfo.latitude * 1}
+                longitude={this.state.eventInfo.longitude * 1}
+              >
+                <FaMapMarkerAlt
+                  className="marker"
+                />
+              </Marker>
+              <div style={{ position: 'absolute', right: 0 }}>
+                <NavigationControl />
+              </div>
+            </MapGL>
           </div>
           <div className="four columns">
-            <h2>Attendees Info</h2>
-            <form onSubmit={this.handleSubmitAttend}>
-              <button type="submit">Attending</button>
-            </form>
-            <form onSubmit={this.handleSubmitNotAttend}>
-              <button type="submit">Not Attending</button>
-            </form>
-            <h4>Event Creator</h4>
-            <p>{this.state.eventInfo.user.handle}</p>
+            <h2>Attendees</h2>
+            <p>{this.state.eventInfo.user.handle} (Event Host)</p>
             <p>{this.state.eventInfo.user.firstName} {this.state.eventInfo.user.surname}</p>
+            <hr />
             {this.state.eventInfo.attendees
               ?
               <>
-                <h4>Other Attendees</h4>
                 {this.state.eventInfo.attendees.map(attendee => (
-                  <p key={attendee.user._id}>{attendee.user.handle}</p>
+                  attendee.user._id === this.state.eventInfo.user._id
+                    ?
+                    null
+                    :
+                    <p key={attendee.user._id}>{attendee.user.handle}</p>
                 ))}
               </>
               :

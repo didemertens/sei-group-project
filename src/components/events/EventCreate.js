@@ -51,11 +51,24 @@ class EventCreate extends React.Component {
     }
 
     try {
-      const res = await axios.post('/api/events', createData, { headers: { Authorization: `Bearer ${FrontAuth.getToken()}` } })
+      const res = await this.createEvent(createData)
+      await this.addCreatorToAttendees(res.data._id)
       this.props.history.push(`/events/${res.data._id}`)
     } catch (err) {
       console.log(err)
     }
+  }
+
+  createEvent(data) {
+    return axios.post('/api/events', data, 
+      { headers: { Authorization: `Bearer ${FrontAuth.getToken()}` } }
+    )
+  } 
+
+  addCreatorToAttendees = (id) => {
+    return axios.get(`/api/events/${id}/attend`, {
+      headers: { Authorization: `Bearer ${FrontAuth.getToken()}` }
+    })      
   }
 
   render() {
