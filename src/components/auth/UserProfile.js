@@ -46,6 +46,8 @@ class UserProfile extends React.Component {
   }
 
   render() {
+    console.log(FrontAuth.getPayload().sub)
+    console.log(this.props.match.params.id)
     console.log(this.state)
     if (!this.state.userData) return null
     const { userData } = this.state
@@ -55,18 +57,19 @@ class UserProfile extends React.Component {
           <div className="six columns">
             <h1>Profile Page</h1>
             {!userData.profileImage ? 
-              <img src="https://res.cloudinary.com/dqwdkxz64/image/upload/v1581504737/tennis-ball_umh6q0.jpg" alt="Profile Picture"/> 
-              
+              <img src="https://res.cloudinary.com/dqwdkxz64/image/upload/v1581507521/dreamstime_xs_166504186_pnbywl.jpg" className="tennis-ball" alt="Profile Picture"/> 
               : 
               <img src={this.state.userData.profileImage} alt="Profile Picture"/> }
-            <ImageUpload 
-              name="imageURL"
-              labelText="My custom label text"
-              handleChange={this.handleChange}
-              fieldName="profileImage"
-              labelClassName="my-label-class"
-              inputClassName="my-input-class"
-            />
+            {FrontAuth.getPayload().sub === this.props.match.params.id ? 
+              <ImageUpload 
+                labelText="My custom label text"
+                handleChange={this.handleChange}
+                fieldName="profileImage"
+                labelClassName="my-label-class"
+                inputClassName="my-input-class"
+              />
+              :
+              '' }
             {userData.attendingEvents.length !== 0
               ?
               <>
