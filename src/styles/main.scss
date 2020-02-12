@@ -1,3 +1,10 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+  box-sizing: border-box;
+}
+
 @import './components/eventIndex';
 @import './components/error';
 @import './components/register';
