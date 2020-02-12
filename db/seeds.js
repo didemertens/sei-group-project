@@ -148,8 +148,8 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           postcode: 'SW178JU',
           description: 'Dont have a team? no problem! Turn up, play and enjoy a game with us. We get a light warm up and stretch done then get into a match',
           requiredPeople: 22,
-          latitude: '',
-          longitude: '',
+          latitude: '51.43412',
+          longitude: '-0.14887',
           user: createdUsers[0]
         }, {
           name: 'Beginners Yoga',
