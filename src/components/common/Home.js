@@ -1,7 +1,7 @@
 import React from 'react'
 import DatePicker from 'react-datepicker'
-
 import 'react-datepicker/dist/react-datepicker.css'
+import FrontAuth from '../common/FrontAuth'
 
 class Home extends React.Component {
   state = {
@@ -16,6 +16,10 @@ class Home extends React.Component {
   activityCategories = ['Football', 'Field Hockey', 'Badminton', 'Walking', 'Bootcamp', 'Running', 'Yoga', 'Rugby', 'Swimming']
 
   componentDidMount() {
+    // if user token is expired, logout user
+    if (!FrontAuth.isAuthenticated()) {
+      FrontAuth.logout()
+    }
     // to round the time up to the next 15 minutes of the hour (e.g. 10:15, 10:30)
     const coeff = 1000 * 60 * 15
     const roundedTime = new Date(Math.ceil(new Date() / coeff) * coeff)

@@ -54,7 +54,10 @@ class EventIndex extends React.Component {
   // FILTER EVENTS BASED ON SEARCH
   // 1) CHECK CATEGORY
   filterCategory = (res, searchData) => {
-    const eventsByCategory = res.data.filter(event => {
+    // filter out old events
+    const newEvents = res.data.filter(event => (new Date() - new Date(event.date) < 0))
+
+    const eventsByCategory = newEvents.filter(event => {
       return event.category === searchData.category
     })
 
@@ -175,7 +178,6 @@ class EventIndex extends React.Component {
   }
 
   render() {
-    console.log(this.state)
     const { events, noEventsMessage, viewport } = this.state
     this.filterEvents()
     return (
@@ -186,11 +188,11 @@ class EventIndex extends React.Component {
             <Link to={SearchBar}></Link>
           </ul>
         </div> */}
-      
+
         <div className="container">
           <h3>Events</h3>
           <input
-            onChange={this.handleSearch} 
+            onChange={this.handleSearch}
           />
           <div className="row">
             <div className="six columns">

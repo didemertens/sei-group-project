@@ -10,8 +10,8 @@ class ImageUpload extends React.Component {
   handleUpload = async ({ target: { files } }) => {
     const data = new FormData
     data.append('file', files[0])
-    data.append('upload_preset', 'an5meedt')
-    const res = await axios.post('https://api.cloudinary.com/v1_1/ckapak/image/upload', data)
+    data.append('upload_preset', 'rskh3gab')
+    const res = await axios.post('https://api.cloudinary.com/v1_1/dqwdkxz64/image/upload', data)
     this.setState({ image: res.data.url }, () => {
       this.props.handleChange({ target: { name: this.props.fieldName, value: res.data.url } })
     })
@@ -22,9 +22,16 @@ class ImageUpload extends React.Component {
     const { image } = this.state
     return (
       <>
+
       {image ? 
         <div>
-          <img src={image} />
+          {/* <img src={image} /> */}
+          <label className={labelClass}>{this.props.labelText}</label>
+          <input 
+            className={this.props.inputClassName}
+            type="file"
+            onChange={this.handleUpload}
+          />
         </div>
         :
         <>

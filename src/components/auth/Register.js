@@ -10,12 +10,14 @@ class Register extends React.Component {
       surname: '',
       email: '',
       password: '',
-      passwordConfirmation: ''
+      passwordConfirmation: '',
+      profileImage: ''
     },
     errors: {}
   }
 
   handleChange = e => {
+    console.log(e.target.name, e.target.value)
     const formData = { ...this.state.formData, [e.target.name]: e.target.value }
     const errors = { ...this.state.errors, [e.target.name]: '' }
     this.setState({ formData, errors })
@@ -126,7 +128,9 @@ class Register extends React.Component {
             <div className="five columns">
               <label className="label">Upload your photo</label>
               <div className="control">
+                <img src={this.state.formData.profileImage} />
                 <ImageUpload 
+                  name="imageURL"
                   labelText="My custom label text"
                   handleChange={this.handleChange}
                   fieldName="profileImage"

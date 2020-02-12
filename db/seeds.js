@@ -32,6 +32,32 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
         {
           name: 'Football on the Common',
           category: 'Football',
+          date: new Date('January 18, 2020'),
+          time: '06:00 PM',
+          location: 'Clapham Common',
+          postcode: 'SW47AJ',
+          description: 'Casual game of football on Clapham Common, next to the pond (but not too close...) Everybody and anybody is welcome!',
+          latitude: '51.46180',
+          longitude: '-0.13831',
+          requiredPeople: 10,
+          user: createdUsers[0]
+        },
+        {
+          name: 'Football on the Common',
+          category: 'Football',
+          date: new Date('January 10, 2020'),
+          time: '06:00 PM',
+          location: 'Clapham Common',
+          postcode: 'SW47AJ',
+          description: 'Casual game of football on Clapham Common, next to the pond (but not too close...) Everybody and anybody is welcome!',
+          latitude: '51.46180',
+          longitude: '-0.13831',
+          requiredPeople: 10,
+          user: createdUsers[0]
+        },
+        {
+          name: 'Football on the Common',
+          category: 'Football',
           date: new Date('June 18, 2020'),
           time: '06:00 PM',
           location: 'Clapham Common',
@@ -485,7 +511,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           latitude: '51.4474',
           longitude: '-0.07614',
           user: createdUsers[0]
-        },{
+        }, {
           name: 'Power walking',
           category: 'Walking',
           date: new Date('February 22, 2020'),
@@ -497,7 +523,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           latitude: '51.4474',
           longitude: '-0.07614',
           user: createdUsers[0]
-        },{
+        }, {
           name: 'Power walking',
           category: 'Walking',
           date: new Date('February 23, 2020'),
