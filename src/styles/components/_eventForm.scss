@@ -27,7 +27,7 @@
   border-radius: 3px;
   background-color: #000;
   background-color: hsla(0, 0%, 20%, 0.9);
-  color: #fff;
+  color: grey;
   content: attr(data-tooltip);
   text-align: center;
   font-size: 14px;
@@ -57,4 +57,87 @@
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
   filter: "progid: DXImageTransform.Microsoft.Alpha(Opacity=100)";
   opacity: 1;
+}
+
+// .control {
+// display: flex;
+// justify-content: center;
+// }
+
+.event-form-container {
+  padding-top: 100px;
+  background-color: darkgrey ;
+}
+
+.field {
+  color:black;
+  font-family: 'Khula', sans-serif;
+
+}
+
+.label {
+  height: auto;
+  width: auto;
+  justify-content: center;
+  text-align: center;
+  
+  
+}
+
+.event-form-category {
+ background-color: white;
+ width: 210px;
+ font-size: 15px;
+ justify-content: center;
+ text-align: center;
+}
+
+.textarea {
+  width: 210px;
+}
+
+.btn-confirm {
+background-color:#fc4a1a;
+color: white;
+
+}
+
+.input {
+  height: 40px;
+  width: 210px;
+  justify-content: center;
+  text-align: center;
+}
+.date {
+  width: 210px;
+}
+
+.time {
+  width: 210px;
+  justify-content: center;
+}
+// .react-datepicker__input-container{
+//   width: 210px;
+// }
+.requiredpeople {
+  width: 210px;
+}
+.location {
+  width: 210px;
+}
+
+
+.event-create-form {
+  background-color: #f3f0f6;
+  width: 80px;
+  justify-content: center;
+  text-align: center;
+  border: solid 0.5px black;
+  padding: 30px 0px 30 0px;
+  margin: auto;
+}
+
+.event-base {
+  background-color: darkgrey ;
+
 }
