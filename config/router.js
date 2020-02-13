@@ -37,6 +37,10 @@ router.route('/login')
 router.route('/profile/:id')
   .get(secureRoute, users.profile)
 
+router.route('/profile/update')
+  .put(secureRoute, users.update)
+
+
 // OTHER ROUTES
 router.route('/email')
   .post(other.sendEmail)

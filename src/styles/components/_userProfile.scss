@@ -3,6 +3,12 @@
   width: 250px;
 }
 
+.profile-prof-picture {
+  height: 200px;
+  width: 200px;
+  border-radius: 100%;
+}
+
 .profile-section {
   display: flex;
   justify-content: center;
@@ -24,10 +30,9 @@
   max-height: 100vh;
 }
 
-
 .profile-user-data {
   font-size: 18px;
-  // background-color: $dark-grey-colour;
+  // border: 5px solid $orange-colour;
   border-radius: 5px;
   padding: 5px;
   margin-bottom: 15px;
@@ -35,8 +40,6 @@
 
 .profile-event-cards {
   min-height: 20vh;
-
-
   a {
     text-decoration: none;
     color: black;
@@ -45,11 +48,19 @@
   .profile-card {
     max-width: 70%;
     border-radius: 5px;
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 700;
     margin-bottom: 25px;
     padding: 10px;
     color: black;
+    border-bottom: 5px solid $orange-colour;
+    h5 {
+      font-size: 20px;
+    }
+  }
+  h2 {
+    font-size: 30px;
+    text-align:center;
   }
 }
 
@@ -67,16 +78,14 @@
 
 .profile-past-cards {
   border-radius: 5px;
-  display: flex;
-  flex-direction: column;
   background-color: $dark-grey-colour;
   border: 5px solid $dark-grey-colour;
 
-  .profile-container-past-cards {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-  }
+  // .profile-container-past-cards {
+  //   display: flex;
+  //   flex-wrap: wrap;
+  //   flex-direction: row;
+  // }
 }
 
 .profile-upcoming-card {
