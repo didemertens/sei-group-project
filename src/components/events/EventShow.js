@@ -146,18 +146,13 @@ class EventShow extends React.Component {
               <div className="two columns">
                 {this.isOwner() && <button className="btn-home" onClick={this.handleDelete}>Delete Event</button>}
               </div>
-              {/* <div className="two columns">
-                {!this.state.userData.profileImage ?
-                  <img src="https://res.cloudinary.com/dqwdkxz64/image/upload/v1581507521/dreamstime_xs_166504186_pnbywl.jpg" className="tennis-ball" alt="Profile Picture" />
-                  :
-                  <img src={this.state.userData.profileImage} alt="Profile Picture" />
-                }
-              </div> */}
             </div>
           </div>
         </div>
+
         <div className="container showpage-container">
           <div className="row">
+
             <div className="four columns showpage-column-left">
               <h3><strong>Event Details</strong></h3>
               <p>⭐️ {this.state.eventInfo.category}</p>
@@ -185,15 +180,11 @@ class EventShow extends React.Component {
                     <NavigationControl />
                   </div>
                 </MapGL>
-              </div>
-              
+              </div>  
             </div>
 
-
             <div className="four columns showpage-column-center">
-
               <h3><strong>Attendees</strong></h3>
-
               <div className="row">
 
                 <div className="seven columns">  
@@ -218,11 +209,9 @@ class EventShow extends React.Component {
                       <button className="btn-show" type="submit">Not Going</button>
                     </form>
                   }
-
                 </div>
 
                 <div className="five columns">
-
                   {this.state.eventInfo.attendees.filter(attendee => attendee.user._id === FrontAuth.getPayload().sub)[0]
                     ?
                     <p>You&apos;re in!</p>
@@ -231,6 +220,7 @@ class EventShow extends React.Component {
                   }
 
                 </div>
+
               </div>
 
               <div className="row">
@@ -246,17 +236,25 @@ class EventShow extends React.Component {
                 }
               </div>
 
-              <p>@{this.state.eventInfo.user.handle} (Event Host)</p>
               {this.state.eventInfo.attendees
                 ?
                 <>
                   {this.state.eventInfo.attendees.map(attendee => (
                     attendee.user._id === this.state.eventInfo.user._id
                       ?
+                      <div key={attendee.user._id}>
+                        <p><strong>@{this.state.eventInfo.user.handle}</strong> (host)</p>
+                      </div>
+                      :
+                      null
+                  ))}
+                  {this.state.eventInfo.attendees.map(attendee => (
+                    attendee.user._id === this.state.eventInfo.user._id
+                      ?
                       null
                       :
                       <div key={attendee.user._id}>
-                        <p>@{attendee.user.handle}</p>
+                        <p><strong>@{attendee.user.handle}</strong></p>
                       </div>
                   ))}
                 </>
@@ -268,30 +266,23 @@ class EventShow extends React.Component {
 
             <div className="four columns showpage-column-right">
               <h3><strong>Comments</strong></h3>
-              <form onSubmit={this.handleSubmitComment}>
-                <textarea name="comment" onChange={this.handleChange} value={this.state.comment}></textarea>
-                <button type="submit">Send</button>
-              </form>
               {this.state.eventInfo.comments
                 ?
                 this.state.eventInfo.comments.map(comment => (
-                  <div key={comment._id}>
-                    <p>{comment.user.handle}</p>
-                    <p>{comment.text}</p>
+                  <div key={comment._id} className="showpage-comment">
+                    <p className="showpage-comment"><strong>@{comment.user.handle}</strong></p>
+                    <p className="showpage-comment">{comment.text}</p>
                   </div>
                 ))
                 :
                 <div></div>
               }
+              <hr />
+              <form onSubmit={this.handleSubmitComment}>
+                <textarea className="showpage-comment" name="comment" onChange={this.handleChange} value={this.state.comment}></textarea>
+                <button className="btn-show-comment" type="submit">Send</button>
+              </form>
             </div>
-
-
-
-
-
-
-            
-            
 
           </div>
         </div>
