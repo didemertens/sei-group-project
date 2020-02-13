@@ -17,6 +17,12 @@
   overflow: scroll;
 }
 
+.login-center {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
 .login-heading {
   font-family: 'Khula', sans-serif;
   font-size: 40px;
