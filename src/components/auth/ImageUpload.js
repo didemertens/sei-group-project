@@ -23,26 +23,26 @@ class ImageUpload extends React.Component {
     return (
       <>
 
-      {image ? 
-        <div>
-          {/* <img src={image} /> */}
-          <label className={labelClass}>{this.props.labelText}</label>
-          <input 
-            className={this.props.inputClassName}
-            type="file"
-            onChange={this.handleUpload}
-          />
-        </div>
-        :
-        <>
-          <label className={labelClass}>{this.props.labelText}</label>
-          <input 
-            className={this.props.inputClassName}
-            type="file"
-            onChange={this.handleUpload}
-          />
-        </>
-      }
+        {image ?
+          <div>
+            {/* <img src={image} /> */}
+            <label className={labelClass}>{this.props.labelText}</label>
+            <input
+              className={this.props.inputClassName}
+              type="file"
+              onChange={this.handleUpload}
+            />
+          </div>
+          :
+          <>
+            <label className={labelClass}>{this.props.labelText}</label>
+            <input
+              className={this.props.inputClassName}
+              type="file"
+              onChange={this.handleUpload}
+            />
+          </>
+        }
       </>
     )
   }
