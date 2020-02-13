@@ -5,6 +5,9 @@
   overflow: hidden;
   display: flex;
   justify-content: space-between;
+  position: fixed;
+  z-index: 2;
+  width: 100vw;
 }
 
 /*Floats each item to the left with padding of 14 & 16 px.

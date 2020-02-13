@@ -5,20 +5,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url('https://thumbs.dreamstime.com/z/social-media-community-network-chalkboard-illustration-73174345.jpg');
+  // background-image: url('../../assets/dreamstime.jpg');
   height: 100vh;
   width: 100vw;
   position: relative;
   color: white;
-  // background-image: url('https://thumbs.dreamstime.com/z/social-media-community-network-chalkboard-illustration-73174345.jpg');
   background-repeat: no-repeat;
   background-size: cover;
-  // position: relative;
-  // min-height: 100vh;
-  // width: 100vw;
-  // display: flex;
-  // margin: 0px;
-  // padding: 0px;
 }
 
 .section-heading {
@@ -27,11 +20,10 @@
   font-weight: 900;
 }
 
-
 .color-overlay {
   height: 100vh;
   width: 100vw;
-  background-color: rgb(0, 113, 0);
+  background-color: $aqua-colour;
   opacity: 0.7;
   position: absolute;
 }
