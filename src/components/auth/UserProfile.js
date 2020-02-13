@@ -135,11 +135,14 @@ class UserProfile extends React.Component {
                   ))}
                 </div>
                 :
-                <div></div>
+                <div className="profile-event-cards profile-upcoming-cards">
+                  <h2>Upcoming Events</h2>
+                  <p>You don't have any events to look forward to!</p>
+                </div>
               }
             </div>
             <div className="six columns">
-              {userData.createdEvents
+              {userData.createdEvents.length !== 0
                 ?
                 <>
                   <div className="profile-event-cards profile-created-cards">
@@ -156,7 +159,12 @@ class UserProfile extends React.Component {
                   </div>
                 </>
                 :
-                <div></div>
+                <>
+                  <div className="profile-event-cards profile-created-cards">
+                    <h2>Created Events</h2>
+                    <p>You haven't created an event yet!</p>
+                  </div>
+                </>
               }
               <h2></h2>
             </div>
@@ -183,7 +191,14 @@ class UserProfile extends React.Component {
                 </div>
               </>
               :
-              <div></div>
+              <>
+                <div className="profile-event-cards profile-past-cards">
+                  <h2>Past Events</h2>
+                  <div className="profile-container-past-cards">
+                    <p>You haven't been to any events yet!</p>
+                  </div>
+                </div>
+              </>
             }
           </div>
         </div>
