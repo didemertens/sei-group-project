@@ -13,7 +13,21 @@ const mapboxToken = process.env.MAPBOX_ACCESS_TOKEN
 
 class EventShow extends React.Component {
   state = {
-    eventInfo: null,
+    eventInfo: {
+      name: '',
+      category: '',
+      date: '',
+      time: '',
+      location: '',
+      postcode: '',
+      description: '',
+      requiredPeople: '',
+      longitude: '',
+      comments: '',
+      user: '',
+      attendees: [],
+      latitude: ''
+    },
     viewport: {
       latitude: 0,
       longitude: 0,
@@ -26,6 +40,7 @@ class EventShow extends React.Component {
   componentDidMount() {
     const eventId = this.props.match.params.id
     this.getEvent(eventId)
+    // this.getAttendees()
   }
 
   getEvent = async (id) => {
@@ -46,6 +61,10 @@ class EventShow extends React.Component {
       this.props.history.push('/notfound')
     }
   }
+
+  // getAttendees = () => {
+  //   const eventInfo = {...this.state.eventInfo, attendee:}
+  // }
 
   handleChange = ({ target: { value } }) => {
     const comment = value
@@ -122,30 +141,35 @@ class EventShow extends React.Component {
       <>
         <div className="row u-full-width showpage-header">
           <div className="row u-full-width">
-            <div className="row u-full-width">
-              <h2><strong>{this.state.eventInfo.name}</strong></h2>
+            <div className="six columns">
+              <div className="row u-full-width">
+                <h2><strong>{this.state.eventInfo.name}</strong></h2>
+              </div>
+              <div className="row u-full-width">
+                <div className="six columns">
+                  <p>📅 {moment(this.state.eventInfo.date).format('DD/MM/YYYY')}</p>
+                </div>
+                <div className="six columns">
+                  <p>⏰ {this.state.eventInfo.time}</p>
+                </div>
+              </div>
             </div>
-            <div className="row u-full-width">
-              <div className="two columns">
-                <p>📅 {moment(this.state.eventInfo.date).format('DD/MM/YYYY')}</p>
-              </div>
-              <div className="two columns">
-                <p>⏰ {this.state.eventInfo.time}</p>
-              </div>
-              <div className="three columns">
-                <p>👤 Hosted by @{this.state.eventInfo.user.handle}</p>
-              </div>
-              <div className="two columns">
-                {this.isOwner() && 
+            <div className="one columns">
+              <img className="showpage-header-image" src={this.state.eventInfo.user.profileImage} />
+            </div>
+            <div className="two columns">
+              <p>Hosted by @{this.state.eventInfo.user.handle}</p>
+            </div>
+            <div className="one column"><p></p></div>
+            <div className="two columns">
+              {this.isOwner() &&
+                <>
                   <Link to={`/events/${this.state.eventInfo._id}/edit`}>
                     <button className="btn-home">Update Event</button>
                   </Link>
-                }
-              </div>
-              <div className="one column"><p></p></div>
-              <div className="two columns">
-                {this.isOwner() && <button className="btn-home" onClick={this.handleDelete}>Delete Event</button>}
-              </div>
+                  <button className="btn-home" onClick={this.handleDelete}>Delete Event</button>
+                </>
+              }
             </div>
           </div>
         </div>
@@ -162,8 +186,8 @@ class EventShow extends React.Component {
                 <MapGL
                   mapboxApiAccessToken={mapboxToken}
                   ref={this.mapRef}
-                  height={'250px'}
-                  width={'250px'}
+                  height={'270px'}
+                  width={'100vw'}
                   mapStyle="mapbox://styles/mapbox/streets-v11"
                   onViewportChange={this.handleViewportChange}
                   {...this.state.viewport}
@@ -242,8 +266,13 @@ class EventShow extends React.Component {
                   {this.state.eventInfo.attendees.map(attendee => (
                     attendee.user._id === this.state.eventInfo.user._id
                       ?
-                      <div key={attendee.user._id}>
-                        <p><strong>@{this.state.eventInfo.user.handle}</strong> (host)</p>
+                      <div className="row" key={attendee.user._id}>
+                        <div className="three columns">
+                          <img className="showpage-image" src={this.state.eventInfo.user.profileImage} />
+                        </div>
+                        <div className="nine columns">
+                          <p><strong>@{this.state.eventInfo.user.handle}</strong> (host)</p>
+                        </div>
                       </div>
                       :
                       null
@@ -253,8 +282,13 @@ class EventShow extends React.Component {
                       ?
                       null
                       :
-                      <div key={attendee.user._id}>
-                        <p><strong>@{attendee.user.handle}</strong></p>
+                      <div className="row" key={attendee.user._id}>
+                        <div className="three columns">
+                          <img className="showpage-image" src={attendee.profileImage} />
+                        </div>
+                        <div className="nine columns">
+                          <p><strong>@{attendee.user.handle}</strong></p>
+                        </div>
                       </div>
                   ))}
                 </>
@@ -269,9 +303,15 @@ class EventShow extends React.Component {
               {this.state.eventInfo.comments
                 ?
                 this.state.eventInfo.comments.map(comment => (
-                  <div key={comment._id} className="showpage-comment">
-                    <p className="showpage-comment"><strong>@{comment.user.handle}</strong></p>
-                    <p className="showpage-comment">{comment.text}</p>
+                  <div key={comment._id} className="row showpage-div">
+                    <div className="three columns">
+                      <img className="showpage-image" src={comment.user.profileImage} />
+                    </div>
+                    {/* <div className="one column"><p></p></div> */}
+                    <div className="nine columns showpage-comment">
+                      <p className="showpage-comment"><strong>@{comment.user.handle}</strong></p>
+                      <p className="showpage-comment">{comment.text}</p>
+                    </div>
                   </div>
                 ))
                 :
