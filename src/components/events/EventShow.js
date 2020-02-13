@@ -117,129 +117,193 @@ class EventShow extends React.Component {
 
   render() {
     if (!this.state.eventInfo) return null
-    console.log('state', this.props.location.state )
+    console.log(this.state.eventInfo)
     return (
-      <div className="container">
-        <div className="row">
-          {this.props.location.state
-            ?
-            <button onClick={() => this.props.history.goBack()}>Back to Search</button>
-            :
-            null
-          }
-        </div>
-        <div className="row">
-          <h2>{this.state.eventInfo.name}</h2>
-          <div className="four columns">
-            <p>Hosted by {this.state.eventInfo.user.firstName} {this.state.eventInfo.user.surname}</p>
-          </div>
-          <div className="two columns">
-            <form onSubmit={this.handleSubmitAttend}>
-              {!(this.state.eventInfo.attendees ? this.state.eventInfo.attendees.filter(attendee => attendee.user._id === FrontAuth.getPayload().sub)[0] : 'none') && this.state.eventInfo.requiredPeople - this.state.eventInfo.attendees.length !== 0 && <button type="submit">Going</button>}
-            </form>
-            {this.state.eventInfo.attendees.filter(attendee => attendee.user._id === FrontAuth.getPayload().sub)[0]
-              ?
-              <p>You are going to this event!</p>
-              :
-              <div></div>
-            }
-            {!!(this.state.eventInfo.attendees ? this.state.eventInfo.attendees.filter(attendee => attendee.user._id === FrontAuth.getPayload().sub)[0] : 'none') &&
-            <form onSubmit={this.handleSubmitNotAttend}>
-              <button type="submit">Not Going</button>
-            </form>
-            }
-            {this.state.eventInfo.requiredPeople - this.state.eventInfo.attendees.length === 0
-              ?
-              <p>This event is full!</p>
-              :
-              this.state.eventInfo.requiredPeople - this.state.eventInfo.attendees.length === 1
-                ?
-                <p>{this.state.eventInfo.requiredPeople - this.state.eventInfo.attendees.length} space left</p>
-                :
-                <p>{this.state.eventInfo.requiredPeople - this.state.eventInfo.attendees.length} spaces left</p>
-            }
-          </div>
-          <div className="two columns">
-            {this.isOwner() && 
-              <>
-                <Link to={`/events/${this.state.eventInfo._id}/edit`}>
-                  <button>Update Event</button>
-                </Link>
-                <button onClick={this.handleDelete}>Delete Event</button>
-              </>
-            }
-          </div>
-        </div>
-        <div className="row">
-          <div className="four columns">
-            <h2>Event Info</h2>
-            <p>Category</p><p>{this.state.eventInfo.category}</p>
-            <p>Date</p><p>{moment(this.state.eventInfo.date).format('DD/MM/YYYY')}</p>
-            <p>Time</p><p>{this.state.eventInfo.time}</p>
-            <p>Location</p><p>{this.state.eventInfo.location}</p>
-            <p>Description</p><p>{this.state.eventInfo.description}</p>
-            <MapGL
-              mapboxApiAccessToken={mapboxToken}
-              ref={this.mapRef}
-              height={'300px'}
-              width={'300px'}
-              mapStyle="mapbox://styles/mapbox/streets-v11"
-              onViewportChange={this.handleViewportChange}
-              {...this.state.viewport}
-            >
-              <Marker
-                latitude={this.state.eventInfo.latitude * 1}
-                longitude={this.state.eventInfo.longitude * 1}
-              >
-                <FaMapMarkerAlt
-                  className="marker"
-                />
-              </Marker>
-              <div style={{ position: 'absolute', right: 0 }}>
-                <NavigationControl />
+      <>
+        <div className="row u-full-width showpage-header">
+          <div className="row u-full-width">
+            <div className="row u-full-width">
+              <h2><strong>{this.state.eventInfo.name}</strong></h2>
+            </div>
+            <div className="row u-full-width">
+              <div className="two columns">
+                <p>📅 {moment(this.state.eventInfo.date).format('DD/MM/YYYY')}</p>
               </div>
-            </MapGL>
-          </div>
-          <div className="four columns">
-            <h2>Attendees</h2>
-            <p>{this.state.eventInfo.user.handle} (Event Host)</p>
-            <p>{this.state.eventInfo.user.firstName} {this.state.eventInfo.user.surname}</p>
-            <hr />
-            {this.state.eventInfo.attendees
-              ?
-              <>
-                {this.state.eventInfo.attendees.map(attendee => (
-                  attendee.user._id === this.state.eventInfo.user._id
-                    ?
-                    null
-                    :
-                    <p key={attendee.user._id}>{attendee.user.handle}</p>
-                ))}
-              </>
-              :
-              <div></div>
-            }
-          </div>
-          <div className="four columns">
-            <h2>User Comments</h2>
-            <form onSubmit={this.handleSubmitComment}>
-              <textarea name="comment" onChange={this.handleChange} value={this.state.comment}></textarea>
-              <button type="submit">Send</button>
-            </form>
-            {this.state.eventInfo.comments
-              ?
-              this.state.eventInfo.comments.map(comment => (
-                <div key={comment._id}>
-                  <p>{comment.user.handle}</p>
-                  <p>{comment.text}</p>
-                </div>
-              ))
-              :
-              <div></div>
-            }
+              <div className="two columns">
+                <p>⏰ {this.state.eventInfo.time}</p>
+              </div>
+              <div className="three columns">
+                <p>👤 Hosted by @{this.state.eventInfo.user.handle}</p>
+              </div>
+              <div className="two columns">
+                {this.isOwner() && 
+                  <Link to={`/events/${this.state.eventInfo._id}/edit`}>
+                    <button className="btn-home">Update Event</button>
+                  </Link>
+                }
+              </div>
+              <div className="one column"><p></p></div>
+              <div className="two columns">
+                {this.isOwner() && <button className="btn-home" onClick={this.handleDelete}>Delete Event</button>}
+              </div>
+              {/* <div className="two columns">
+                {!this.state.userData.profileImage ?
+                  <img src="https://res.cloudinary.com/dqwdkxz64/image/upload/v1581507521/dreamstime_xs_166504186_pnbywl.jpg" className="tennis-ball" alt="Profile Picture" />
+                  :
+                  <img src={this.state.userData.profileImage} alt="Profile Picture" />
+                }
+              </div> */}
+            </div>
           </div>
         </div>
-      </div>
+        <div className="container showpage-container">
+          <div className="row">
+            <div className="four columns showpage-column-left">
+              <h3><strong>Event Details</strong></h3>
+              <p>⭐️ {this.state.eventInfo.category}</p>
+              <p>{this.state.eventInfo.description}</p>
+              <p>📍 {this.state.eventInfo.location}, {this.state.eventInfo.postcode}</p>
+              <div className="showpage-map">
+                <MapGL
+                  mapboxApiAccessToken={mapboxToken}
+                  ref={this.mapRef}
+                  height={'250px'}
+                  width={'250px'}
+                  mapStyle="mapbox://styles/mapbox/streets-v11"
+                  onViewportChange={this.handleViewportChange}
+                  {...this.state.viewport}
+                >
+                  <Marker
+                    latitude={this.state.eventInfo.latitude * 1}
+                    longitude={this.state.eventInfo.longitude * 1}
+                  >
+                    <FaMapMarkerAlt
+                      className="marker"
+                    />
+                  </Marker>
+                  <div style={{ position: 'absolute', right: 0 }}>
+                    <NavigationControl />
+                  </div>
+                </MapGL>
+              </div>
+              
+            </div>
+
+
+            <div className="four columns showpage-column-center">
+
+              <h3><strong>Attendees</strong></h3>
+
+              <div className="row">
+
+                <div className="seven columns">  
+            
+                  {!(this.state.eventInfo.attendees
+                    ?
+                    this.state.eventInfo.attendees.filter(attendee => attendee.user._id === FrontAuth.getPayload().sub)[0] : 'none')
+                    &&
+                    this.state.eventInfo.requiredPeople - this.state.eventInfo.attendees.length !== 0 &&
+                    <form onSubmit={this.handleSubmitAttend}>
+                      <button className="btn-show" type="submit">Going</button>
+                    </form>
+                  }
+
+                  {!!(this.state.eventInfo.attendees
+                    ?
+                    this.state.eventInfo.attendees.filter(attendee => attendee.user._id === FrontAuth.getPayload().sub)[0]
+                    :
+                    'none')
+                    &&
+                    <form onSubmit={this.handleSubmitNotAttend}>
+                      <button className="btn-show" type="submit">Not Going</button>
+                    </form>
+                  }
+
+                </div>
+
+                <div className="five columns">
+
+                  {this.state.eventInfo.attendees.filter(attendee => attendee.user._id === FrontAuth.getPayload().sub)[0]
+                    ?
+                    <p>You&apos;re in!</p>
+                    :
+                    <div></div>
+                  }
+
+                </div>
+              </div>
+
+              <div className="row">
+                {this.state.eventInfo.requiredPeople - this.state.eventInfo.attendees.length === 0
+                  ?
+                  <p>This event is full!</p>
+                  :
+                  this.state.eventInfo.requiredPeople - this.state.eventInfo.attendees.length === 1
+                    ?
+                    <p>{this.state.eventInfo.requiredPeople - this.state.eventInfo.attendees.length} space left</p>
+                    :
+                    <p>{this.state.eventInfo.requiredPeople - this.state.eventInfo.attendees.length} spaces left</p>
+                }
+              </div>
+
+              <p>@{this.state.eventInfo.user.handle} (Event Host)</p>
+              {this.state.eventInfo.attendees
+                ?
+                <>
+                  {this.state.eventInfo.attendees.map(attendee => (
+                    attendee.user._id === this.state.eventInfo.user._id
+                      ?
+                      null
+                      :
+                      <div key={attendee.user._id}>
+                        <p>@{attendee.user.handle}</p>
+                      </div>
+                  ))}
+                </>
+                :
+                <div></div>
+              }
+            </div>
+
+
+            <div className="four columns showpage-column-right">
+              <h3><strong>Comments</strong></h3>
+              <form onSubmit={this.handleSubmitComment}>
+                <textarea name="comment" onChange={this.handleChange} value={this.state.comment}></textarea>
+                <button type="submit">Send</button>
+              </form>
+              {this.state.eventInfo.comments
+                ?
+                this.state.eventInfo.comments.map(comment => (
+                  <div key={comment._id}>
+                    <p>{comment.user.handle}</p>
+                    <p>{comment.text}</p>
+                  </div>
+                ))
+                :
+                <div></div>
+              }
+            </div>
+
+
+
+
+
+
+            
+            
+
+          </div>
+        </div>
+      </>
+      // <div className="row">
+      //   {this.props.location.state
+      //     ?
+      //     <button onClick={() => this.props.history.goBack()}>Back to Search</button>
+      //     :
+      //     null
+      //   }
+      // </div>
     )
   }
 }

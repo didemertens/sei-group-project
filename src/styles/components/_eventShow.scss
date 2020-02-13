@@ -1,6 +1,58 @@
-// .marker{
-//   background-color: red;
-//   width: 10px;
-//   height: 10px;
-//   border-radius: 50%;
-// }
+@import 'base/colours';
+@import 'base/fonts';
+
+main {
+  background-color: $dark-grey-colour;
+}
+
+.showpage-header {
+  padding: 70px 230px 0px 30px;
+  background-color: white;
+  width: 100vw;
+  margin-bottom: 20px;
+}
+
+.showpage-button {
+  margin-top: 100px;
+}
+
+.showpage-column-left {
+  padding: 10px 15px;
+  background-color: $aqua-colour;
+  min-height: 100vh;
+}
+
+.showpage-column-center {
+  padding: 10px 15px;
+  background-color: $yellow-colour;
+  min-height: 100vh;
+}
+
+.showpage-column-right {
+  padding: 10px 15px;
+  background-color: $orange-colour;
+  min-height: 100vh;
+}
+
+.showpage-container {
+  background-color: $dark-grey-colour;
+}
+
+.showpage-map {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.btn-show {
+  width: 150px;
+  border: none;
+  background-color: $orange-colour;
+  color: white;
+  font-size: 15px;
+  text-align: center;
+  &:hover{
+    background-color: $aqua-colour;
+    color: black;
+  }
+}
