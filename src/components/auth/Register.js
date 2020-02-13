@@ -43,22 +43,17 @@ class Register extends React.Component {
           <div className="container reg-container">
             <h4 className="u-full-width reg-heading">Registration Page</h4>
             <h5 className="u-full-width reg-subtitle">To attend an out and about event, you must register your details here.
-
               Once you&apos;ve registered you&apos;ll be able to:
             <ul className="reg-benefit-list">
               <li className="reg-item"><FaCheck className="tick"/>Go to FREE events in your local area</li>
               <li className="reg-item"><FaCheck className="tick"/>Create your own meet-ups</li>
               <li className="reg-item"><FaCheck className="tick"/>Chat with other members in your event</li>
             </ul>
-
             </h5>
             
             <form onSubmit={this.handleSubmit}>
-
               <div className="row">
                 <div className="offset-by-three six columns">
-
-
                   <input type="text" 
                     name="handle" 
                     placeholder="Handle Name" 
@@ -66,7 +61,6 @@ class Register extends React.Component {
                     onChange={this.handleChange}
                   />
                   {this.state.errors.handle && <small className="help has-error">{this.state.errors.handle}</small>}
-
                 </div>
               </div>
 

@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios'
+import { FaCheck } from 'react-icons/fa'
 
 class EmailForm extends React.Component {
   state = {
@@ -32,31 +33,49 @@ class EmailForm extends React.Component {
   render() {
     const { sendEmail } = this.state
     return (
-      <section className="section">
-        <h1>Email Form</h1>
-        {!sendEmail && <form onSubmit={this.handleSubmit}>
-          <div className="field">
-            <label>Your email</label>
-            <input
-              name="email"
-              placeholder="Your email"
-              type="email"
-              onChange={this.handleChange}
-            />
+    <>
+      <section className="section eform-form">
+        <div className="container eform-container">
+          <div className="container eform-center">
+
+            <h4 className="u-full-width eform-heading">Email Form</h4>
+            <p className="u-full-width eform-subtitle">Creating an event but can&apos;t see a category to match it to? Complete the form below to let us know! </p>
+            {!sendEmail && <form onSubmit={this.handleSubmit}>
+
+              <div className="row">
+                <div className="eform-field">
+                  {/* <label>Your email</label> */}
+                  <input
+                    className="eform-input offset-by-three six columns"
+                    name="email"
+                    placeholder="Enter your email address"
+                    type="email"
+                    onChange={this.handleChange}
+                  />
+                </div>
+              </div>
+
+              <div className="row">
+                <div className="eform-field">
+                  {/* <label>New category</label> */}
+                  <input
+                    className="eform-input offset-by-three six columns"
+                    name="category"
+                    placeholder="Enter the name of the new category"
+                    type="text"
+                    onChange={this.handleChange}
+                  />
+                </div>
+              </div>
+
+              <button className="btn-eform offset-by-three six columns">Submit</button>
+            </form>}
+            {sendEmail && <p className="u-full-width eform-submitted">
+              <FaCheck className="tick-eform"/>Thanks - you&apos;ve successfully submitted your form! We&apos;ll let you know if we can add your suggested category to the website within 7 working days.</p>}
           </div>
-          <div className="field">
-            <label>New category</label>
-            <input
-              name="category"
-              placeholder="Name of category"
-              type="text"
-              onChange={this.handleChange}
-            />
-          </div>
-          <button className="button">Submit</button>
-        </form>}
-        {sendEmail && <p>Thanks! We'll respond within 7 working days.</p>}
+        </div>
       </section>
+    </>
     )
   }
 }
