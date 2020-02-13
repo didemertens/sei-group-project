@@ -171,11 +171,11 @@ class EventIndex extends React.Component {
     const { events, noEventsMessage, viewport } = this.state
     return (
       <section className="section index-section">
-        <div className="container">
+        <div className="container index-container">
+          <h3 className="index-header">Events in your Area</h3>
           <div className="row index-row">
             <div className="two-thirds column">
               <div className="cards index-event-cards">
-                <h3 className="index-header">Events in your Area</h3>
                 {noEventsMessage && <p>{noEventsMessage}</p>}
                 {events.map(event => (
                   <Link
@@ -187,7 +187,7 @@ class EventIndex extends React.Component {
                       }
                     }}>
                     <div className="index-card">
-                      <p>What: {event.name} ({event.category})</p>
+                      <h5>What: {event.name} ({event.category})</h5>
                       <p>Where: {event.location}</p>
                       <p>When: {event.time} {moment(event.date).format('DD/MM/YYYY')}</p>
                       <p>{event.description}</p>
