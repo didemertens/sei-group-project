@@ -93,9 +93,39 @@ class UserProfile extends React.Component {
     return (
       <section className="section profile-section">
 
-        <div className="profile-container-banner">
-          <div className="row profile-row">
-            <div className="six columns">
+        <div className="profile-banner">
+          <div className="row profile-banner">
+            <div className="offset-by-five three columns">
+              {FrontAuth.getPayload().sub === this.props.match.params.id ?
+                <ImageUpload
+                  labelText=""
+                  handleChange={this.handleChange}
+                  fieldName="profileImage"
+                  labelClassName="my-label-class"
+                  inputClassName="my-input-class"
+                />
+                :
+                ''}
+              {!userData.profileImage ?
+                <img src="https://res.cloudinary.com/dqwdkxz64/image/upload/v1581507521/dreamstime_xs_166504186_pnbywl.jpg" className="tennis-ball u-max-full-width" alt="Profile Picture" />
+                :
+                <img src={this.state.userData.profileImage} className="profile-prof-picture u-max-full-width" alt="Profile Picture" />}
+
+            </div>
+            <div className="three columns">
+              <div className="profile-user-data u-max-full-width">
+                <p>@{userData.handle}</p>
+                <p>👤{userData.firstName} {userData.surname}</p>
+                <p>📫{userData.email}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="container profile-container">
+
+          {/* <div className="row profile-row profile-banner">
+            <div className="three columns">
               {!userData.profileImage ?
                 <img src="https://res.cloudinary.com/dqwdkxz64/image/upload/v1581507521/dreamstime_xs_166504186_pnbywl.jpg" className="tennis-ball u-max-full-width" alt="Profile Picture" />
                 :
@@ -110,21 +140,17 @@ class UserProfile extends React.Component {
                 />
                 :
                 ''}
-
-              <div className="six columns">
-                <div className="profile-user-data u-max-full-width">
-                  <p>Handle: @{userData.handle}</p>
-                  <p>Name: {userData.firstName} {userData.surname}</p>
-                  <p>Email: {userData.email}</p>
-                </div>
-              </div>
-
             </div>
-          </div>
-        </div>
+            <div className="five columns">
+              <div className="profile-user-data u-max-full-width">
+                <p>Handle: @{userData.handle}</p>
+                <p>Name: {userData.firstName} {userData.surname}</p>
+                <p>Email: {userData.email}</p>
+              </div>
+            </div>
+          </div> */}
 
 
-        <div className="container profile-container">
           <div className="row profile-row">
             <div className="four columns">
               {this.state.upcomingEvents.length !== 0
@@ -134,7 +160,7 @@ class UserProfile extends React.Component {
                   {this.state.upcomingEvents.map(event => (
                     <div key={event._id} className="profile-card profile-upcoming-card">
                       <Link to={`/events/${event._id}`}>
-                        <h5>{event.name}</h5>
+                        <h5>⭐️ {event.name}</h5>
                         <p>When: {event.time} {moment(event.date).format('DD/MM/YYYY')}</p>
                         <p>Where: {event.location}</p>
                       </Link>
@@ -157,7 +183,7 @@ class UserProfile extends React.Component {
                     {userData.createdEvents.map(event => (
                       <div key={event._id} className="profile-card profile-created-card">
                         <Link to={`/events/${event._id}`}>
-                          <h5>{event.name}</h5>
+                          <h5>⭐️{event.name}</h5>
                           <p>When: {event.time} {moment(event.date).format('DD/MM/YYYY')}</p>
                           <p>Where: {event.location}</p>
                         </Link>
@@ -185,7 +211,7 @@ class UserProfile extends React.Component {
                       {this.state.pastEvents.map(event => (
                         <div key={event._id} className="profile-card profile-past-card">
                           <Link to={`/events/${event._id}`}>
-                            <h5>{event.name}</h5>
+                            <h5>⭐️{event.name}</h5>
                             <p>When: {event.time} {moment(event.date).format('DD/MM/YYYY')}</p>
                             <p>Where: {event.location}</p>
                           </Link>
