@@ -67,7 +67,7 @@ class Home extends React.Component {
         <section className="section hero-image">
           <div className="container form">
             <div className="row row-form">
-              <h2 className="offset-by-one ten columns section-heading">out and about</h2>
+              <h2 className="offset-by-two ten columns section-heading">out and about</h2>
               <div className="offset-by-two eight columns red-back">
                 <form onSubmit={this.handleSubmit} className="form">
                   <label>Postcode</label>
