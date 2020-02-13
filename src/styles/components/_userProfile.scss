@@ -1,6 +1,7 @@
 .tennis-ball {
-  height: 150px;
-  width: 250px;
+  height: 160px;
+  width: 160px;
+  border-radius: 100%;
 }
 
 .profile-prof-picture {
@@ -19,8 +20,7 @@
 
 .profile-container {
   background-color: $dark-grey-colour;
-  padding: 80px;
-  // height: 100vh;
+  padding: 10px;
 }
 
 .profile-banner {
@@ -104,7 +104,7 @@
 .profile-created-card {
   border: 5px solid $yellow-colour;
   &:hover {
-    border: 5px solid $orange-colour;
+    border: 5px solid $aqua-colour;
   }
 }
 
@@ -112,6 +112,6 @@
 .profile-past-card {
   border: 5px solid $orange-colour;
   &:hover {
-    border: 5px solid $orange-colour;
+    border: 5px solid $yellow-colour;
   }
 }
