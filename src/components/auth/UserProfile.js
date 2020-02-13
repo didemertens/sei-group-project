@@ -90,87 +90,104 @@ class UserProfile extends React.Component {
     if (!this.state.userData) return null
     const { userData } = this.state
     return (
-      <div className="container">
-        <div className="row">
-          <div className="six columns">
-            <h1>Profile Page</h1>
-            {!userData.profileImage ?
-              <img src="https://res.cloudinary.com/dqwdkxz64/image/upload/v1581507521/dreamstime_xs_166504186_pnbywl.jpg" className="tennis-ball" alt="Profile Picture" />
-              :
-              <img src={this.state.userData.profileImage} alt="Profile Picture" />}
-            {FrontAuth.getPayload().sub === this.props.match.params.id ?
-              <ImageUpload
-                labelText="My custom label text"
-                handleChange={this.handleChange}
-                fieldName="profileImage"
-                labelClassName="my-label-class"
-                inputClassName="my-input-class"
-              />
-              :
-              ''}
-            {this.state.upcomingEvents.length !== 0
-              ?
-              <>
-                <h2>Upcoming Events</h2>
-                {this.state.upcomingEvents.map(event => (
-                  <div key={event._id}>
-                    <Link to={`/events/${event._id}`}>
-                      <p>{event.name}</p>
-                      <p>{moment(event.date).format('DD/MM/YYYY')}</p>
-                      <p>{event.time}</p>
-                      <p>{event.location}</p>
-                    </Link>
+      <section className="section profile-section">
+        <div className="container profile-container">
+          <div className="row profile-row">
+            <div className="six columns">
+              {!userData.profileImage ?
+                <img src="https://res.cloudinary.com/dqwdkxz64/image/upload/v1581507521/dreamstime_xs_166504186_pnbywl.jpg" className="tennis-ball" alt="Profile Picture" />
+                :
+                <img src={this.state.userData.profileImage} alt="Profile Picture" />}
+              {FrontAuth.getPayload().sub === this.props.match.params.id ?
+                <ImageUpload
+                  labelText=""
+                  handleChange={this.handleChange}
+                  fieldName="profileImage"
+                  labelClassName="my-label-class"
+                  inputClassName="my-input-class"
+                />
+                :
+                ''}
+            </div>
+            <div className="six columns">
+              <div className="profile-user-data">
+                <p>Name: {userData.firstName} {userData.surname}</p>
+                <p>Handle: @{userData.handle}</p>
+                <p>Email: {userData.email}</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="row profile-row">
+            <div className="six columns">
+              {this.state.upcomingEvents.length !== 0
+                ?
+                <div className="profile-event-cards profile-upcoming-cards">
+                  <h2>Upcoming Events</h2>
+                  {this.state.upcomingEvents.map(event => (
+                    <div key={event._id} className="profile-card profile-upcoming-card">
+                      <Link to={`/events/${event._id}`}>
+                        <h5>{event.name}</h5>
+                        <p>When: {event.time} {moment(event.date).format('DD/MM/YYYY')}</p>
+                        <p>Where: {event.location}</p>
+                      </Link>
+                    </div>
+                  ))}
+                </div>
+                :
+                <div></div>
+              }
+            </div>
+            <div className="six columns">
+              {userData.createdEvents
+                ?
+                <>
+                  <div className="profile-event-cards profile-created-cards">
+                    <h2>Created Events</h2>
+                    {userData.createdEvents.map(event => (
+                      <div key={event._id} className="profile-card profile-created-card">
+                        <Link to={`/events/${event._id}`}>
+                          <h5>{event.name}</h5>
+                          <p>When: {event.time} {moment(event.date).format('DD/MM/YYYY')}</p>
+                          <p>Where: {event.location}</p>
+                        </Link>
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </>
-              :
-              <div></div>
-            }
+                </>
+                :
+                <div></div>
+              }
+              <h2></h2>
+            </div>
+          </div>
+
+          <div className="row profile-row">
+            <div className="one-half column"></div>
             {this.state.pastEvents.length !== 0
               ?
               <>
-                <h2>Past Events</h2>
-                {this.state.pastEvents.map(event => (
-                  <div key={event._id}>
-                    <Link to={`/events/${event._id}`}>
-                      <p>{event.name}</p>
-                      <p>{moment(event.date).format('DD/MM/YYYY')}</p>
-                      <p>{event.time}</p>
-                      <p>{event.location}</p>
-                    </Link>
+                <div className="profile-event-cards profile-past-cards">
+                  <h2>Past Events</h2>
+                  <div className="profile-container-past-cards">
+                    {this.state.pastEvents.map(event => (
+                      <div key={event._id} className="profile-card profile-past-card">
+                        <Link to={`/events/${event._id}`}>
+                          <h5>{event.name}</h5>
+                          <p>When: {event.time} {moment(event.date).format('DD/MM/YYYY')}</p>
+                          <p>Where: {event.location}</p>
+                        </Link>
+                      </div>
+                    ))}
                   </div>
-                ))}
+                </div>
               </>
               :
               <div></div>
             }
-          </div>
-          <div className="six columns">
-            <p>Name {userData.firstName} {userData.surname}</p>
-            <p>Handle {userData.handle}</p>
-            <p>Email {userData.email}</p>
-            {userData.createdEvents
-              ?
-              <>
-                <h2>Created Events</h2>
-                {userData.createdEvents.map(event => (
-                  <div key={event._id}>
-                    <Link to={`/events/${event._id}`}>
-                      <p>{event.name}</p>
-                      <p>{moment(event.date).format('DD/MM/YYYY')}</p>
-                      <p>{event.time}</p>
-                      <p>{event.location}</p>
-                    </Link>
-                  </div>
-                ))}
-              </>
-              :
-              <div></div>
-            }
-            <h2></h2>
           </div>
         </div>
-      </div >
+      </section>
     )
   }
 }
