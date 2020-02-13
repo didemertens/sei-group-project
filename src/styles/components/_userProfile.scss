@@ -4,20 +4,28 @@
 }
 
 .profile-prof-picture {
-  height: 200px;
-  width: 200px;
+  height: 150px;
+  width: 150px;
   border-radius: 100%;
 }
 
 .profile-section {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  // display: flex;
+  // justify-content: center;
+  // align-items: center;
+  // flex-direction: column;
   min-height: 100vh;
   width: 100vw;
   background-color: $dark-grey-colour;
   font-size: 16px;
   overflow: scroll;
+}
+
+.profile-container-banner {
+  background-color: $yellow-colour;
+  // width: 100vw;
+  // margin-right: 20px;
+  margin-bottom: 20px;
 }
 
 .profile-container {
@@ -32,10 +40,8 @@
 
 .profile-user-data {
   font-size: 18px;
-  // border: 5px solid $orange-colour;
   border-radius: 5px;
-  padding: 5px;
-  margin-bottom: 15px;
+  padding: 25px;
 }
 
 .profile-event-cards {
@@ -53,7 +59,7 @@
     margin-bottom: 25px;
     padding: 10px;
     color: black;
-    border-bottom: 5px solid $orange-colour;
+    // border-bottom: 5px solid $orange-colour;
     h5 {
       font-size: 20px;
     }

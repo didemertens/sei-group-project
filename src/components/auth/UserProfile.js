@@ -11,7 +11,7 @@ class UserProfile extends React.Component {
       name: '',
       handle: '',
       email: '',
-      profileImage: '',
+      profileImage: 'https://res.cloudinary.com/dqwdkxz64/image/upload/v1581507521/dreamstime_xs_166504186_pnbywl.jpg',
       createdEvents: [],
       attendingEvents: []
     },
@@ -92,13 +92,14 @@ class UserProfile extends React.Component {
     const { userData } = this.state
     return (
       <section className="section profile-section">
-        <div className="container profile-container">
+
+        <div className="profile-container-banner">
           <div className="row profile-row">
             <div className="six columns">
               {!userData.profileImage ?
-                <img src="https://res.cloudinary.com/dqwdkxz64/image/upload/v1581507521/dreamstime_xs_166504186_pnbywl.jpg" className="tennis-ball" alt="Profile Picture" />
+                <img src="https://res.cloudinary.com/dqwdkxz64/image/upload/v1581507521/dreamstime_xs_166504186_pnbywl.jpg" className="tennis-ball u-max-full-width" alt="Profile Picture" />
                 :
-                <img src={this.state.userData.profileImage} className="profile-prof-picture" alt="Profile Picture" />}
+                <img src={this.state.userData.profileImage} className="profile-prof-picture u-max-full-width" alt="Profile Picture" />}
               {FrontAuth.getPayload().sub === this.props.match.params.id ?
                 <ImageUpload
                   labelText=""
@@ -109,16 +110,21 @@ class UserProfile extends React.Component {
                 />
                 :
                 ''}
-            </div>
-            <div className="six columns">
-              <div className="profile-user-data">
-                <p>Name: {userData.firstName} {userData.surname}</p>
-                <p>Handle: @{userData.handle}</p>
-                <p>Email: {userData.email}</p>
+
+              <div className="six columns">
+                <div className="profile-user-data u-max-full-width">
+                  <p>Handle: @{userData.handle}</p>
+                  <p>Name: {userData.firstName} {userData.surname}</p>
+                  <p>Email: {userData.email}</p>
+                </div>
               </div>
+
             </div>
           </div>
+        </div>
 
+
+        <div className="container profile-container">
           <div className="row profile-row">
             <div className="four columns">
               {this.state.upcomingEvents.length !== 0
