@@ -76,17 +76,18 @@ class UserProfile extends React.Component {
   }
 
   handleChange = async e => {
+    console.log(e.target.value)
     const userData = { ...this.state.userData, [e.target.name]: e.target.value }
     this.setState({ userData })
     try {
-      await axios.post('/api/register', this.state.formData)
+      await axios.put('/api/profile/update', userData,
+        { headers: { Authorization: `Bearer ${FrontAuth.getToken()}` } })
     } catch (err) {
       console.log(err)
     }
   }
 
   render() {
-    // console.log(this.state)
     if (!this.state.userData) return null
     const { userData } = this.state
     return (
@@ -97,7 +98,7 @@ class UserProfile extends React.Component {
               {!userData.profileImage ?
                 <img src="https://res.cloudinary.com/dqwdkxz64/image/upload/v1581507521/dreamstime_xs_166504186_pnbywl.jpg" className="tennis-ball" alt="Profile Picture" />
                 :
-                <img src={this.state.userData.profileImage} alt="Profile Picture" />}
+                <img src={this.state.userData.profileImage} className="profile-prof-picture" alt="Profile Picture" />}
               {FrontAuth.getPayload().sub === this.props.match.params.id ?
                 <ImageUpload
                   labelText=""
@@ -119,11 +120,11 @@ class UserProfile extends React.Component {
           </div>
 
           <div className="row profile-row">
-            <div className="six columns">
+            <div className="four columns">
               {this.state.upcomingEvents.length !== 0
                 ?
                 <div className="profile-event-cards profile-upcoming-cards">
-                  <h2>Upcoming Events</h2>
+                  <h2>Upcoming</h2>
                   {this.state.upcomingEvents.map(event => (
                     <div key={event._id} className="profile-card profile-upcoming-card">
                       <Link to={`/events/${event._id}`}>
@@ -136,17 +137,17 @@ class UserProfile extends React.Component {
                 </div>
                 :
                 <div className="profile-event-cards profile-upcoming-cards">
-                  <h2>Upcoming Events</h2>
+                  <h2>Upcoming</h2>
                   <p>You don't have any events to look forward to!</p>
                 </div>
               }
             </div>
-            <div className="six columns">
+            <div className="four columns">
               {userData.createdEvents.length !== 0
                 ?
                 <>
                   <div className="profile-event-cards profile-created-cards">
-                    <h2>Created Events</h2>
+                    <h2>Created</h2>
                     {userData.createdEvents.map(event => (
                       <div key={event._id} className="profile-card profile-created-card">
                         <Link to={`/events/${event._id}`}>
@@ -161,48 +162,46 @@ class UserProfile extends React.Component {
                 :
                 <>
                   <div className="profile-event-cards profile-created-cards">
-                    <h2>Created Events</h2>
+                    <h2>Created</h2>
                     <p>You haven't created an event yet!</p>
                   </div>
                 </>
               }
-              <h2></h2>
+            </div>
+
+            <div className="four columns">
+              {this.state.pastEvents.length !== 0
+                ?
+                <>
+                  <div className="profile-event-cards profile-past-cards">
+                    <h2>Past</h2>
+                    <div className="profile-container-past-cards">
+                      {this.state.pastEvents.map(event => (
+                        <div key={event._id} className="profile-card profile-past-card">
+                          <Link to={`/events/${event._id}`}>
+                            <h5>{event.name}</h5>
+                            <p>When: {event.time} {moment(event.date).format('DD/MM/YYYY')}</p>
+                            <p>Where: {event.location}</p>
+                          </Link>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </>
+                :
+                <>
+                  <div className="profile-event-cards profile-past-cards">
+                    <h2>Past</h2>
+                    <div className="profile-container-past-cards">
+                      <p>You haven't been to any events yet!</p>
+                    </div>
+                  </div>
+                </>
+              }
             </div>
           </div>
-
-          <div className="row profile-row">
-            <div className="one-half column"></div>
-            {this.state.pastEvents.length !== 0
-              ?
-              <>
-                <div className="profile-event-cards profile-past-cards">
-                  <h2>Past Events</h2>
-                  <div className="profile-container-past-cards">
-                    {this.state.pastEvents.map(event => (
-                      <div key={event._id} className="profile-card profile-past-card">
-                        <Link to={`/events/${event._id}`}>
-                          <h5>{event.name}</h5>
-                          <p>When: {event.time} {moment(event.date).format('DD/MM/YYYY')}</p>
-                          <p>Where: {event.location}</p>
-                        </Link>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </>
-              :
-              <>
-                <div className="profile-event-cards profile-past-cards">
-                  <h2>Past Events</h2>
-                  <div className="profile-container-past-cards">
-                    <p>You haven't been to any events yet!</p>
-                  </div>
-                </div>
-              </>
-            }
-          </div>
         </div>
-      </section>
+      </section >
     )
   }
 }

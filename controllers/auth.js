@@ -31,4 +31,16 @@ function profile(req, res, next) {
     .catch(next)
 }
 
-module.exports = { register, login, profile }
+function update(req, res, next) {
+  User
+    .findOne({ email: req.body.email })
+    .then(user => {
+      if (!user) return res.status(404)
+      Object.assign(user, req.body)
+      return user.save()
+    })
+    .then(updatedUser => res.status(202).json(updatedUser))
+    .catch(next)
+}
+
+module.exports = { register, login, profile, update }
