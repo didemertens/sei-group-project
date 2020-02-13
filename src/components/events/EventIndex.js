@@ -69,7 +69,7 @@ class EventIndex extends React.Component {
     // no events with that category, try search again
     if (eventsByCategory.length === 0) {
       this.setState({
-        noEventsMessage: `There are no ${searchData.category} events yet. Go back and try another search.`
+        noEventsMessage: `We're sorry but we can't find any ${searchData.category} events in your area yet. Please go back to the homepage and search again.`
       })
       return
     }
@@ -85,7 +85,7 @@ class EventIndex extends React.Component {
     // no events in searched area, show events of searched category sorted by date & time
     if (eventsByPostcode.length === 0) {
       this.setState({
-        noEventsMessage: `There are no ${searchData.category} events in your area yet. Here are some other suggestions.`
+        noEventsMessage: `We're sorry but we can't find any ${searchData.category} events in your area yet. Not to worry, we've found other events that might interest you below.`
       })
       const sortedEvents = this.sortDateTime(eventsByCategory)
       this.setState({ events: sortedEvents })
@@ -105,7 +105,7 @@ class EventIndex extends React.Component {
     if (eventsByDates.length === 0) {
       const date = moment(searchData.date).format('DD/MM/YYYY')
       this.setState({
-        noEventsMessage: `There are no events for ${date} yet. Here are some other suggestions.`
+        noEventsMessage: `We're sorry but we can't find any events on ${date} in your area yet. Not to worry, we've found other events at different dates that might interest you below.`
       })
 
       const sortedEvents = this.sortDateTime(eventsByPostcode)
@@ -128,7 +128,7 @@ class EventIndex extends React.Component {
     // no events with searched time, show the events of that area on searched date sorted by time
     if (eventsByTime.length === 0) {
       this.setState({
-        noEventsMessage: `There are no events at ${searchData.time} yet. Here are some other suggestions for ${date}.`
+        noEventsMessage: `We're sorry but we can't find any events at ${searchData.time} in your area yet. Not to worry, we've found other events at different times that might interest you below.`
       })
       const sortedEvents = this.sortDateTime(eventsByDates)
       events = [...sortedEvents]
@@ -170,12 +170,12 @@ class EventIndex extends React.Component {
   render() {
     const { events, noEventsMessage, viewport } = this.state
     return (
-      <section className="section" >
+      <section className="section index-section">
         <div className="container">
-          <h3>Events</h3>
-          <div className="row">
-            <div className="six columns">
-              <div className="cards">
+          <div className="row index-row">
+            <div className="two-thirds column">
+              <div className="cards index-event-cards">
+                <h3 className="index-header">Events in your Area</h3>
                 {noEventsMessage && <p>{noEventsMessage}</p>}
                 {events.map(event => (
                   <Link
@@ -186,25 +186,23 @@ class EventIndex extends React.Component {
                         fromNotifications: true
                       }
                     }}>
-                    <div className="card">
-                      <h5>{event.name}</h5>
-                      <p>{event.category}</p>
-                      <p>{event.location}</p>
-                      <p>{moment(event.date).format('DD/MM/YYYY')}</p>
-                      <p>{event.time}</p>
+                    <div className="index-card">
+                      <p>What: {event.name} ({event.category})</p>
+                      <p>Where: {event.location}</p>
+                      <p>When: {event.time} {moment(event.date).format('DD/MM/YYYY')}</p>
                       <p>{event.description}</p>
                     </div>
                   </Link>
                 ))}
               </div>
             </div>
-            <div className="six columns">
+            <div className="one-third column index-map">
               <MapGL
                 mapboxApiAccessToken={mapboxToken}
                 ref={this.mapRef}
                 {...viewport}
-                height={'70vh'}
-                width={'90vh'}
+                height={'300px'}
+                width={'400px'}
                 mapStyle="mapbox://styles/mapbox/streets-v11"
                 onViewportChange={this.handleViewportChange}>
                 {events.map((event, index) => {
