@@ -1,11 +1,78 @@
-.help {
-  &:has-error {
-    color: red;
+@import 'base/colours';
+@import 'base/fonts';
+
+.reg-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  background-color: #dfdce3
+}
+
+.reg-container {
+  background-color: #f3f0f6;
+  padding: 70px;
+  height: 100vh;
+  overflow: scroll;
+}
+
+.reg-heading {
+  font-family: 'Khula', sans-serif;
+  font-size: 40px;
+  font-weight: 900;
+  text-align: center;
+}
+
+.reg-subtitle {
+  text-align: center;
+  font-size: 20px;
+}
+
+.reg-item {
+  margin: 30px 10px 10px;
+}
+
+.reg-benefit-list {
+  margin: 0;
+  display: flex;
+  list-style-type: none;
+  justify-content: space-around;
+}
+
+.reg-input {
+  font-size: 15px;
+}
+
+.reg-profile-image {
+  height: 200px;
+  width: 200px;
+  border-radius: 100%;
+}
+
+.btn-reg {
+  border: none;
+  background-color: $orange-colour;
+  font-size: 15px;
+  &:hover{
+    background-color: $yellow-colour;
+  color: white;
   }
 }
 
-.input {
-  &:has-error {
-    border-color: red;
-  }
+.tick {
+  color: $orange-colour;
+  padding: 0 5px 0 0;
 }
+
+// .help {
+//   &:has-error {
+//     color: red;
+//   }
+// }
+
+// .input {
+//   &:has-error {
+//     border-color: red;
+//   }
+// }
