@@ -16,12 +16,12 @@ const EventForm = ({ formData, handleChange, handleTime, handleDate, handleSubmi
             <div className="four columns"><p></p></div>
             <div className="four columns event-create-form">
               <form onSubmit={handleSubmit}>
-
+                <h4 className="u-full-width event-create-heading">Create an Event</h4>
                 <div className="field">
                   <div className="control">
                     <label className="label">Name</label>
                     <input
-                      className="input"
+                      className="event-input"
                       name="name"
                       value={formData.name}
                       onChange={handleChange}
@@ -68,7 +68,7 @@ const EventForm = ({ formData, handleChange, handleTime, handleDate, handleSubmi
                   <label className="label">Location Name</label>
                   <div className="control">
                     <input
-                      className="input"
+                      className="event-input"
                       name="location"
                       value={formData.location}
                       onChange={handleChange}
@@ -79,7 +79,7 @@ const EventForm = ({ formData, handleChange, handleTime, handleDate, handleSubmi
                   <label className="label">Location Postcode</label>
                   <div className="control">
                     <input
-                      className="input"
+                      className="event-input"
                       name="postcode"
                       value={formData.postcode}
                       onChange={handleChange}
@@ -113,7 +113,7 @@ const EventForm = ({ formData, handleChange, handleTime, handleDate, handleSubmi
                   <label className="label">Required people</label>
                   <div className="control">
                     <input
-                      className="input"
+                      className="event-input"
                       name="requiredPeople"
                       type="number"
                       onChange={handleChange}

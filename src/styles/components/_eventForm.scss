@@ -66,7 +66,7 @@
 
 .event-form-container {
   padding-top: 100px;
-  background-color: darkgrey ;
+  background-color:  #dfdce3;
 }
 
 .field {
@@ -102,7 +102,7 @@ color: white;
 
 }
 
-.input {
+.event-input {
   height: 40px;
   width: 210px;
   justify-content: center;
@@ -125,6 +125,9 @@ color: white;
 .location {
   width: 210px;
 }
+.event-create-heading{
+  padding-top: 15px;
+}
 
 
 .event-create-form {
@@ -132,12 +135,12 @@ color: white;
   width: 80px;
   justify-content: center;
   text-align: center;
-  border: solid 0.5px black;
+  border: none;
   padding: 30px 0px 30 0px;
   margin: auto;
 }
 
 .event-base {
-  background-color: darkgrey ;
+  background-color: #dfdce3 ;
 
 }

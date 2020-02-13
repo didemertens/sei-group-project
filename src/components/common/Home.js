@@ -2,7 +2,7 @@ import React from 'react'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import FrontAuth from '../common/FrontAuth'
-import { FaMapMarkerAlt, FaRunning, FaRegCalendarAlt, FaRegClock } from "react-icons/fa";
+import { FaMapMarkerAlt, FaRunning, FaRegCalendarAlt, FaRegClock } from 'react-icons/fa'
 
 class Home extends React.Component {
   state = {
