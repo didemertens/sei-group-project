@@ -35,7 +35,7 @@ class App extends React.Component {
             <Route path="/create" component={EventCreate} />
             <Route path="/login" component={Login} />
             <Route path="/email" component={EmailForm} />
-            <Route path="/error" component={ErrorPage} />
+            <Route path="/*" component={ErrorPage} />
           </Switch>
         </main>
       </BrowserRouter>
