@@ -1,11 +1,51 @@
-.help {
-  &:has-error {
-    color: red;
+@import 'base/colours';
+@import 'base/fonts';
+
+.login-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  background-color: #dfdce3
+}
+
+.login-container {
+  background-color: #f3f0f6;
+  padding: 70px;
+  height: 100vh;
+  overflow: scroll;
+}
+
+.login-heading {
+  font-family: 'Khula', sans-serif;
+  font-size: 40px;
+  font-weight: 900;
+  text-align: center;
+}
+
+.login-input {
+  font-size: 15px;
+}
+
+.btn-login {
+  border: none;
+  background-color: $orange-colour;
+  font-size: 15px;
+  &:hover{
+    background-color: $yellow-colour;
+  color: white;
   }
 }
 
-.input {
-  &:has-error {
-    border-color: red;
-  }
-}
+// .help {
+//   &:has-error {
+//     color: red;
+//   }
+// }
+
+// .input {
+//   &:has-error {
+//     border-color: red;
+//   }
+// }
