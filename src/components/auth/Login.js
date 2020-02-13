@@ -36,50 +36,46 @@ class Login extends React.Component {
       <>
       <section className="section login-form">
         <div className="container login-container">
+          <div className="container login-center">
+            <h4 className="u-full-width login-heading">Login</h4>
+            <form onSubmit={this.handleSubmit}>
 
-          <h4 className="u-full-width login-heading">Login</h4>
-          <form onSubmit={this.handleSubmit}>
-
-            <div className="row">
-              <div className="three columns"><p></p></div>
-
-              <div className="five columns">
-                <input type="text" 
-                  name="email" 
-                  placeholder="Email Address" 
-                  className={`u-full-width login-input input ${this.state.error} ? : help 'has-error' : '' `}
-                  onChange={this.handleChange}
-                />
-                {/* {this.state.error && <small className="help has-error">{this.state.error}</small>} */}
+              <div className="row">
+                <div className="offset-by-three six columns">
+                  <input type="text" 
+                    name="email" 
+                    placeholder="Email Address" 
+                    className={`u-full-width login-input input ${this.state.error} ? : help 'has-error' : '' `}
+                    onChange={this.handleChange}
+                  />
+                  {/* {this.state.error && <small className="help has-error">{this.state.error}</small>} */}
+                </div>
               </div>
-            </div>
 
-            <div className="row">
-              <div className="three columns"><p></p></div>
-              <div className="five columns">
-                <input type="password" 
-                  name="password" 
-                  placeholder="Password" 
-                  className={`u-full-width login-input input ${this.state.error} ? : help 'has-error' : '' `}
-                  onChange={this.handleChange}
-                />
-                {this.state.error && <small className="help has-error">{this.state.error}</small>}
+              <div className="row">
+                <div className="offset-by-three six columns">
+                  <input type="password" 
+                    name="password" 
+                    placeholder="Password" 
+                    className={`u-full-width login-input input ${this.state.error} ? : help 'has-error' : '' `}
+                    onChange={this.handleChange}
+                  />
+                  {this.state.error && <small className="help has-error">{this.state.error}</small>}
+                </div>
               </div>
-            </div>
 
-            <div className="row">
-              <div className="three columns"><p></p></div>
-
-              <div className="five columns">
-                <button type="submit" 
-                  className="button offset-by-three six columns btn-login" 
-                  value="Login"
-                >Login
-                </button>
+              <div className="row">
+                <div className="offset-by-three six columns">
+                  <button type="submit" 
+                    className="button offset-by-three six columns btn-login" 
+                    value="Login"
+                  >Login
+                  </button>
+                </div>
               </div>
-            </div>
 
-          </form>
+            </form>
+          </div>
         </div>
       </section>
       </>

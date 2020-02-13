@@ -56,8 +56,8 @@ class Register extends React.Component {
             <form onSubmit={this.handleSubmit}>
 
               <div className="row">
-                <div className="three columns"><p></p></div>
-                <div className="five columns">
+                <div className="offset-by-three six columns">
+
 
                   <input type="text" 
                     name="handle" 
@@ -71,8 +71,7 @@ class Register extends React.Component {
               </div>
 
               <div className="row">
-                <div className="three columns"><p></p></div>
-                <div className="five columns">
+                <div className="offset-by-three six columns">
                   <input type="text" 
                     name="firstName" 
                     placeholder="First Name" 
@@ -84,8 +83,7 @@ class Register extends React.Component {
               </div>
 
               <div className="row">
-                <div className="three columns"><p></p></div>
-                <div className="five columns">
+                <div className="offset-by-three six columns">
                   <input type="text"
                     name="surname" 
                     placeholder="Surname" 
@@ -97,8 +95,7 @@ class Register extends React.Component {
               </div>
 
               <div className="row">
-                <div className="three columns"><p></p></div>
-                <div className="five columns">
+                <div className="offset-by-three six columns">
                   <input type="text" 
                     name="email" 
                     placeholder="Email Address" 
@@ -110,8 +107,7 @@ class Register extends React.Component {
               </div>
 
               <div className="row">
-                <div className="three columns"><p></p></div>
-                <div className="five columns">
+                <div className="offset-by-three six columns">
                   <input type="password" 
                     name="password" 
                     placeholder="Password" 
@@ -124,9 +120,7 @@ class Register extends React.Component {
 
 
               <div className="row">
-                <div className="three columns"><p></p></div>
-
-                <div className="five columns">
+                <div className="offset-by-three six columns">
                   <input type="password" 
                     name="passwordConfirmation" 
                     placeholder="Please confirm your password here" 
@@ -138,8 +132,7 @@ class Register extends React.Component {
               </div>
 
               <div className="row">
-                <div className="three columns"><p></p></div>
-                <div className="five columns">
+                <div className="offset-by-three six columns">
                   <label className="label">Upload your photo</label>
                   <div className="control">
                     {this.state.formData.profileImage && <img className="reg-profile-image" src={this.state.formData.profileImage} />}
