@@ -41,6 +41,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           longitude: '-0.13831',
           requiredPeople: 10,
           user: createdUsers[0]
+          // attendees: createdUsers[0]
         },
         {
           name: 'Football on the Common',
@@ -54,6 +55,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           longitude: '-0.13831',
           requiredPeople: 10,
           user: createdUsers[0]
+          // attendees: createdUsers[0]
         },
         {
           name: 'Football on the Common',
@@ -67,6 +69,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           longitude: '-0.13831',
           requiredPeople: 10,
           user: createdUsers[0]
+          // attendees: createdUsers[0]
         }, {
           name: 'Field hockey game',
           category: 'Field Hockey',
@@ -79,6 +82,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           longitude: '-0.04406',
           requiredPeople: 10,
           user: createdUsers[0]
+          // attendees: createdUsers[0]
         }, {
           name: 'Badminton Doubles',
           category: 'Badminton',
@@ -91,6 +95,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           longitude: '-0.09818',
           requiredPeople: 2,
           user: createdUsers[0]
+          // attendees: createdUsers[0]
         }, {
           name: 'Dogwalking',
           category: 'Walking',
@@ -103,6 +108,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           longitude: '-0.09818',
           requiredPeople: 10,
           user: createdUsers[0]
+          // attendees: createdUsers[0]
         }, {
           name: 'Bootcamp',
           category: 'Bootcamp',
@@ -115,6 +121,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           longitude: '0.01261',
           requiredPeople: 15,
           user: createdUsers[0]
+          // attendees: createdUsers[0]
         }, {
           name: 'Fun Run',
           category: 'Running',
@@ -127,6 +134,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           longitude: '-0.10615',
           requiredPeople: null,
           user: createdUsers[0]
+          // attendees: createdUsers[0]
         }, {
           name: 'Power walking',
           category: 'Walking',
@@ -139,6 +147,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           longitude: '0.00298',
           requiredPeople: 10,
           user: createdUsers[0]
+          // attendees: createdUsers[0]
         }, {
           name: 'Football Match',
           category: 'Football',
@@ -151,6 +160,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           latitude: '51.43412',
           longitude: '-0.14887',
           user: createdUsers[0]
+          // attendees: createdUsers[0]
         }, {
           name: 'Beginners Yoga',
           category: 'Yoga',
@@ -163,6 +173,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           latitude: '51.43412',
           longitude: '-0.14887',
           user: createdUsers[0]
+          // attendees: createdUsers[0]
         }, {
           name: 'Power walking',
           category: 'Walking',
@@ -175,6 +186,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           latitude: '51.4762',
           longitude: '-0.16083',
           user: createdUsers[0]
+          // attendees: createdUsers[0]
         }, {
           name: 'Football Match',
           category: 'Football',
@@ -187,6 +199,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           latitude: '51.44743',
           longitude: '-0.07614',
           user: createdUsers[0]
+          // attendees: createdUsers[0]
         }, {
           name: 'Beginners Yoga',
           category: 'Yoga',
@@ -199,6 +212,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           latitude: '51.4377',
           longitude: '-0.20280',
           user: createdUsers[0]
+          // attendees: createdUsers[0]
         }, {
           name: 'Advanced Yoga',
           category: 'Yoga',
@@ -211,6 +225,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           latitude: '51.49533',
           longitude: '-0.05355',
           user: createdUsers[0]
+          // attendees: createdUsers[0]
         }, {
           name: 'Tag Rugby For Beginners',
           category: 'Rugby',
@@ -223,6 +238,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           latitude: '51.53325',
           longitude: '-0.04070',
           user: createdUsers[0]
+          // attendees: createdUsers[0]
         }, {
           name: 'Run Club',
           category: 'Running',
@@ -235,6 +251,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           latitude: '51.44743',
           longitude: '-0.07614',
           user: createdUsers[0]
+          // attendees: createdUsers[0]
         }, {
           name: 'Run Run Run',
           category: 'Running',
@@ -247,6 +264,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           latitude: '51.43621',
           longitude: '-0.15924',
           user: createdUsers[0]
+          // attendees: createdUsers[0]
         }, {
           name: 'Lunchtime Burst',
           category: 'Running',
@@ -259,6 +277,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           latitude: '51.50308',
           longitude: '-0.01860',
           user: createdUsers[0]
+          // attendees: createdUsers[0]
         }, {
           name: 'Football For Fun',
           category: 'Football',
@@ -271,6 +290,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           latitude: '51.57462',
           longitude: '-0.10335',
           user: createdUsers[0]
+          // attendees: createdUsers[0]
         }, {
           name: 'Beginners Yoga',
           category: 'Yoga',
@@ -283,6 +303,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           latitude: '51.47444',
           longitude: '0.01261',
           user: createdUsers[0]
+          // attendees: createdUsers[0]
         }, {
           name: 'Power walking',
           category: 'Walking',
@@ -295,6 +316,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           latitude: '51.47300',
           longitude: '0.00298',
           user: createdUsers[0]
+          // attendees: createdUsers[0]
         }, {
           name: 'Bootcamp',
           category: 'Bootcamp',
@@ -307,6 +329,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           longitude: '-0.16083',
           requiredPeople: 10,
           user: createdUsers[0]
+          // attendees: createdUsers[0]
         }, {
           name: 'Bootcamp',
           category: 'Bootcamp',
@@ -319,6 +342,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           longitude: '-0.16083',
           requiredPeople: 10,
           user: createdUsers[0]
+          // attendees: createdUsers[0]
         }, {
           name: 'Bootcamp',
           category: 'Bootcamp',
@@ -331,6 +355,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           longitude: '-0.16083',
           requiredPeople: 10,
           user: createdUsers[0]
+          // attendees: createdUsers[0]
         }, {
           name: 'Bootcamp',
           category: 'Bootcamp',
@@ -343,6 +368,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           longitude: '-0.16083',
           requiredPeople: 10,
           user: createdUsers[0]
+          // attendees: createdUsers[0]
         }, {
           name: 'Bootcamp',
           category: 'Bootcamp',
@@ -355,6 +381,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           longitude: '-0.16083',
           requiredPeople: 10,
           user: createdUsers[0]
+          // attendees: createdUsers[0]
         }, {
           name: 'Bootcamp',
           category: 'Bootcamp',
@@ -367,6 +394,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           longitude: '-0.16083',
           requiredPeople: 10,
           user: createdUsers[0]
+          // attendees: createdUsers[0]
         }, {
           name: 'Advanced Yoga',
           category: 'Yoga',
@@ -379,6 +407,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           longitude: '-0.04070',
           requiredPeople: 10,
           user: createdUsers[0]
+          // attendees: createdUsers[0]
         }, {
           name: 'Advanced Yoga',
           category: 'Yoga',
@@ -391,6 +420,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           longitude: '-0.16083',
           requiredPeople: 10,
           user: createdUsers[0]
+          // attendees: createdUsers[0]
         }, {
           name: 'Dogwalking',
           category: 'Walking',
@@ -403,6 +433,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           longitude: '-0.15924',
           requiredPeople: 10,
           user: createdUsers[0]
+          // attendees: createdUsers[0]
         }, {
           name: 'Football on the Common',
           category: 'Football',
@@ -415,6 +446,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           latitude: '51.46180',
           longitude: '-0.13831',
           user: createdUsers[0]
+          // attendees: createdUsers[0]
         }, {
           name: 'Beginners Yoga',
           category: 'Yoga',
@@ -427,6 +459,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           latitude: '51.55712',
           longitude: '-0.04406',
           user: createdUsers[0]
+          // attendees: createdUsers[0]
         }, {
           name: 'Field hockey game',
           category: 'Field Hockey',
@@ -439,6 +472,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           latitude: '51.47444',
           longitude: '0.01261',
           user: createdUsers[0]
+          // attendees: createdUsers[0]
         }, {
           name: 'Bootcamp',
           category: 'Bootcamp',
@@ -451,6 +485,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           latitude: '51.4474',
           longitude: '-0.07614',
           user: createdUsers[0]
+          // attendees: createdUsers[0]
         }, {
           name: 'Beginners Yoga',
           category: 'Yoga',
@@ -463,6 +498,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           latitude: '51.4474',
           longitude: '-0.07614',
           user: createdUsers[0]
+          // attendees: createdUsers[0]
         }, {
           name: 'Bootcamp',
           category: 'Bootcamp',
@@ -475,6 +511,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           latitude: '51.4474',
           longitude: '-0.07614',
           user: createdUsers[0]
+          // attendees: createdUsers[0]
         }, {
           name: 'Football on the Common',
           category: 'Football',
@@ -487,6 +524,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           latitude: '51.4474',
           longitude: '-0.07614',
           user: createdUsers[0]
+          // attendees: createdUsers[0]
         }, {
           name: 'Dogwalking',
           category: 'Walking',
@@ -499,6 +537,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           latitude: '51.4474',
           longitude: '-0.07614',
           user: createdUsers[0]
+          // attendees: createdUsers[0]
         }, {
           name: 'Advanced Yoga',
           category: 'Yoga',
@@ -511,6 +550,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           latitude: '51.4474',
           longitude: '-0.07614',
           user: createdUsers[0]
+          // attendees: createdUsers[0]
         }, {
           name: 'Power walking',
           category: 'Walking',
@@ -523,6 +563,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           latitude: '51.4474',
           longitude: '-0.07614',
           user: createdUsers[0]
+          // attendees: createdUsers[0]
         }, {
           name: 'Power walking',
           category: 'Walking',
@@ -535,6 +576,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           latitude: '51.53325',
           longitude: '-0.04070',
           user: createdUsers[0]
+          // attendees: createdUsers[0]
         }
 
       ])

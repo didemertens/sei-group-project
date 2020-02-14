@@ -12,6 +12,19 @@ main {
   margin-bottom: 20px;
 }
 
+.showpage-header-image {
+  height: 70px;
+  width: 70px;
+  border-radius: 50%;
+}
+
+.showpage-image {
+  height: 50px;
+  width: 50px;
+  background: transparent;
+  border-radius: 50%;
+}
+
 .showpage-button {
   margin-top: 100px;
 }
@@ -57,11 +70,15 @@ main {
 }
 
 div.showpage-comment {
-  margin: 15px 10px;
+  // margin: 15px 0;
   padding: 10px;
   background-color: white;
   border: 1px black solid;
   border-radius: 5px;
+}
+
+.showpage-div {
+  margin: 15px 0;
 }
 
 p.showpage-comment {

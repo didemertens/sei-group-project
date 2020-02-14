@@ -32,6 +32,7 @@ async function create(req, res) {
   req.body.user = req.currentUser
   req.body.latitude = await getLat(req.body.postcode)
   req.body.longitude = await getLong(req.body.postcode)
+  // req.body.attendees[0] = req.currentUser
 
   Event
     .create(req.body)
