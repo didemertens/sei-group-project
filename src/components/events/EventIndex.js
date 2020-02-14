@@ -191,8 +191,8 @@ class EventIndex extends React.Component {
                     }}>
                     <div className="index-card">
                       <h5>{event.name} ({event.category})</h5>
-                      <p>Where: {event.location}</p>
-                      <p>When: {event.time} {moment(event.date).format('DD/MM/YYYY')}</p>
+                      <p>📍 {event.location}</p>
+                      <p>📅 {event.time} {moment(event.date).format('DD/MM/YYYY')}</p>
                       <p>{event.description}</p>
                     </div>
                   </Link>
