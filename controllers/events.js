@@ -32,8 +32,9 @@ async function create(req, res) {
   req.body.user = req.currentUser
   req.body.latitude = await getLat(req.body.postcode)
   req.body.longitude = await getLong(req.body.postcode)
-  // req.body.attendees[0] = req.currentUser
+  req.body.attendees = [req.currentUser]
 
+  console.log(req.body)
   Event
     .create(req.body)
     .then(createdEvent => {
@@ -47,7 +48,7 @@ function show(req, res, next) {
   Event
     .findById(req.params.id)
     .populate('user')
-    .populate('attendees.user')
+    .populate('attendees')
     .populate('comments.user')
     .then(event => {
       if (!event) throw new Error('NotFound')
@@ -113,8 +114,8 @@ function attend(req, res) {
     .findById(req.params.id)
     .then(event => {
       if (!event) return res.status(404).json({ message: 'Not Found ' })
-      if (event.attendees.some(attendee => attendee.user.equals(req.currentUser._id))) return event
-      event.attendees.push({ user: req.currentUser })
+      if (event.attendees.some(attendee => attendee.equals(req.currentUser._id))) return event
+      event.attendees.push(req.currentUser)
       return event.save()
     })
     .then(event => res.status(202).json(event))
@@ -124,13 +125,13 @@ function attend(req, res) {
 function notAttend(req, res) {
   Event
     .findById(req.params.id)
+    // .then(console.log('REQ', req))
     .then(event => { 
       if (!event) return res.status(404).json({ message: 'Not Found ' })
-      const attend = event.attendees.id(req.params.attendId)
-      // console.log('REQ', req)
-      if (!attend) return res.status(404).json({ message: 'Not Found ' })
-      if (!attend.user.equals(req.currentUser._id)) return res.status(401).json({ message: 'Unauthorised' })
-      attend.remove()
+      const filteredAttendees = event.attendees.filter(attendee => !attendee.equals(req.currentUser._id))
+      // if (!attend) return res.status(404).json({ message: 'Not Found ' })
+      // if (!attend.user.equals(req.currentUser._id)) return res.status(401).json({ message: 'Unauthorised' })
+      event.attendees = filteredAttendees
       return event.save()
     })
     .then(event => res.status(202).json(event))

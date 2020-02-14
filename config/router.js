@@ -17,7 +17,7 @@ router.route('/events/:id')
 router.route('/events/:id/attend')
   .get(secureRoute, events.attend)
 
-router.route('/events/:id/attend/:attendId')
+router.route('/events/:id/attend/:attendeeId')
   .delete(secureRoute, events.notAttend)
 
 router.route('/events/:id/comments')

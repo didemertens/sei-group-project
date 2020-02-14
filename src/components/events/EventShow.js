@@ -87,9 +87,11 @@ class EventShow extends React.Component {
   handleSubmitNotAttend = async (e) => {
     e.preventDefault()
     const eventId = this.props.match.params.id
-    const attendId = this.state.eventInfo.attendees.filter(attendee => attendee.user._id === FrontAuth.getPayload().sub)[0]._id
+    const attendeeId = this.state.eventInfo.attendees.filter(attendee => attendee._id === FrontAuth.getPayload().sub)[0]._id
+    console.log(eventId)
+    // console.log(attendId)
     try {
-      await axios.delete(`/api/events/${eventId}/attend/${attendId}`, {
+      await axios.delete(`/api/events/${eventId}/attend/${attendeeId}`, {
         headers: { Authorization: `Bearer ${FrontAuth.getToken()}` }
       })
       this.getEvent(eventId)
@@ -136,7 +138,8 @@ class EventShow extends React.Component {
 
   render() {
     if (!this.state.eventInfo) return null
-    console.log(this.state.eventInfo)
+    console.log('Attendees:', this.state.eventInfo.attendees)
+    console.log('Login token:', FrontAuth.getPayload().sub)
     return (
       <>
         <div className="row u-full-width showpage-header">
@@ -154,12 +157,12 @@ class EventShow extends React.Component {
                 </div>
               </div>
             </div>
-            <Link to={`/profile/${this.state.eventInfo.user._id}`}>
+            <Link to={`/profile/${this.state.eventInfo.user._id}`} className="anchor-black-text">
               <div className="one columns">
                 <img className="showpage-header-image" src={this.state.eventInfo.user.profileImage} />
               </div>
               <div className="two columns">
-                <p>Hosted by @{this.state.eventInfo.user.handle}</p>
+                <p>Hosted by <strong>@{this.state.eventInfo.user.handle}</strong></p>
               </div>
             </Link>
             <div className="one column"><p></p></div>
@@ -181,7 +184,7 @@ class EventShow extends React.Component {
               <h3><strong>Event Details</strong></h3>
               <p>⭐️ {this.state.eventInfo.category}</p>
               <p>{this.state.eventInfo.description}</p>
-              <p>📍 {this.state.eventInfo.location}, {this.state.eventInfo.postcode}</p>
+              <p>📍 {this.state.eventInfo.location}, {this.state.eventInfo.postcode.toUpperCase()}</p>
               <div className="showpage-map">
                 <MapGL
                   mapboxApiAccessToken={mapboxToken}
@@ -212,7 +215,7 @@ class EventShow extends React.Component {
                 <div className="seven columns">
                   {!(this.state.eventInfo.attendees
                     ?
-                    this.state.eventInfo.attendees.filter(attendee => attendee.user._id === FrontAuth.getPayload().sub)[0] : 'none')
+                    this.state.eventInfo.attendees.filter(attendee => attendee._id === FrontAuth.getPayload().sub)[0] : 'none')
                     &&
                     this.state.eventInfo.requiredPeople - this.state.eventInfo.attendees.length !== 0 &&
                     <form onSubmit={this.handleSubmitAttend}>
@@ -221,7 +224,7 @@ class EventShow extends React.Component {
                   }
                   {!!(this.state.eventInfo.attendees
                     ?
-                    this.state.eventInfo.attendees.filter(attendee => attendee.user._id === FrontAuth.getPayload().sub)[0]
+                    this.state.eventInfo.attendees.filter(attendee => attendee._id === FrontAuth.getPayload().sub)[0]
                     :
                     'none')
                     &&
@@ -231,7 +234,7 @@ class EventShow extends React.Component {
                   }
                 </div>
                 <div className="five columns">
-                  {this.state.eventInfo.attendees.filter(attendee => attendee.user._id === FrontAuth.getPayload().sub)[0]
+                  {this.state.eventInfo.attendees.filter(attendee => attendee._id === FrontAuth.getPayload().sub)[0]
                     ?
                     <p>You&apos;re in!</p>
                     :
@@ -255,10 +258,10 @@ class EventShow extends React.Component {
                 ?
                 <>
                   {this.state.eventInfo.attendees.map(attendee => (
-                    attendee.user._id === this.state.eventInfo.user._id
+                    attendee._id === this.state.eventInfo.user._id
                       ?
-                      <Link to={`/profile/${attendee.user._id}`}>
-                        <div className="row" key={attendee.user._id}>
+                      <Link to={`/profile/${attendee}`} key={attendee._id} className="anchor-black-text">
+                        <div className="row">
                           <div className="three columns">
                             <img className="showpage-image" src={this.state.eventInfo.user.profileImage} />
                           </div>
@@ -271,17 +274,17 @@ class EventShow extends React.Component {
                       null
                   ))}
                   {this.state.eventInfo.attendees.map(attendee => (
-                    attendee.user._id === this.state.eventInfo.user._id
+                    attendee._id === this.state.eventInfo.user._id
                       ?
                       null
                       :
-                      <Link to={`/profile/${attendee.user._id}`}>
-                        <div className="row" key={attendee.user._id}>
+                      <Link to={`/profile/${attendee}`} key={attendee._id} className="anchor-black-text">
+                        <div className="row">
                           <div className="three columns">
                             <img className="showpage-image" src={attendee.profileImage} />
                           </div>
                           <div className="nine columns">
-                            <p><strong>@{attendee.user.handle}</strong></p>
+                            <p><strong>@{attendee.handle}</strong></p>
                           </div>
                         </div>
                       </Link>

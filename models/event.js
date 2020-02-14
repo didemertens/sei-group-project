@@ -10,12 +10,6 @@ const commentSchema = new mongoose.Schema({
   timestamps: true
 })
 
-const attendeeSchema = new mongoose.Schema({
-  user: { type: mongoose.Schema.ObjectId, ref: 'User', required: true }
-}, {
-  timestamps: true
-})
-
 const eventSchema = new mongoose.Schema({
   name: { type: String, required: true },
   category: { type: String, required: true },
@@ -27,8 +21,8 @@ const eventSchema = new mongoose.Schema({
   requiredPeople: { type: Number },
   longitude: { type: String },
   comments: [commentSchema],
-  user: { type: mongoose.Schema.ObjectId, ref: 'User', required: true },
-  attendees: [attendeeSchema],
+  user: { type: mongoose.Schema.ObjectId, ref: 'User', required: true  },
+  attendees: [{ type: mongoose.Schema.ObjectId, ref: 'User', required: true }],
   latitude: { type: String }
 }, {
   timestamps: true
