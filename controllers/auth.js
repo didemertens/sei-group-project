@@ -24,7 +24,8 @@ function login(req, res, next) {
 
 function profile(req, res, next) {
   User
-    .findById(req.currentUser._id)
+    // .findById(req.currentUser._id)
+    .findOne({ _id: req.body })
     .populate('createdEvents')
     .populate('attendingEvents')
     .then(user => res.status(200).json(user))

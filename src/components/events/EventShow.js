@@ -154,12 +154,14 @@ class EventShow extends React.Component {
                 </div>
               </div>
             </div>
-            <div className="one columns">
-              <img className="showpage-header-image" src={this.state.eventInfo.user.profileImage} />
-            </div>
-            <div className="two columns">
-              <p>Hosted by @{this.state.eventInfo.user.handle}</p>
-            </div>
+            <Link to={`/profile/${this.state.eventInfo.user._id}`}>
+              <div className="one columns">
+                <img className="showpage-header-image" src={this.state.eventInfo.user.profileImage} />
+              </div>
+              <div className="two columns">
+                <p>Hosted by @{this.state.eventInfo.user.handle}</p>
+              </div>
+            </Link>
             <div className="one column"><p></p></div>
             <div className="two columns">
               {this.isOwner() &&
@@ -295,12 +297,15 @@ class EventShow extends React.Component {
                 ?
                 this.state.eventInfo.comments.map(comment => (
                   <div key={comment._id} className="row showpage-div">
-                    <div className="three columns">
-                      <img className="showpage-image" src={comment.user.profileImage} />
-                    </div>
-                    {/* <div className="one column"><p></p></div> */}
+                    <Link to={`/profile/${comment.user._id}`}>
+                      <div className="three columns">
+                        <img className="showpage-image" src={comment.user.profileImage} />
+                      </div>
+                    </Link>
                     <div className="nine columns showpage-comment">
-                      <p className="showpage-comment"><strong>@{comment.user.handle}</strong></p>
+                      <Link to={`/profile/${comment.user._id}`}>
+                        <p className="showpage-comment"><strong>@{comment.user.handle}</strong></p>
+                      </Link>
                       <p className="showpage-comment">{comment.text}</p>
                     </div>
                   </div>

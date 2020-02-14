@@ -28,7 +28,7 @@ class UserProfile extends React.Component {
   getUserData = async (id) => {
     try {
       FrontAuth.getToken()
-      const response = await axios.get(`/api/profile/${id}`, {
+      const response = await axios.post(`/api/profile/${id}`, { _id: id }, {
         headers: { Authorization: `Bearer ${FrontAuth.getToken()}` }
       })
 

@@ -35,7 +35,7 @@ router.route('/login')
   .post(users.login)
 
 router.route('/profile/:id')
-  .get(secureRoute, users.profile)
+  .post(secureRoute, users.profile)
 
 router.route('/profile/update')
   .put(secureRoute, users.update)
