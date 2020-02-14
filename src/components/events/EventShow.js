@@ -120,7 +120,7 @@ class EventShow extends React.Component {
       await axios.delete(`/api/events/${eventId}`, {
         headers: { Authorization: `Bearer ${FrontAuth.getToken()}` }
       })
-      this.props.history.push('/events')
+      this.props.history.push('/')
     } catch (err) {
       this.props.history.push('/notfound')
     }
