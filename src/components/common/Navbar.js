@@ -17,15 +17,6 @@ class Navbar extends React.Component {
     }
   }
 
-  // openDrawerMenu = () => {
-  //   var x = document.getElementById('mainNavBar')
-  //   if (x.className === 'navBar'){
-  //     x.className += 'responsive'
-  //   } else {
-  //     x.className = 'navBar'
-  //   }
-  // }
-
   handleLogout = () => {
     FrontAuth.logout()
     this.props.history.push('/')
@@ -34,10 +25,49 @@ class Navbar extends React.Component {
   render() {
     return (
       <>
-        <div className="navBar" id="mainNavBar">
-          <div className="navBar-left">
-            <Link to="/" className="navbar-item">Home</Link>
+        <div className="nav" id="mainNavBar">
+          <input type="checkbox" id="nav-check" />
+          <div className="nav-head">
+            <div className="nav-title">
+              <Link to="/" className="navbar-title">Home</Link>
+            </div>
           </div>
+          <div className="nav-btn">
+            <label htmlFor="nav-check">
+              <span></span>
+              <span></span>
+              <span></span>
+            </label>
+          </div>
+
+          <div className="nav-links">
+
+
+            {!FrontAuth.isAuthenticated()
+              ?
+              <>
+                <Link to="/register" className="navbar-item">Register</Link>
+                <Link to="/login" className="navbar-item">Login</Link>
+              </>
+              :
+              null}
+
+            {FrontAuth.isAuthenticated()
+              ?
+              <>
+                <Link to="/create" className="navbar-item">Create an Event</Link>
+                <Link className="navbar-item" to={`/profile/${FrontAuth.getPayload().sub}`}><FaUserAlt /></Link>
+                <a className="navbar-item" href="#" onClick={this.handleLogout}>Logout</a>
+              </>
+              :
+              null}
+          </div>
+        </div>
+
+
+
+
+        {/*           
           <div className="navBar-right">
             {!FrontAuth.isAuthenticated()
               ?
@@ -59,9 +89,7 @@ class Navbar extends React.Component {
               null
             }
           </div>
-          
-          {/* <a href="javascript:void(0);" className="icon" onClick="openDrawerMenu()">&#9776;</a> */}
-        </div>
+        </div> */}
 
 
         {/* <div className="row navbar" id="nav">

@@ -1,72 +1,185 @@
 @import 'base/colours';
 
-.navBar{
-  background-color: $orange-colour; 
+// .navBar{
+//   background-color: $orange-colour; 
+//   overflow: hidden;
+//   display: flex;
+//   justify-content: space-between;
+//   position: fixed;
+//   z-index: 2;
+//   width: 100vw;
+// }
+
+
+.nav {
+  // height: 50px;
+  width: 100vw;
+  position: fixed;
+  background-color: $orange-colour;
+  position: relative;
   overflow: hidden;
   display: flex;
   justify-content: space-between;
-  position: fixed;
-  z-index: 2;
-  width: 100vw;
 }
 
-/*Floats each item to the left with padding of 14 & 16 px.
-Removes the underline with text decoration = none.*/
-.navBar a{
-  float: left;
-  color: white;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-size: 17px;
-  font-family: Tahoma;
+.nav a {
+    color: white;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+    font-family: Tahoma;
+   
 }
-/*Background color change during hover state*/
-.navBar a:hover{
+
+.nav a:hover{
   background-color: $yellow-colour;
   color: white;
 }
-/*Hides the menu Icon which will show when the nav needs to be responsive*/
-.navBar .icon{
+
+.nav > .nav-header {
+  display: inline;
+}
+
+.nav a.navbar-title {
+  display: block;
+}
+
+.nav > .nav-btn {
   display: none;
 }
-/*Set your custom screen width here replacing 700*/
-@media (max-width: 700px){
-/*Ignores the first link (which is Home) in the div and applies 'display = none' to everything else.   Basically hiding everything but Home*/
-  .navBar a:not(:first-child){
-    display: none;
-  }
-/*Brings the menu icon into view and floats it to the right*/
-  .navBar a.icon{
-    display: block; float: right;
-  }
-/*The navBar class will be changed to 'navBar responsive' using JS. This chunk of CSS makes the menu icon stay where it is by making the position absolute within it's parent 'right top corner'. Without this, the icon will get kicked around when the items are collapsed and expanded*/
-  // .navBar.responsive {
-  //   position: relative;
-  // }
-  // .navBar.responsive a.icon {
-  //   position: absolute;
-  //   right: 0;
-  //   top: 0;
-  // }
-/*Removes the originally set float and brings them to view*/
-  // .navBar.responsive a {
-  //   float: none;
-  //   display: block;
-  //   text-align: left;
-  // }
+
+.nav > .nav-links {
+  display: inline;
+  // float: right;
+  font-size: 18px;
+}
+.nav > .nav-links > a {
+  display: inline-block;
+  // padding: 13px 10px 13px 10px;
+  text-decoration: none;
+  color: #efefef;
 }
 
-.navBar-left {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
+.nav > #nav-check {
+  display: none;
 }
 
-.navBar-left {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
+@media (max-width:600px) {
+  .nav {
+    overflow: visible;
+  }
+  .nav > .nav-btn {
+    display: inline-block;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+  }
+
+  .nav > .nav-btn > label {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    padding: 13px;
+  }
+
+  .nav > .nav-btn > label:hover,.nav  #nav-check:checked ~ .nav-btn > label {
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+
+  .nav > .nav-btn > label > span {
+    display: block;
+    width: 25px;
+    height: 10px;
+    border-top: 2px solid #eee;
+  }
+
+  .nav > .nav-links {
+    position: absolute;
+    display: block;
+    width: 100%;
+    background-color: #333;
+    height: 0px;
+    transition: all 0.3s ease-in;
+    overflow-y: hidden;
+    top: 50px;
+    left: 0px;
+  }
+  .nav > .nav-links > a {
+    display: block;
+    width: 100%;
+    position: relative;
+    z-index: 600;
+  }
+
+  .nav > #nav-check:not(:checked) ~ .nav-links {
+    height: 0px;
+  }
+
+  .nav > #nav-check:checked ~ .nav-links {
+    height: calc(100vh - 50px);
+    overflow-y: auto;
+  }
 }
+
+
+
+/*Floats each item to the left with padding of 14 & 16 px.
+Removes the underline with text decoration = none.*/
+// .navBar a{
+//   // float: left;
+//   color: white;
+//   padding: 14px 16px;
+//   text-decoration: none;
+//   font-size: 17px;
+//   font-family: Tahoma;
+// }
+// /*Background color change during hover state*/
+// .navBar a:hover{
+//   background-color: $yellow-colour;
+//   color: white;
+// }
+// /*Hides the menu Icon which will show when the nav needs to be responsive*/
+// .navBar .icon{
+//   display: none;
+// }
+// /*Set your custom screen width here replacing 700*/
+// @media (max-width: 700px){
+// /*Ignores the first link (which is Home) in the div and applies 'display = none' to everything else.   Basically hiding everything but Home*/
+//   .navBar a:not(:first-child){
+//     display: none;
+//   }
+// /*Brings the menu icon into view and floats it to the right*/
+//   .navBar a.icon{
+//     // display: block; float: right;
+//   }
+// /*The navBar class will be changed to 'navBar responsive' using JS. This chunk of CSS makes the menu icon stay where it is by making the position absolute within it's parent 'right top corner'. Without this, the icon will get kicked around when the items are collapsed and expanded*/
+//   // .navBar.responsive {
+//   //   position: relative;
+//   // }
+//   // .navBar.responsive a.icon {
+//   //   position: absolute;
+//   //   right: 0;
+//   //   top: 0;
+//   // }
+// /*Removes the originally set float and brings them to view*/
+//   // .navBar.responsive a {
+//   //   float: none;
+//   //   display: block;
+//   //   text-align: left;
+//   // }
+// }
+
+// .navBar-left {
+//   display: flex;
+//   justify-content: flex-start;
+//   align-items: center;
+// }
+
+// .navBar-left {
+//   display: flex;
+//   justify-content: flex-start;
+//   align-items: center;
+// }
 
 
 // .navbar {
