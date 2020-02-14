@@ -9,12 +9,12 @@ const EventForm = ({ formData, handleChange, handleTime, handleDate, handleSubmi
   return (
     <main className="section">
 
-      <div className="columns is-mobile">
+      <div className="columns is-mobile event-form-container">
 
-        <div className="column is-6-tablet is-offset-3-tablet is-8-mobile is-offset-2-mobile event-form-container">
+        <div className="column is-6-tablet is-offset-3-tablet is-8-mobile is-offset-2-mobile">
           <div className="row event-base">
-            <div className="four columns"><p></p></div>
-            <div className="four columns event-create-form">
+            <div className="three columns"><p></p></div>
+            <div className="six columns event-create-form">
               <form onSubmit={handleSubmit}>
                 <h4 className="u-full-width event-create-heading">Create an Event</h4>
                 <div className="field">
@@ -90,6 +90,7 @@ const EventForm = ({ formData, handleChange, handleTime, handleDate, handleSubmi
                 <div className="field">
                   <label className="label">Date</label>
                   <DatePicker
+                    className="createpage-date-time"
                     selected={formData.date}
                     onChange={handleDate}
                     dateFormat="d MMMM yyyy"
@@ -100,6 +101,7 @@ const EventForm = ({ formData, handleChange, handleTime, handleDate, handleSubmi
                   <label className="label">
                     Time </label>
                   <DatePicker
+                    className="createpage-date-time"
                     selected={formData.time}
                     onChange={handleTime}
                     showTimeSelect
@@ -126,7 +128,7 @@ const EventForm = ({ formData, handleChange, handleTime, handleDate, handleSubmi
                 </div>
               </form>
             </div>
-            <div className="four columns"><p></p></div>
+            <div className="three columns"><p></p></div>
           </div>
 
         </div>

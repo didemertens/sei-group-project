@@ -53,10 +53,11 @@
 .btn-reg {
   border: none;
   background-color: $orange-colour;
+  color: white;
   font-size: 15px;
   &:hover{
     background-color: $yellow-colour;
-  color: white;
+    color: white;
   }
 }
 

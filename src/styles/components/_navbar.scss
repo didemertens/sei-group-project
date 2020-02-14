@@ -22,8 +22,8 @@ Removes the underline with text decoration = none.*/
 }
 /*Background color change during hover state*/
 .navBar a:hover{
-  background-color: white;
-  color: $orange-colour;
+  background-color: $yellow-colour;
+  color: white;
 }
 /*Hides the menu Icon which will show when the nav needs to be responsive*/
 .navBar .icon{

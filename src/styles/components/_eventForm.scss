@@ -65,8 +65,10 @@
 // }
 
 .event-form-container {
-  padding-top: 100px;
-  background-color:  #dfdce3;
+  background-color: $dark-grey-colour;
+  padding: 55px 100px;
+  height: 100vh;
+  overflow: scroll;
 }
 
 .field {
@@ -80,50 +82,63 @@
   width: auto;
   justify-content: center;
   text-align: center;
-  
-  
+}
+
+.react-datepicker-wrapper {
+  width: 80%
 }
 
 .event-form-category {
  background-color: white;
- width: 210px;
+ width: 80%;
  font-size: 15px;
  justify-content: center;
  text-align: center;
 }
 
 .textarea {
-  width: 210px;
+  width: 80%;
+  padding-top: 10px;
+}
+
+.createpage-date-time {
+  width: 100%;
 }
 
 .btn-confirm {
-background-color:#fc4a1a;
-color: white;
-
+  border: none;
+  background-color: $orange-colour;
+  color: white;
+  font-size: 15px;
+  &:hover{
+    background-color: $yellow-colour;
+  color: white;
+  }
 }
 
 .event-input {
   height: 40px;
-  width: 210px;
-  justify-content: center;
-  text-align: center;
+  width: 80%;
+  padding-left: 10px;
 }
 .date {
-  width: 210px;
+  width: 80%;
 }
 
 .time {
-  width: 210px;
+  width: 80%;
   justify-content: center;
 }
-// .react-datepicker__input-container{
-//   width: 210px;
-// }
+
+.react-datepicker__input-container{
+  width: 100%;
+}
+
 .requiredpeople {
-  width: 210px;
+  width: 80%;
 }
 .location {
-  width: 210px;
+  width: 80%;
 }
 .event-create-heading{
   padding-top: 15px;
@@ -131,8 +146,8 @@ color: white;
 
 
 .event-create-form {
-  background-color: #f3f0f6;
-  width: 80px;
+  background-color: $light-grey-colour;
+  width: 50%;
   justify-content: center;
   text-align: center;
   border: none;
