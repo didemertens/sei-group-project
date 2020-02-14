@@ -79,7 +79,7 @@ class EventIndex extends React.Component {
   // 2) CHECK POSTCODE
   filterPostcode = (searchData, eventsByCategory) => {
     const eventsByPostcode = eventsByCategory.filter(event => {
-      return event.postcode.slice(0, 3) === searchData.postcode.slice(0, 3)
+      return event.postcode.toLowerCase().slice(0, 3) === searchData.postcode.toLowerCase().slice(0, 3)
     })
 
     // no events in searched area, show events of searched category sorted by date & time
@@ -128,13 +128,16 @@ class EventIndex extends React.Component {
     // no events with searched time, show the events of that area on searched date sorted by time
     if (eventsByTime.length === 0) {
       this.setState({
-        noEventsMessage: `We're sorry but we can't find any events at ${searchData.time} in your area yet. Not to worry, we've found other events at different times that might interest you below.`
+        noEventsMessage: `Here are all the events available on ${date}.`
       })
       const sortedEvents = this.sortDateTime(eventsByDates)
       events = [...sortedEvents]
     } else {
       const sortedEventsTime = this.sortDateTime(eventsByTime)
       events = [...sortedEventsTime]
+      this.setState({
+        noEventsMessage: `Choose from these events available at ${searchData.time}.`
+      })
     }
 
     this.setState({ events })
