@@ -154,12 +154,14 @@ class EventShow extends React.Component {
                 </div>
               </div>
             </div>
-            <div className="one columns">
-              <img className="showpage-header-image" src={this.state.eventInfo.user.profileImage} />
-            </div>
-            <div className="two columns">
-              <p>Hosted by @{this.state.eventInfo.user.handle}</p>
-            </div>
+            <Link to={`/profile/${this.state.eventInfo.user._id}`}>
+              <div className="one columns">
+                <img className="showpage-header-image" src={this.state.eventInfo.user.profileImage} />
+              </div>
+              <div className="two columns">
+                <p>Hosted by @{this.state.eventInfo.user.handle}</p>
+              </div>
+            </Link>
             <div className="one column"><p></p></div>
             <div className="two columns">
               {this.isOwner() &&
@@ -266,14 +268,16 @@ class EventShow extends React.Component {
                   {this.state.eventInfo.attendees.map(attendee => (
                     attendee.user._id === this.state.eventInfo.user._id
                       ?
-                      <div className="row" key={attendee.user._id}>
-                        <div className="three columns">
-                          <img className="showpage-image" src={this.state.eventInfo.user.profileImage} />
+                      <Link to={`/profile/${attendee.user._id}`}>
+                        <div className="row" key={attendee.user._id}>
+                          <div className="three columns">
+                            <img className="showpage-image" src={this.state.eventInfo.user.profileImage} />
+                          </div>
+                          <div className="nine columns">
+                            <p><strong>@{this.state.eventInfo.user.handle}</strong> (host)</p>
+                          </div>
                         </div>
-                        <div className="nine columns">
-                          <p><strong>@{this.state.eventInfo.user.handle}</strong> (host)</p>
-                        </div>
-                      </div>
+                      </Link>
                       :
                       null
                   ))}
@@ -282,14 +286,16 @@ class EventShow extends React.Component {
                       ?
                       null
                       :
-                      <div className="row" key={attendee.user._id}>
-                        <div className="three columns">
-                          <img className="showpage-image" src={attendee.profileImage} />
+                      <Link to={`/profile/${attendee.user._id}`}>
+                        <div className="row" key={attendee.user._id}>
+                          <div className="three columns">
+                            <img className="showpage-image" src={attendee.profileImage} />
+                          </div>
+                          <div className="nine columns">
+                            <p><strong>@{attendee.user.handle}</strong></p>
+                          </div>
                         </div>
-                        <div className="nine columns">
-                          <p><strong>@{attendee.user.handle}</strong></p>
-                        </div>
-                      </div>
+                      </Link>
                   ))}
                 </>
                 :
@@ -304,12 +310,15 @@ class EventShow extends React.Component {
                 ?
                 this.state.eventInfo.comments.map(comment => (
                   <div key={comment._id} className="row showpage-div">
-                    <div className="three columns">
-                      <img className="showpage-image" src={comment.user.profileImage} />
-                    </div>
-                    {/* <div className="one column"><p></p></div> */}
+                    <Link to={`/profile/${comment.user._id}`}>
+                      <div className="three columns">
+                        <img className="showpage-image" src={comment.user.profileImage} />
+                      </div>
+                    </Link>
                     <div className="nine columns showpage-comment">
-                      <p className="showpage-comment"><strong>@{comment.user.handle}</strong></p>
+                      <Link to={`/profile/${comment.user._id}`}>
+                        <p className="showpage-comment"><strong>@{comment.user.handle}</strong></p>
+                      </Link>
                       <p className="showpage-comment">{comment.text}</p>
                     </div>
                   </div>
