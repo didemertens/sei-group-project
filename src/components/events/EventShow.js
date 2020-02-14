@@ -94,7 +94,7 @@ class EventShow extends React.Component {
   }
 
   isOwner = () => FrontAuth.getPayload().sub === this.state.eventInfo.user._id
-  
+
   handleDelete = async () => {
     const eventId = this.props.match.params.id
     try {
@@ -117,7 +117,7 @@ class EventShow extends React.Component {
 
   render() {
     if (!this.state.eventInfo) return null
-    console.log(this.state.eventInfo)
+    console.log(this.state)
     return (
       <>
         <div className="row u-full-width showpage-header">
@@ -136,7 +136,7 @@ class EventShow extends React.Component {
                 <p>👤 Hosted by @{this.state.eventInfo.user.handle}</p>
               </div>
               <div className="two columns">
-                {this.isOwner() && 
+                {this.isOwner() &&
                   <Link to={`/events/${this.state.eventInfo._id}/edit`}>
                     <button className="btn-home">Update Event</button>
                   </Link>
@@ -180,15 +180,15 @@ class EventShow extends React.Component {
                     <NavigationControl />
                   </div>
                 </MapGL>
-              </div>  
+              </div>
             </div>
 
             <div className="four columns showpage-column-center">
               <h3><strong>Attendees</strong></h3>
               <div className="row">
 
-                <div className="seven columns">  
-            
+                <div className="seven columns">
+
                   {!(this.state.eventInfo.attendees
                     ?
                     this.state.eventInfo.attendees.filter(attendee => attendee.user._id === FrontAuth.getPayload().sub)[0] : 'none')
