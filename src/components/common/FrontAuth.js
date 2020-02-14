@@ -13,17 +13,17 @@ class FrontAuth {
 
   static getPayload() {
     const token = this.getToken()
-    if (!token) 
+    if (!token)
       return false
     const parts = token.split('.')
-    if (parts.length < 3) 
+    if (parts.length < 3)
       return false
     return JSON.parse(atob(parts[1]))
   }
 
   static isAuthenticated() {
     const payload = this.getPayload()
-    if (!payload) 
+    if (!payload)
       return false
     const now = Math.round(Date.now() / 1000)
     return now < payload.exp
