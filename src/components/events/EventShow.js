@@ -113,7 +113,7 @@ class EventShow extends React.Component {
   }
 
   isOwner = () => FrontAuth.getPayload().sub === this.state.eventInfo.user._id
-  
+
   handleDelete = async () => {
     const eventId = this.props.match.params.id
     try {
@@ -175,10 +175,8 @@ class EventShow extends React.Component {
             </div>
           </div>
         </div>
-
         <div className="container showpage-container">
           <div className="row">
-
             <div className="four columns showpage-column-left">
               <h3><strong>Event Details</strong></h3>
               <p>⭐️ {this.state.eventInfo.category}</p>
@@ -206,15 +204,12 @@ class EventShow extends React.Component {
                     <NavigationControl />
                   </div>
                 </MapGL>
-              </div>  
+              </div>
             </div>
-
             <div className="four columns showpage-column-center">
               <h3><strong>Attendees</strong></h3>
               <div className="row">
-
-                <div className="seven columns">  
-            
+                <div className="seven columns">
                   {!(this.state.eventInfo.attendees
                     ?
                     this.state.eventInfo.attendees.filter(attendee => attendee.user._id === FrontAuth.getPayload().sub)[0] : 'none')
@@ -224,7 +219,6 @@ class EventShow extends React.Component {
                       <button className="btn-show" type="submit">Going</button>
                     </form>
                   }
-
                   {!!(this.state.eventInfo.attendees
                     ?
                     this.state.eventInfo.attendees.filter(attendee => attendee.user._id === FrontAuth.getPayload().sub)[0]
@@ -236,7 +230,6 @@ class EventShow extends React.Component {
                     </form>
                   }
                 </div>
-
                 <div className="five columns">
                   {this.state.eventInfo.attendees.filter(attendee => attendee.user._id === FrontAuth.getPayload().sub)[0]
                     ?
@@ -244,11 +237,8 @@ class EventShow extends React.Component {
                     :
                     <div></div>
                   }
-
                 </div>
-
               </div>
-
               <div className="row">
                 {this.state.eventInfo.requiredPeople - this.state.eventInfo.attendees.length === 0
                   ?
@@ -261,7 +251,6 @@ class EventShow extends React.Component {
                     <p>{this.state.eventInfo.requiredPeople - this.state.eventInfo.attendees.length} spaces left</p>
                 }
               </div>
-
               {this.state.eventInfo.attendees
                 ?
                 <>
@@ -302,8 +291,6 @@ class EventShow extends React.Component {
                 <div></div>
               }
             </div>
-
-
             <div className="four columns showpage-column-right">
               <h3><strong>Comments</strong></h3>
               {this.state.eventInfo.comments
@@ -332,7 +319,6 @@ class EventShow extends React.Component {
                 <button className="btn-show-comment" type="submit">Send</button>
               </form>
             </div>
-
           </div>
         </div>
       </>
