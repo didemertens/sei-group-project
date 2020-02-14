@@ -138,8 +138,6 @@ class EventShow extends React.Component {
 
   render() {
     if (!this.state.eventInfo) return null
-    console.log('Attendees:', this.state.eventInfo.attendees)
-    console.log('Login token:', FrontAuth.getPayload().sub)
     return (
       <>
         <div className="row u-full-width showpage-header">

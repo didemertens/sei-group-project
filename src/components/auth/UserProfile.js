@@ -45,7 +45,6 @@ class UserProfile extends React.Component {
       } else {
         this.setState({ userData: response.data })
       }
-
       this.filterEvents(response.data.attendingEvents)
       this.sortCreatedEvents(response.data.createdEvents)
     } catch (err) {
@@ -127,7 +126,7 @@ class UserProfile extends React.Component {
                 <img src={this.state.userData.profileImage} className="profile-prof-picture u-max-full-width" alt="Profile Picture" />}
 
             </div>
-            <div className="three columns">
+            <div className="four columns">
               <div className="profile-user-data u-max-full-width">
                 <p>@{userData.handle}</p>
                 <p>👤{userData.firstName} {userData.surname}</p>

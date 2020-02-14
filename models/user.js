@@ -21,7 +21,7 @@ userSchema.virtual('createdEvents', {
 userSchema.virtual('attendingEvents', {
   ref: 'Event',
   localField: '_id',
-  foreignField: 'attendees.user'
+  foreignField: 'attendees'
 })
 
 userSchema
