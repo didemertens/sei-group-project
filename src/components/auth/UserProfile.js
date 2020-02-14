@@ -11,7 +11,7 @@ class UserProfile extends React.Component {
       name: '',
       handle: '',
       email: '',
-      profileImage: '/../../assets/tennis-ball.png',
+      profileImage: '',
       createdEvents: [],
       attendingEvents: []
     },
@@ -31,7 +31,21 @@ class UserProfile extends React.Component {
       const response = await axios.get(`/api/profile/${id}`, {
         headers: { Authorization: `Bearer ${FrontAuth.getToken()}` }
       })
-      this.setState({ userData: response.data })
+
+      // if user has profile image, use that one, otherwise send default pic to backend
+      if (!response.data.profileImage) {
+        const userData = { ...response.data, profileImage: '/../../assets/tennis-ball.png' }
+        this.setState({ userData: response.data })
+        try {
+          await axios.put('/api/profile/update', userData,
+            { headers: { Authorization: `Bearer ${FrontAuth.getToken()}` } })
+        } catch (err) {
+          console.log(err)
+        }
+      } else {
+        this.setState({ userData: response.data })
+      }
+
       this.filterEvents(response.data.attendingEvents)
       this.sortCreatedEvents(response.data.createdEvents)
     } catch (err) {
