@@ -1,7 +1,6 @@
 require('dotenv').config()
 const env = process.env.NODE_ENV || 'development'
-const dbURI = env === 'production' ? process.env.MONGODB_URI : `${process.env.MONGODB_URI}-${env}`
-// const dbURI = process.env.MONGODB_URI || `mongodb://localhost/out-n-about-${env}`
+const dbURI = process.env.MONGOLAB_RED_URI || `mongodb://localhost/out-n-about-${env}`
 
 const port = process.env.PORT || 4000
 const secret = process.env.SECRET || 'shhh its a secret'
