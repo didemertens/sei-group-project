@@ -1,0 +1,118 @@
+.tennis-ball {
+  height: 160px;
+  width: 160px;
+  border-radius: 100%;
+}
+
+.profile-prof-picture {
+  height: 160px;
+  width: 160px;
+  border-radius: 100%;
+}
+
+.profile-section {
+  min-height: 100vh;
+  width: 100vw;
+  background-color: $dark-grey-colour;
+  font-size: 16px;
+  overflow: scroll;
+}
+
+.profile-container {
+  background-color: $dark-grey-colour;
+  padding: 10px;
+}
+
+.profile-banner {
+  background-color: white;
+  max-height: 120px;
+  margin-bottom: 40px;
+  // margin-top: 15px;
+  padding-top: 30px;
+  position: relative;
+  z-index: 1;
+}
+
+.profile-row {
+  max-height: 100vh;
+}
+
+.profile-user-data {
+  display: flex;
+  justify-content: space-evenly;
+  font-size: 18px;
+  padding: 0;
+  font-size: 15px;
+}
+
+
+.profile-event-cards {
+  margin-top: 25px;
+  min-height: 20vh;
+  a {
+    text-decoration: none;
+    color: black;
+  }
+
+  .profile-card {
+    // max-width: 80%;
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 25px;
+    padding: 10px;
+    color: black;
+    // border-bottom: 5px solid $orange-colour;
+    h5 {
+      font-size: 20px;
+    }
+  }
+  h2 {
+    font-size: 30px;
+    font-weight: 900;
+    text-align:center;
+  }
+}
+
+.profile-upcoming-cards {
+  background-color: $aqua-colour;
+  border: 5px solid $aqua-colour;
+}
+
+.profile-created-cards {
+  background-color: $yellow-colour;
+  border: 5px solid $yellow-colour;
+}
+
+.profile-past-cards {
+  background-color: $orange-colour;
+  border: 5px solid $orange-colour;
+
+  // .profile-container-past-cards {
+  //   display: flex;
+  //   flex-wrap: wrap;
+  //   flex-direction: row;
+  // }
+}
+
+.profile-upcoming-card {
+  border: 5px solid $aqua-colour;
+  &:hover {
+    border: 5px solid $orange-colour;
+  }
+}
+
+
+.profile-created-card {
+  border: 5px solid $yellow-colour;
+  &:hover {
+    border: 5px solid $aqua-colour;
+  }
+}
+
+
+.profile-past-card {
+  border: 5px solid $orange-colour;
+  &:hover {
+    border: 5px solid $yellow-colour;
+  }
+}

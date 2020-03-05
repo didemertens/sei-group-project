@@ -1,0 +1,113 @@
+@import 'base/colours';
+@import 'base/fonts';
+
+main {
+  background-color: $dark-grey-colour;
+}
+
+.showpage-header {
+  padding: 80px 230px 0px 30px;
+  background-color: white;
+  width: 100vw;
+  margin-bottom: 20px;
+}
+
+.showpage-header-image {
+  height: 70px;
+  width: 70px;
+  border-radius: 50%;
+}
+
+.showpage-image {
+  height: 50px;
+  width: 50px;
+  background: transparent;
+  border-radius: 50%;
+}
+
+.showpage-button {
+  margin-top: 100px;
+}
+
+.showpage-column-left {
+  padding: 10px 15px;
+  background-color: $aqua-colour;
+  min-height: 100vh;
+}
+
+.showpage-column-center {
+  padding: 10px 15px;
+  background-color: $yellow-colour;
+  min-height: 100vh;
+}
+
+.showpage-column-right {
+  padding: 10px 15px;
+  background-color: $orange-colour;
+  min-height: 100vh;
+}
+
+.showpage-container {
+  background-color: $dark-grey-colour;
+}
+
+.showpage-map {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.btn-show {
+  width: 150px;
+  border: none;
+  background-color: $orange-colour;
+  color: black;
+  font-size: 15px;
+  text-align: center;
+  &:hover{
+    background-color: $aqua-colour;
+  }
+}
+
+a.anchor-black-text {
+  color: black;
+}
+
+.marker {
+  transform: scale(1.5, 1.5);
+  color: red;
+}
+
+div.showpage-comment {
+  // margin: 15px 0;
+  padding: 10px;
+  background-color: white;
+  border: 1px black solid;
+  border-radius: 5px;
+}
+
+.showpage-div {
+  margin: 15px 0;
+}
+
+p.showpage-comment {
+  margin: 0;
+}
+
+textarea.showpage-comment {
+  width: 90%;
+  margin: 0px 10px;
+}
+
+.btn-show-comment {
+  width: 150px;
+  border: none;
+  background-color: $yellow-colour;
+  color: black;
+  font-size: 15px;
+  text-align: center;
+  margin: 0 10px;
+  &:hover{
+    background-color: $aqua-colour;
+  }
+}

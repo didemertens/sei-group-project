@@ -1,0 +1,18 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+  box-sizing: border-box;
+  font-family: 'Khula', sans-serif;
+}
+
+@import './components/eventIndex';
+@import './components/error';
+@import './components/register';
+@import './components/navbar';
+@import './components/homePage';
+@import './components/login';
+@import './components/eventForm';
+@import './components/userProfile';
+@import './components/eventShow';
+@import './components/emailForm';

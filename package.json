@@ -8,6 +8,7 @@
     "start:front": "webpack-dev-server --mode-development",
     "seed": "node db/seeds.js",
     "start": "node index",
+    "build": "webpack -p",
     "test": "mocha test/**/*_spec.js --require test/spec_helper --recursive --exit"
   },
   "dependencies": {
