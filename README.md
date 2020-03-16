@@ -51,7 +51,7 @@ The home page consists of the name of the website and a search bar. Users can se
 
 After searching for an activity on the home page, the user is send to the index page. This page shows the event(s) available. I built the filter and sort functionality of this page. The first thing I did, was filter out all of the old events as we didn't want to show those on this page. After that I checked whether there were any events of the activity type searched for, for example 'field hockey' or 'yoga'. After that I filtered on the postcode, date and time. If we didn't have an event that completely matched the search, we would show the next best activity (such as for a different date or time). For example, this function checks if there are any events at the searched for time:
 
-```
+``` javascript
  if (eventsByTime.length === 0) {
       this.setState({
         noEventsMessage: `Here are all the events available on ${date}.`
@@ -69,7 +69,7 @@ After searching for an activity on the home page, the user is send to the index 
 
 Because MongoDB uses a specific format for dates, I also had to convert those to be able to filter the search results on date and time. See the sort function below. I used the Moment.js package to check the time, as I could extract the times more easily from the dates and change these into valid floats. For the dates I could just use the JavaScript Date object. 
 
-```
+``` javascript
 sortDateTime = (array) => {
     const sortedArray = [...array].sort((a, b) => {
       if (a.date === b.date) {
@@ -101,7 +101,7 @@ To create (or update) an event, users have to pick the category of their event. 
 
 After submitting, an email is send to the email address of our group, so one of us can add it to the website. I built this email functionality using the third-party API SendGrid. The form input is send to the back-end, where the following function is called, sending an email to our email address:
 
-``` 
+``` javascript
 function sendEmail(req, res) {
   const msg = {
     to: 'teamoutabout@gmail.com',
