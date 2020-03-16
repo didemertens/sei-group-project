@@ -2,7 +2,7 @@
 
 Out and About was a group project lasting 8 days during which we built a website for free outdoor events. Users can search on their postcode, activity type, date and time to see if there are any free events in their area. They can also create events themselves and attend events.
 
-## Team mates
+## Teammates
 * Christine: https://github.com/ckapak
 * George: https://github.com/georgeanthony33
 * Jesse: https://github.com/Jesse2889
@@ -119,7 +119,7 @@ I grabbed the opportunity to also write tests for the events. I was in charge fo
 ### 5. Profile page
 <img src="src/assets/profile-scr.png" alt="Profile page" height="250"/>
 
-On the profile page, users can change their picture and see the events they created and are attending. I wrote the filter functionality to show the appropriate events in each column, for example an event in the future should be 'upcoming' and events that are in the past have to be shown as such. These events also had to be sorted based on the date and time, for which I used the same function as for the index page. One other feature I worked together on with someone else from my team was having a default image if a user hadn't uploaded an image during registration. Now their picture won't be blank, but a photo of a tennis ball will be shown. 
+On the profile page, users can change their picture and see the events they created and are attending. I wrote the filter functionality to show the appropriate events in each column, for example an event in the future should be 'upcoming' and events that are in the past have to be shown as such. These events also had to be sorted based on the date and time, for which I used the same sorting function as for the index page. One other feature I worked together on with someone else from my team was having a default image if a user hadn't uploaded an image during registration. Now their picture won't be blank, but a photo of a tennis ball will be shown. 
 
 ## Challenges and future improvements
 * Because we only had 1 week to create this website, and we used a CSS framework (Skeleton) which we weren't familiar with yet, we didn't have any time to make the website more responsive. 
