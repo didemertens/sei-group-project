@@ -123,16 +123,12 @@ On the profile page, users can change their picture and see the events they crea
 
 ## Wins and challenges 
 * The biggest win of this project was working in a group. It was amazing to be able to tackle all of the tasks and bugs together. We helped each other a lot and also always decided together when we needed to make an important choice. For example about the design of the overall website and how we wanted the search functionality to work.
-
 * It was also great to use a Trello board with all the tickets that had to be done, someone was working on and those that were already done. That way, we always had something to do and we knew who had worked on what part of the project. 
-
 * One of the challenges of this project was using the CSS framework Skeleton. We wanted to use a different framework, one we weren't familiar with yet, but that also meant that it took a while before we were comfortable with the framework. As a consequence, we didn't have any time left to make the website more responsive. 
 
 ## Future improvements
 * I would like to add a weather API to not only show the date, time and place of the event, but also what the weather is going to be like. 
-
 * Another feature I would like to add is a wait list. If an event is full, users would be able to add themselves to a wait list and automatically be added to the attendees of the event when a place would become available.
-
 * We made tests for the back-end. However, there aren't any tests for the React components so I would like to create these as well using Enzyme and Jest.
 
 
